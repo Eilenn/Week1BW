@@ -1,8 +1,11 @@
 package com.capgemini.fibonacci;
 
 public class Fibonacci {
+	public Fibonacci(){
+		
+	}
 	// n - ktory element ciagu
-	public static long fib(int n) {
+	public long fib(int n) {
 		if (n == 0) {
 			return 0;
 		} else if (n == 1 || n == 2) {
@@ -20,6 +23,7 @@ public class Fibonacci {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(fib(9));
+		Fibonacci ciag=new Fibonacci();
+		System.out.println(ciag.fib(9));
 	}
 }

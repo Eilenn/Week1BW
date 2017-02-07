@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FibonacciTest {
-	//private Fibonacci fibonacci;
-	/*@Before
+	private Fibonacci fibonacci;
+	@Before
 	 public void setUp() throws Exception {
 	  fibonacci = new Fibonacci();
 	 }
@@ -15,10 +15,10 @@ public class FibonacciTest {
 	 @After
 	 public void tearDown() throws Exception {
 	  fibonacci = null;
-	 }*/
+	 }
 	@Test
 	public void testFib() {
-		long wynik=Fibonacci.fib(5);
+		long wynik=fibonacci.fib(5);
 		assertEquals(5, wynik,0);
 		//fail("Not yet implemented");
 	}
