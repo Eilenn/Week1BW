@@ -1,0 +1,13 @@
+package com.capgemini.fibonacci;
+
+public class Fibonacci {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static long fib(int n) {
+        return 0;
+	}
+}
