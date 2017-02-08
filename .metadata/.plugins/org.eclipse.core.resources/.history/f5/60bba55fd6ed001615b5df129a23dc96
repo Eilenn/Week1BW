@@ -1,0 +1,20 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciTestNegativeInt {
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFibInt() throws IllegalArgumentException{
+		try {
+			Fibonacci.fib(-7);
+			fail("ujemny argument powinien wyrzucic wyjatek");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+}

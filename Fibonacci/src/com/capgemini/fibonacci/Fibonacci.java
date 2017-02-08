@@ -1,12 +1,25 @@
 package com.capgemini.fibonacci;
 
 public class Fibonacci {
-	public Fibonacci(){
-		
+	public Fibonacci() {
+
 	}
+
 	// n - ktory element ciagu
-	public long fib(int n) {
-		if (n == 0) {
+	public static long fib(int n) {
+
+		return obliczFib(n);
+	}
+
+	public static long fib(double a) {
+		int n = (int) Math.round(a);
+		return obliczFib(n);
+	}
+
+	public static long obliczFib(int n) {
+		if (n < 0) {
+			throw new IllegalArgumentException("Numer elementu ciagu musi byc liczba nieujemna!");
+		} else if (n == 0) {
 			return 0;
 		} else if (n == 1 || n == 2) {
 			return 1;
@@ -20,10 +33,7 @@ public class Fibonacci {
 			}
 			return elementyCiagu[n];
 		}
+
 	}
 
-	public static void main(String[] args) {
-		Fibonacci ciag=new Fibonacci();
-		System.out.println(ciag.fib(9));
-	}
 }

@@ -1,0 +1,15 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class FibonacciIntTest {
+
+	@Test
+	public void testFibInt() {
+		long wynik = Fibonacci.fib(5);
+		assertEquals(5, wynik, 0);
+
+	}
+
+}
