@@ -6,8 +6,10 @@ public class Fibonacci {
 	}
 
 	// n - ktory element ciagu
-	public static long fib(int n) {
-
+	public static long fib(int n) throws ResultOutOfRangeException {
+		if(obliczFib(n)>Long.MAX_VALUE){
+			throw new ResultOutOfRangeException("Wynik operacji nie miesci sie w zakresie long");
+		}
 		return obliczFib(n);
 	}
 

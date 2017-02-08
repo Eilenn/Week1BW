@@ -1,0 +1,17 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciDuzyIntTest {
+
+	@Test
+	public void testFibDuzyInt() {
+		int n=93;
+		long wynik = Fibonacci.fib(n);
+		assertEquals(12200160415121876738L, wynik, 0);
+		//fail("Not yet implemented");
+	}
+
+}

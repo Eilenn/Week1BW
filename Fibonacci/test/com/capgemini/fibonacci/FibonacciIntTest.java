@@ -6,7 +6,7 @@ import org.junit.Test;
 public class FibonacciIntTest {
 
 	@Test
-	public void testFibInt() {
+	public void testFibInt() throws ResultOutOfRangeException {
 		int n=5;
 		long wynik = Fibonacci.fib(n);
 		assertEquals(5, wynik, 0);

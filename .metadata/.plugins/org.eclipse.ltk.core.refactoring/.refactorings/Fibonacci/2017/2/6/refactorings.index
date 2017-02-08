@@ -13,3 +13,10 @@
 1486543060783	Delete element
 1486543077745	Delete element
 1486543143834	Move compilation units
+1486547981793	Rename method 'testFibInt'
+1486550722732	Copy compilation unit
+1486550728631	Delete element
+1486550756188	Copy compilation unit
+1486550785476	Rename method 'testFibNegativeArgument'
+1486550866458	Rename method 'testFibResultOutOfBounds'
+1486550904891	Rename type 'FibonacciResultOutOfBoundsTest'
