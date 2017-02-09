@@ -6,19 +6,29 @@ public class Hanoi {
 	public Hanoi() {
 
 	}
-
-	public ArrayList<Ring> listOfRings = new ArrayList<>();
+	public static Stack originTower;
+	public static ArrayList<Integer> listOfRings=new ArrayList<>();
+	//public ArrayList<Ring> listOfRings = new ArrayList<>();
 
 	// creating list of rings - first is the biggest one, then in descending order
-	public ArrayList<Ring> createRings(int numberOfRings) {
+	public static ArrayList<Integer> createRings(int numberOfRings) {
+		
 		for (int i = numberOfRings; i >=1; i--) {
-			listOfRings.add(new Ring(i, 1));
+			listOfRings.add(i);
 		}
 		return listOfRings;
 	}
-	public void showListOfRings(ArrayList<Ring> listaKrazkow){
-		for (Ring k : listaKrazkow) {
+	public static void showListOfRings(ArrayList<Integer> listOfRings){
+		for (Integer k : listOfRings) {
 			System.out.println(k);
+		}
+	}
+	
+	//dodawanie krazkow na pierwsza wieze
+	public static void createOriginTower(ArrayList<Integer> listOfRings){
+		originTower=new Stack(listOfRings.size());
+		for (int i = 0; i < listOfRings.size(); i++) {
+			originTower.push(listOfRings.get(i).intValue());
 		}
 	}
 	
@@ -33,19 +43,21 @@ public class Hanoi {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Hanoi hanoi = new Hanoi();
+		//Hanoi hanoi = new Hanoi();
 		//hanoi.showListOfRings(hanoi.createRings(3));
 		System.out.println("How many rings do you want to put on first tower?");
 		int numberOfRings, whichRing, origin, target;
 		// TODO delimiter na niecyfry
 		Scanner sc=new Scanner(System.in);
 		numberOfRings=sc.nextInt();
-		hanoi.showListOfRings(hanoi.createRings(numberOfRings));
-		System.out.println("Specify which ring you want to move, from which peg and to where.\n Separate numbers with whitespaces");
+		//showListOfRings(createRings(numberOfRings));
+		createOriginTower(createRings(numberOfRings));
+		originTower.display();
+		/*System.out.println("Specify which ring you want to move, from which peg and to where.\n Separate numbers with whitespaces");
 		whichRing=sc.nextInt();
 		origin=sc.nextInt();
 		target=sc.nextInt();
-		System.out.println("Ring "+whichRing+" from tower "+origin+" to tower "+target);
+		System.out.println("Ring "+whichRing+" from tower "+origin+" to tower "+target);*/
 		sc.close();
 	}
 }
