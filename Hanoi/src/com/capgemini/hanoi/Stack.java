@@ -1,8 +1,8 @@
 package com.capgemini.hanoi;
 
 public class Stack {
-	static int[] stackOfRings;
-	static int stackTopIndex; //indeks ostatniego zajetego
+	int[] stackOfRings;
+	int stackTopIndex; //indeks ostatniego zajetego
 
 	public Stack(){
 		
@@ -12,7 +12,15 @@ public class Stack {
 		stackOfRings = new int[numberOfRings];
 		stackTopIndex = -1;
 	}
-
+	
+    public int getMaximumStackSize() {
+        return stackOfRings.length;
+    }
+    
+    public int getSize() {
+        return stackTopIndex;
+    }
+    
 	// zdejmowanie ze stosu 
 	public int pop() throws ArrayIndexOutOfBoundsException {
 		if(stackTopIndex<0){
@@ -38,11 +46,11 @@ public class Stack {
 	}
 
 	// wartosc wierzcholka stosu
-	public static int peek() {
+	public int peek() {
 		return stackOfRings[stackTopIndex];
 	}
 
-	public static boolean isEmpty() {
+	public boolean isEmpty() {
 		if (stackTopIndex==-1) {
 			return true;
 		}
