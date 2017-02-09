@@ -6,7 +6,7 @@ public class Fibonacci {
 	}
 
 	// n - ktory element ciagu
-	public static long fib(int n) throws ResultOutOfRangeException {
+	public static long fib(int n) {
 		if(evaluateFib(n)>Long.MAX_VALUE){
 			throw new ResultOutOfRangeException("Result of this operation is out of range");
 		}

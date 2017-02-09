@@ -11,11 +11,11 @@ public class Ring {
 		this.numberID = numerID;
 	}
 
-	public int getObecnaWieza() {
+	public int getCurrentTower() {
 		return currentTower;
 	}
 
-	public void setObecnaWieza(int obecnaWieza) {
+	public void setCurrentTower(int obecnaWieza) {
 		this.currentTower = obecnaWieza;
 	}
 

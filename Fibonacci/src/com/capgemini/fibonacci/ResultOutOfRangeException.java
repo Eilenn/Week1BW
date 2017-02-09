@@ -1,6 +1,6 @@
 package com.capgemini.fibonacci;
 
-public class ResultOutOfRangeException extends Exception {
+public class ResultOutOfRangeException extends RuntimeException {
 	/**
 	 * 
 	 */

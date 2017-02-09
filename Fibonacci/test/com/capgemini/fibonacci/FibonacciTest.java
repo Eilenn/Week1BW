@@ -56,8 +56,8 @@ public class FibonacciTest {
 		}
 
 	}
-	@Test // (expected = IllegalArgumentException.class)
-	public void testFibResultOutOfRange() throws IllegalArgumentException, ResultOutOfRangeException {
+	@Test  //(expected = ResultOutOfRangeException.class)
+	public void testFibResultOutOfRange(){
 		try {
 			int n=93;
 			Fibonacci.fib(n);
@@ -68,4 +68,12 @@ public class FibonacciTest {
 		}
 
 	}
+	@Test (expected=ResultOutOfRangeException.class)
+	public void testFibResultOutOfRange2(){
+			int n=93;
+			Fibonacci.fib(n);
+			
+		}
+
+	
 }
