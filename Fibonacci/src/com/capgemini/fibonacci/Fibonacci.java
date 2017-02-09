@@ -7,33 +7,33 @@ public class Fibonacci {
 
 	// n - ktory element ciagu
 	public static long fib(int n) throws ResultOutOfRangeException {
-		if(obliczFib(n)>Long.MAX_VALUE){
-			throw new ResultOutOfRangeException("Wynik operacji nie miesci sie w zakresie long");
+		if(evaluateFib(n)>Long.MAX_VALUE){
+			throw new ResultOutOfRangeException("Result of this operation is out of range");
 		}
-		return obliczFib(n);
+		return evaluateFib(n);
 	}
 
 	public static long fib(double a) {
 		int n = (int) Math.round(a);
-		return obliczFib(n);
+		return evaluateFib(n);
 	}
 
-	public static long obliczFib(int n) {
+	public static long evaluateFib(int n) {
 		if (n < 0) {
-			throw new IllegalArgumentException("Numer elementu ciagu musi byc liczba nieujemna!");
+			throw new IllegalArgumentException("Element's number must be a non-negative number!");
 		} else if (n == 0) {
 			return 0;
 		} else if (n == 1 || n == 2) {
 			return 1;
 		} else {
-			long[] elementyCiagu = new long[n + 1];
-			elementyCiagu[0] = 0;
-			elementyCiagu[1] = 1;
-			elementyCiagu[2] = 1;
+			long[] elementsOfFibonacci = new long[n + 1];
+			elementsOfFibonacci[0] = 0;
+			elementsOfFibonacci[1] = 1;
+			elementsOfFibonacci[2] = 1;
 			for (int i = 3; i <= n; i++) {
-				elementyCiagu[i] = elementyCiagu[i - 1] + elementyCiagu[i - 2];
+				elementsOfFibonacci[i] = elementsOfFibonacci[i - 1] + elementsOfFibonacci[i - 2];
 			}
-			return elementyCiagu[n];
+			return elementsOfFibonacci[n];
 		}
 
 	}
