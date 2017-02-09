@@ -5,24 +5,17 @@ public class Fibonacci {
 
 	}
 
-	// n - ktory element ciagu
+	// n - series' element number
 	public static long fib(int n) {
-		if(evaluateFib(n)>Long.MAX_VALUE){
+		if(evaluateFib(n)<0){
 			throw new ResultOutOfRangeException("Result of this operation is out of range");
 		}
 		return evaluateFib(n);
 	}
 
-	public static long fib(double a) {
-		int n = (int) Math.round(a);
-		return evaluateFib(n);
-	}
-
 	public static long evaluateFib(int n) {
-		if (n < 0) {
+		if (n <= 0) {
 			throw new IllegalArgumentException("Element's number must be a non-negative number!");
-		} else if (n == 0) {
-			return 0;
 		} else if (n == 1 || n == 2) {
 			return 1;
 		} else {
