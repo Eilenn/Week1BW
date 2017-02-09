@@ -7,16 +7,17 @@ public class Hanoi {
 
 	}
 
-	public ArrayList<Krazek> listaKrazkow = new ArrayList<>();
+	public ArrayList<Ring> listOfRings = new ArrayList<>();
 
-	public ArrayList<Krazek> stworzKrazki(int iloscKrazkow) {
-		for (int i = 1; i <= iloscKrazkow; i++) {
-			listaKrazkow.add(new Krazek(i, i, 1));
+	// creating list of rings - first is the biggest one, then in descending order
+	public ArrayList<Ring> createRings(int numberOfRings) {
+		for (int i = numberOfRings; i >=1; i--) {
+			listOfRings.add(new Ring(i, 1));
 		}
-		return listaKrazkow;
+		return listOfRings;
 	}
-	public void wyswietlListeKrazkow(ArrayList<Krazek> listaKrazkow){
-		for (Krazek k : listaKrazkow) {
+	public void showListOfRings(ArrayList<Ring> listaKrazkow){
+		for (Ring k : listaKrazkow) {
 			System.out.println(k);
 		}
 	}
@@ -26,6 +27,6 @@ public class Hanoi {
 	 */
 	public static void main(String[] args) {
 		Hanoi hanoi = new Hanoi();
-		hanoi.wyswietlListeKrazkow(hanoi.stworzKrazki(20));
+		hanoi.showListOfRings(hanoi.createRings(3));
 	}
 }
