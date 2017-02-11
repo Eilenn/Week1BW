@@ -13,7 +13,6 @@ import java.util.HashSet;
  *
  */
 public class Hanoi {
-
 	private static Stack originTower;
 	private static Stack intermediateTower;
 	private static Stack targetTower;
@@ -28,7 +27,6 @@ public class Hanoi {
 		indexesOfTowers.add(1);
 		indexesOfTowers.add(2);
 		indexesOfTowers.add(3);
-
 		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
 		System.out.println("How many rings do you want to put on the tower number 1?");
 		Scanner sc = new Scanner(System.in);
@@ -50,8 +48,10 @@ public class Hanoi {
 	 * @param numberOfRings
 	 * @return ArrayList of integer values meaning rings diameter
 	 */
-	private static ArrayList<Integer> createRings(int numberOfRings) {
-
+	public static ArrayList<Integer> createRings(int numberOfRings) {
+		if (numberOfRings <= 0) {
+			throw new IllegalArgumentException("Number of rings must be positive, integer value!");
+		}
 		for (int i = numberOfRings; i >= 1; i--) {
 			listOfRings.add(i);
 		}
@@ -64,7 +64,7 @@ public class Hanoi {
 	 * 
 	 * @param listOfRings
 	 */
-	private static void createTowers(ArrayList<Integer> listOfRings) {
+	public static void createTowers(ArrayList<Integer> listOfRings) {
 		intermediateTower = new Stack(listOfRings.size());
 		targetTower = new Stack(listOfRings.size());
 		originTower = new Stack(listOfRings.size());
@@ -76,7 +76,7 @@ public class Hanoi {
 	/**
 	 * collects commands for moving rings in form of tower numbers
 	 */
-	private static void getCommandsForMovingRings() {
+	public static void getCommandsForMovingRings() {
 		Scanner sc = new Scanner(System.in);
 		while (targetTower.getSize() < targetTower.getMaximumStackSize() - 1) {
 			int originTowerNumber, targetTowerNumber;
@@ -86,7 +86,6 @@ public class Hanoi {
 			targetTowerNumber = sc.nextInt();
 			Stack[] allTowers = { originTower, intermediateTower, targetTower };
 			moveRingIfTowerNumberIsValid(originTowerNumber, targetTowerNumber, allTowers);
-
 		}
 		sc.close();
 	}
@@ -99,7 +98,7 @@ public class Hanoi {
 	 * @param targetTowerNumber
 	 * @param allTowers
 	 */
-	private static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber, Stack[] allTowers) {
+	public static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber, Stack[] allTowers) {
 		if (indexesOfTowers.contains(originTowerNumber) && indexesOfTowers.contains(targetTowerNumber)) {
 			if (originTowerNumber != targetTowerNumber) {
 				Integer[] moveFromTo = { originTowerNumber, targetTowerNumber };
@@ -121,10 +120,10 @@ public class Hanoi {
 	 * @param origin
 	 * @param target
 	 */
-
-	private static void moveRing(Stack origin, Stack target) {
+	public static void moveRing(Stack origin, Stack target) {
 		if (origin.isEmpty()) {
 			System.out.println("The tower is empty! " + "\n Choose another move.");
+			throw new IllegalStateException("Tower is empty");
 		} else {
 			if (target.isEmpty() || origin.peek() < target.peek()) {
 				int temp = origin.pop();
@@ -134,17 +133,15 @@ public class Hanoi {
 			}
 
 		}
-
 	}
 
 	/**
 	 * prints a list of valid moves made by the player
 	 */
-	private static void printListOfMoves() {
+	public static void printListOfMoves() {
 		System.out.println("Here is the list of your moves:");
 		for (int i = 0; i < listOfMoves.size(); i++) {
 			System.out.println("From " + listOfMoves.get(i)[0] + " to " + listOfMoves.get(i)[1]);
 		}
 	}
-
 }
