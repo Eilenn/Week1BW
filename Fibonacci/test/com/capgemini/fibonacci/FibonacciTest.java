@@ -5,10 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-import static org.hamcrest.CoreMatchers.*;
-
 import org.junit.Test;
-
+/**
+ * Tests @Fibonacci class.
+ * @author BOWROBEL
+ *
+ */
 public class FibonacciTest {
 
 	@Rule
@@ -16,38 +18,51 @@ public class FibonacciTest {
 
 	// testing an integer
 	@Test
-	public void testFibInt() {
+	public void shouldReturnValueOfGivenElementOfFibonacci() {
+		// given
 		int n = 5;
+		// when
 		long result = Fibonacci.fib(n);
+		// then
 		assertEquals(5, result, 0);
 
 	}
 
 	// testing first series' element
 	@Test
-	public void testFibOne() {
+	public void shouldReturnOneForFirstElementOfFinbonacci() {
+		// given
 		int n = 1;
+		// when
 		long result = Fibonacci.fib(n);
+		// then
 		assertEquals(1, result, 0);
 
 	}
 
 	// testing second series' element
 	@Test
-	public void testFibTwo() {
+	public void shouldReturnOneForSecondElementOfFibonacci() {
+		// given
 		int n = 2;
+		// when
 		long result = Fibonacci.fib(n);
+		// then
 		assertEquals(1, result, 0);
+	
 
 	}
 
 	// testing big integer, one before crossing long's range
 	@Test
-	public void testFibBigInt() {
-		final long result92 = 7540113804746346429L;
+	public void shouldReturnValueOfFibonacciForBigInteger() {
+		// given
+		final long resultFor92 = 7540113804746346429L;
 		int n = 92;
+		// when
 		long wynik = Fibonacci.fib(n);
-		assertEquals(result92, wynik, 0);
+		// then
+		assertEquals(resultFor92, wynik, 0);
 
 	}
 
@@ -56,7 +71,7 @@ public class FibonacciTest {
 	// testing if zero causes exception throwing
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFibZero() {
+	public void shouldThrowIllegalArgumentExceptionForZero() {
 		int n = 0;
 		long result = Fibonacci.fib(n);
 	}
@@ -73,7 +88,7 @@ public class FibonacciTest {
 	// testing if argument too big for computation to fit into long throws an
 	// exception
 	@Test(expected = ResultOutOfRangeException.class)
-	public void testfibResultOutOfRange() {
+	public void shouldThrowResultOutOfRangeExceptionForElementsTooBigForLong() {
 
 		int n = 93;
 		long result = Fibonacci.fib(n);
@@ -94,7 +109,7 @@ public class FibonacciTest {
 
 	// testing if negative argument throws an IllegalArgumentException
 	@Test(expected = IllegalArgumentException.class)
-	public void testFibNegativeIntArgument() {
+	public void shouldThrowIllegalArgumentExceptionForNegativeArgument() {
 
 		int n = -8;
 		long result = Fibonacci.fib(n);

@@ -63,4 +63,10 @@ public class Stack {
 			System.out.print(stackOfRings[i]+" ");
 		}
 	}
+	
+	public void displayVertical() {
+		for (int i = stackTopIndex; i >=0; i--) {
+			System.out.println(stackOfRings[i]+" ");
+		}
+	}
 }

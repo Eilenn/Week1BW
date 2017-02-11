@@ -1,16 +1,17 @@
 package com.capgemini.hanoi;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Hanoi {
-	public Hanoi() {
 
-	}
 	public static Stack originTower;
-	public static Stack helperTower;
+	public static Stack intermediateTower;
 	public static Stack targetTower;
 	public static ArrayList<Integer> listOfRings=new ArrayList<>();
-	//public ArrayList<Ring> listOfRings = new ArrayList<>();
+	private static Set<Integer> indexesOfTowers=new HashSet<Integer>();
+	
 
 	// creating list of rings - first is the biggest one, then in descending order
 	public static ArrayList<Integer> createRings(int numberOfRings) {
@@ -26,9 +27,9 @@ public class Hanoi {
 		}
 	}
 	
-	//dodawanie krazkow na pierwsza wieze
-	public static void createOriginTower(ArrayList<Integer> listOfRings){
-		helperTower=new Stack(listOfRings.size());
+	//adding rings to first tower and creating other towers
+	public static void createTowers(ArrayList<Integer> listOfRings){
+		intermediateTower=new Stack(listOfRings.size());
 		targetTower=new Stack(listOfRings.size());
 		originTower=new Stack(listOfRings.size());
 		for (int i = 0; i < listOfRings.size(); i++) {
@@ -36,10 +37,11 @@ public class Hanoi {
 		}
 	}
 	
-	public void moveRing(Stack origin, Stack target){
+	
+	public static void moveRing(Stack origin, Stack target){
 		if(origin.isEmpty()){
-			System.out.println("First tower is empty!");
-			//TODO ponowne wywolanie metody z prosba o inne dane
+			System.out.println("The tower is empty! "
+					+ "\n Choose another move.");
 		}
 		else{
 			if(target.isEmpty()||origin.peek()<target.peek()){
@@ -50,35 +52,70 @@ public class Hanoi {
 				//System.out.println(target.peek());
 			}
 			else{
-			System.out.println("This operation is not allowed!");
+				System.out.println("You cannot put a bigger ring on a smaller one! \nChoose another move.");
 			}
+
 		}
 		
 	}
+	
+	public static void setBoard(){
+		//Hanoi hanoi = new Hanoi();
+		indexesOfTowers.add(1);
+		indexesOfTowers.add(2);
+		indexesOfTowers.add(3);
+		int numberOfRings;
+		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
+		System.out.println("How many rings do you want to put on the tower number 1?");
+		Scanner sc=new Scanner(System.in);
+		numberOfRings=sc.nextInt();
+		createTowers(createRings(numberOfRings));
+		System.out.println("Tower 1 looks like this:");
+		originTower.displayVertical();
+		Hanoi.commandToMove();
+		System.out.println("Game is finished, tower 3 is full and looks like this:");
+		targetTower.displayVertical();
+		sc.close();
+	}
+	
+	public static void commandToMove(){
+		Scanner sc=new Scanner(System.in);
+		while(targetTower.getSize()<targetTower.getMaximumStackSize()-1)
+		{
+			//System.out.println(targetTower.getSize());
+		System.out.println("Specify which tower (first number) you want to move the top ring from "
+				+ "and where to move it (second number).\n Separate towers' numbers with whitespaces and press Enter. "
+				+ "Example: 1 3\n");
+		
+		int originTowerNumber, targetTowerNumber;
+		originTowerNumber=sc.nextInt();
+		targetTowerNumber=sc.nextInt();
+		Stack[] allTowers={originTower, intermediateTower, targetTower};
+		//System.out.println(allTowers.length);
+		if(indexesOfTowers.contains(originTowerNumber)&&indexesOfTowers.contains(targetTowerNumber)){
+			Hanoi.moveRing(allTowers[originTowerNumber-1], allTowers[targetTowerNumber-1]);
+		}
+		else{
+			System.out.println("One or both of tower numbers are invalid!\nTower are numbered 1, 2 and 3.\n"
+					+ "Choose another combination.");
+		}
+		
+		
+		}
+		sc.close();
+		}
+		
+		
+	
+	
 	
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Hanoi hanoi = new Hanoi();
-		//hanoi.showListOfRings(hanoi.createRings(3));
-		System.out.println("How many rings do you want to put on first tower?");
-		int numberOfRings, whichRing, origin, target;
-		// TODO delimiter na niecyfry
-		Scanner sc=new Scanner(System.in);
-		numberOfRings=sc.nextInt();
-		//showListOfRings(createRings(numberOfRings));
-		createOriginTower(createRings(numberOfRings));
-		originTower.display();
-		System.out.println("\n");
-		targetTower.display();
-		hanoi.moveRing(originTower, targetTower);
-		/*System.out.println("Specify which ring you want to move, from which peg and to where.\n Separate numbers with whitespaces");
-		whichRing=sc.nextInt();
-		origin=sc.nextInt();
-		target=sc.nextInt();
-		System.out.println("Ring "+whichRing+" from tower "+origin+" to tower "+target);*/
-		sc.close();
+		//Hanoi hanoi = new Hanoi();
+		Hanoi.setBoard();
+
 	}
 }
