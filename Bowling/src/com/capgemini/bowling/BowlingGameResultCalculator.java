@@ -1,5 +1,7 @@
 package com.capgemini.bowling;
 
+import java.util.ArrayList;
+
 public interface BowlingGameResultCalculator {
 
 	/**
@@ -19,5 +21,6 @@ public interface BowlingGameResultCalculator {
 	 * @return true if a game is over, otherwise false
 	 */
 	public boolean isFinished();
+
 
 }
