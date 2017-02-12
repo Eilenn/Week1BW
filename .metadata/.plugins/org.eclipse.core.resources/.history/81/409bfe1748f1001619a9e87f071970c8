@@ -1,0 +1,90 @@
+package com.capgemini.bowling;
+
+public class BowlingGame implements BowlingGameResultCalculator {
+	final int NUMBER_OF_FRAMES = 10;
+	final int PINS_DOWN_IN_A_STRIKE = 10;
+	final int MAXIMAL_NUMBER_OF_ROLLS = 22;
+	private int[] listOfRolls = new int[MAXIMAL_NUMBER_OF_ROLLS - 1];
+	private int currentRoll = 0;
+	int score = 0;
+
+	@Override
+	public void roll(int numberOfPins) {
+		if (numberOfPins < 0) {
+			throw new IllegalArgumentException("You cannot knock down negative number of pins");
+		} else if (numberOfPins > 10) {
+			throw new IllegalArgumentException("You cannot knock down more than 10 pins!");
+		} else {
+			listOfRolls[currentRoll] = numberOfPins;
+			currentRoll++;
+		}
+
+	}
+
+	@Override
+	public int score() {
+		int whichRoll = 0;
+		for (int frames = 0; frames < NUMBER_OF_FRAMES; frames++) {
+			if(isRollAStrike(whichRoll)){
+				score+= listOfRolls[whichRoll] + listOfRolls[whichRoll + 1]+listOfRolls[whichRoll+2];
+				whichRoll--;
+			}
+			else if (isRollASpare(whichRoll)) {
+				score += standardScoreForFrame(whichRoll) + spareBonus(whichRoll);
+			} else {
+				score += standardScoreForFrame(whichRoll);
+			}
+			whichRoll += 2;
+		}
+		if(currentRoll==18&&isRollAStrike(18)){
+			score+=listOfRolls[whichRoll + 1]+listOfRolls[whichRoll+2];
+		}
+		return score;
+	}
+
+	protected boolean isRollAStrike(int whichRoll) {
+		return listOfRolls[whichRoll]==10;
+	}
+
+	protected boolean isRollASpare(int whichRoll) {
+		return listOfRolls[whichRoll] + listOfRolls[whichRoll + 1] == 10;
+	}
+
+	protected int standardScoreForFrame(int whichRoll) {
+		return listOfRolls[whichRoll] + listOfRolls[whichRoll + 1];
+	}
+	
+	protected int spareBonus(int whichRoll) {
+		return listOfRolls[whichRoll+2];
+	}
+	
+	protected int strikeBonus(int whichRoll) {
+		return listOfRolls[whichRoll + 1]+listOfRolls[whichRoll+2];
+	}
+
+	@Override
+	public boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	protected void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(numberOfPinsDown);
+		}
+
+	}
+	
+	protected void rollStrike(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(PINS_DOWN_IN_A_STRIKE);
+		}
+	}
+		
+		protected void rollSpare(int numberOfRolls) {
+			for (int i = 0; i < numberOfRolls; i++) {
+				rollManyTimes(5,2);
+			}
+	}
+	
+}

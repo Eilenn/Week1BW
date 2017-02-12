@@ -1,15 +1,11 @@
 package com.capgemini.bowling;
 
-import java.util.ArrayList;
-
 public class BowlingGame implements BowlingGameResultCalculator {
 	final int NUMBER_OF_FRAMES = 10;
-	final int NUMBER_OF_ROLLS_PER_FRAME = 2;
+	final int PINS_DOWN_IN_A_STRIKE = 10;
 	final int MAXIMAL_NUMBER_OF_ROLLS = 22;
 	private int[] listOfRolls = new int[MAXIMAL_NUMBER_OF_ROLLS - 1];
 	private int currentRoll = 0;
-	private int currentTurn = 1;
-	private ArrayList<Integer> turns = new ArrayList<>();
 
 	@Override
 	public void roll(int numberOfPins) {
@@ -20,26 +16,55 @@ public class BowlingGame implements BowlingGameResultCalculator {
 		} else {
 			listOfRolls[currentRoll] = numberOfPins;
 			currentRoll++;
-			turns.add(numberOfPins);
-			//score += numberOfPins;
 		}
 
 	}
 
 	@Override
 	public int score() {
-		int score=0;
-		int whichRoll=0;
-		for(int frames=0;frames<NUMBER_OF_FRAMES;frames++){
-		if(listOfRolls[whichRoll]+listOfRolls[whichRoll+1]==10){
-			score=score+listOfRolls[whichRoll]+listOfRolls[whichRoll+1]+listOfRolls[whichRoll+2];
-		}
-		else{
-			score=score+listOfRolls[whichRoll]+listOfRolls[whichRoll+1];
-		}
-		whichRoll=whichRoll+2;
+		int score = 0;
+		int whichRoll = 0;
+		for (int frames = 0; frames < NUMBER_OF_FRAMES; frames++) {
+			if (isRollAStrike(whichRoll)) {
+				score += 10 + strikeBonus(whichRoll);
+				whichRoll++;
+			} else if (isRollASpare(whichRoll)) {
+				score += 10 + spareBonus(whichRoll);
+				whichRoll += 2;
+			} else {
+				score += standardScoreForFrame(whichRoll);
+				whichRoll += 2;
+			}
 		}
 		return score;
+	}
+
+	protected boolean isRollAStrike(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		return firstRollOfAFrame == 10;
+	}
+
+	protected boolean isRollASpare(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
+		return firstRollOfAFrame + secondRollOfAFrame == 10;
+	}
+
+	protected int standardScoreForFrame(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
+		return firstRollOfAFrame + secondRollOfAFrame;
+	}
+
+	protected int spareBonus(int whichRoll) {
+		int firstRollAfterSpare = listOfRolls[whichRoll + 2];
+		return firstRollAfterSpare;
+	}
+
+	protected int strikeBonus(int whichRoll) {
+		int firstRollAfterStrike = listOfRolls[whichRoll + 1];
+		int secondRollAfterStrike = listOfRolls[whichRoll + 2];
+		return firstRollAfterStrike + secondRollAfterStrike;
 	}
 
 	@Override
@@ -48,8 +73,23 @@ public class BowlingGame implements BowlingGameResultCalculator {
 		return false;
 	}
 
-	public ArrayList<Integer> getTurns() {
-		return turns;
+	protected void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(numberOfPinsDown);
+		}
+
+	}
+
+	protected void rollStrike(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(PINS_DOWN_IN_A_STRIKE);
+		}
+	}
+
+	protected void rollSpare(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			rollManyTimes(5, 2);
+		}
 	}
 
 }

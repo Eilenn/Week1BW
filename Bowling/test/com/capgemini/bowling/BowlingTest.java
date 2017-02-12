@@ -18,7 +18,7 @@ public class BowlingTest {
 		// given
 		int numberOfPinsDown = 0;
 		// when
-		rollManyTimes(numberOfPinsDown, 20);
+		((BowlingGame) scoreCalculator).rollManyTimes(numberOfPinsDown, 20);
 		// then
 		assertEquals(0, scoreCalculator.score());
 	}
@@ -28,7 +28,7 @@ public class BowlingTest {
 		// given
 		int numberOfPinsDown = 1;
 		// when
-		rollManyTimes(numberOfPinsDown, 20);
+		((BowlingGame) scoreCalculator).rollManyTimes(numberOfPinsDown, 20);
 		// then
 		assertEquals(20, scoreCalculator.score());
 	}
@@ -38,7 +38,7 @@ public class BowlingTest {
 		// given
 		int numberOfPinsDown = -1;
 		// when
-			scoreCalculator.roll(numberOfPinsDown);
+		scoreCalculator.roll(numberOfPinsDown);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -50,32 +50,99 @@ public class BowlingTest {
 	}
 
 	@Test
-	public void shouldAddThrowsToList() {
-		// given
-		int numberOfPinsDown = 1;
-		// when
-		rollManyTimes(numberOfPinsDown, 20);
-		// then
-		// assertTrue(scoreCalculator.getTurns().size()==20);
-		assertTrue(((BowlingGame) scoreCalculator).getTurns().contains(1));
-	}
-	
-	@Test
-	public void canRollSpare(){
+	public void canRollSpareThenStandardRolls() {
 		// given
 		scoreCalculator.roll(2);
 		scoreCalculator.roll(8);
 		scoreCalculator.roll(5);
-		rollManyTimes(1, 17);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 17);
 		// when
-		int score=scoreCalculator.score();
+		int score = scoreCalculator.score();
 		// then
 		assertEquals(37, score);
-		}
-
-	private void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
-		for (int i = 0; i < numberOfRolls; i++) {
-			scoreCalculator.roll(numberOfPinsDown);
-		}
 	}
+
+	@Test
+	public void canRollStandardRollsThenASpare() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 16);
+		scoreCalculator.roll(2);
+		scoreCalculator.roll(8);
+		scoreCalculator.roll(5);
+		scoreCalculator.roll(3);
+		// when
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(39, score);
+	}
+
+	@Test
+	public void canRollStrikeFirst() {
+		// given
+		scoreCalculator.roll(10);
+		scoreCalculator.roll(1);
+		scoreCalculator.roll(1);
+		// when
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(14, score);
+	}
+
+	@Test
+	public void canRollStandardRollsThenStrike() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 2);
+		((BowlingGame) scoreCalculator).rollStrike(1);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 16);
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(30, score);
+	}
+
+	@Test
+	public void canRollStrikeStandardSpareStandard() {
+		// given
+		((BowlingGame) scoreCalculator).rollStrike(1);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 2);
+		((BowlingGame) scoreCalculator).rollSpare(1);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 14);
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(39, score);
+	}
+
+	@Test
+	public void canRollPerfectGame() {
+		// given
+		((BowlingGame) scoreCalculator).rollStrike(12);
+		// when
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(300, score);
+	}
+
+	@Test
+	public void canRollStrikeIn10thFrame() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 18);
+		((BowlingGame) scoreCalculator).rollStrike(1);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 2);
+		// when
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(30, score);
+	}
+
+	@Test
+	public void canRollSpareIn10thFrame() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 18);
+		((BowlingGame) scoreCalculator).rollSpare(1);
+		scoreCalculator.roll(1);
+		// when
+		int score = scoreCalculator.score();
+		// then
+		assertEquals(29, score);
+	}
+
 }

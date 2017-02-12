@@ -4,19 +4,25 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class HanoiTest {
 
-	
+	/*
+	 * @Test public void shouldPlayCorrectly() { // given Hanoi.setBoard(); //
+	 * when
+	 * 
+	 * fail("Not yet implemented"); }
+	 */
+
 	@Test
-	public void shouldPlayCorrectly() {
+	public void shouldCreateSpecifiedNumberOfRings() {
 		// given
-		Hanoi.setBoard();
+		int numberOfRings = 10;
 		// when
-	
-		fail("Not yet implemented");
+		ArrayList<Integer> listOfRings = Hanoi.createRings(numberOfRings);
+		// then
+		assertTrue(listOfRings.size() == numberOfRings);
 	}
 
 }

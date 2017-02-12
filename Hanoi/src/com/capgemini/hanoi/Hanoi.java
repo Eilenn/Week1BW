@@ -48,7 +48,7 @@ public class Hanoi {
 	 * @param numberOfRings
 	 * @return ArrayList of integer values meaning rings diameter
 	 */
-	public static ArrayList<Integer> createRings(int numberOfRings) {
+	protected static ArrayList<Integer> createRings(int numberOfRings) {
 		if (numberOfRings <= 0) {
 			throw new IllegalArgumentException("Number of rings must be positive, integer value!");
 		}
