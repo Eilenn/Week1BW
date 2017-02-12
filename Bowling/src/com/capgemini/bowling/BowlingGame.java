@@ -6,6 +6,7 @@ public class BowlingGame implements BowlingGameResultCalculator {
 	final int MAXIMAL_NUMBER_OF_ROLLS = 22;
 	private int[] listOfRolls = new int[MAXIMAL_NUMBER_OF_ROLLS - 1];
 	private int currentRoll = 0;
+	private int currentFrame = 0;
 
 	@Override
 	public void roll(int numberOfPins) {
@@ -24,7 +25,7 @@ public class BowlingGame implements BowlingGameResultCalculator {
 	public int score() {
 		int score = 0;
 		int whichRoll = 0;
-		for (int frames = 0; frames < NUMBER_OF_FRAMES; frames++) {
+		while (!isFinished()) {
 			if (isRollAStrike(whichRoll)) {
 				score += 10 + strikeBonus(whichRoll);
 				whichRoll++;
@@ -35,8 +36,17 @@ public class BowlingGame implements BowlingGameResultCalculator {
 				score += standardScoreForFrame(whichRoll);
 				whichRoll += 2;
 			}
+			currentFrame++;
 		}
 		return score;
+	}
+
+	@Override
+	public boolean isFinished() {
+		if (currentFrame < NUMBER_OF_FRAMES)
+			return false;
+		else
+			return true;
 	}
 
 	protected boolean isRollAStrike(int whichRoll) {
@@ -67,13 +77,10 @@ public class BowlingGame implements BowlingGameResultCalculator {
 		return firstRollAfterStrike + secondRollAfterStrike;
 	}
 
-	@Override
-	public boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	protected void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
+		if (numberOfRolls > MAXIMAL_NUMBER_OF_ROLLS) {
+			throw new IllegalArgumentException("You cannot roll more than 22 times");
+		}
 		for (int i = 0; i < numberOfRolls; i++) {
 			roll(numberOfPinsDown);
 		}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BowlingTest" project="Bowling" tests="17" started="17" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.bowling.BowlingTest" time="0.004">
+    <testcase name="canRollSpareIn10thFrame" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionWhenKnockingMoreThan10Pins" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionWhenKnockingNegativeNumberOfPins" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollSpareThenStandardRolls" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollAll0" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollAll1" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollStandardRollsThenASpare" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldReturnFalseFor2Rolls" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollStandardRollsThenStrike" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollStrikeStandardSpareStandard" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollPerfectGame" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="canRollStrikeIn10thFrame" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldReturnTrueFor20Rolls" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldReturnTrueFor21Rolls" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldReturnTrueFor22Rolls" classname="com.capgemini.bowling.BowlingTest" time="0.0"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionFor23Rolls" classname="com.capgemini.bowling.BowlingTest" time="0.003"/>
+    <testcase name="canRollStrikeFirst" classname="com.capgemini.bowling.BowlingTest" time="0.001"/>
+  </testsuite>
+</testrun>

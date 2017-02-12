@@ -145,4 +145,61 @@ public class BowlingTest {
 		assertEquals(29, score);
 	}
 
+	@Test
+	public void shouldReturnTrueFor20Rolls() {
+		// given
+		int numberOfPinsDown = 1;
+		((BowlingGame) scoreCalculator).rollManyTimes(numberOfPinsDown, 20);
+		scoreCalculator.score();
+		// when
+		boolean isGameFinished = scoreCalculator.isFinished();
+		// then
+		assertTrue(isGameFinished);
+	}
+
+	@Test
+	public void shouldReturnTrueFor21Rolls() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 18);
+		((BowlingGame) scoreCalculator).rollSpare(1);
+		scoreCalculator.roll(1);
+		scoreCalculator.score();
+		// when
+		boolean isGameFinished = scoreCalculator.isFinished();
+		// then
+		assertTrue(isGameFinished);
+	}
+
+	@Test
+	public void shouldReturnTrueFor22Rolls() {
+		// given
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 18);
+		((BowlingGame) scoreCalculator).rollStrike(1);
+		((BowlingGame) scoreCalculator).rollManyTimes(1, 2);
+		scoreCalculator.score();
+		// when
+		boolean isGameFinished = scoreCalculator.isFinished();
+		// then
+		assertTrue(isGameFinished);
+	}
+
+	@Test
+	public void shouldReturnFalseFor19Rolls() {
+		// given
+		int numberOfRolls = 19;
+		((BowlingGame) scoreCalculator).rollManyTimes(1, numberOfRolls);
+		// when
+		boolean isGameFinished = scoreCalculator.isFinished();
+		// then
+		assertFalse(isGameFinished);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThrowIllegalArgumentExceptionFor23Rolls() {
+		// given
+		int numberOfRolls = 23;
+		// when
+		((BowlingGame) scoreCalculator).rollManyTimes(1, numberOfRolls);
+
+	}
 }
