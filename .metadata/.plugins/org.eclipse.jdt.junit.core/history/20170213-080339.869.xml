@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="HanoiTest" project="Hanoi" tests="5" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.hanoi.HanoiTest" incomplete="true">
+    <testcase name="shouldThrowIllegalArgumentExceptionWhenCreatingNegativeNumberOfRings" classname="com.capgemini.hanoi.HanoiTest" time="0.0"/>
+    <testcase name="shouldPlayCorrectly" classname="com.capgemini.hanoi.HanoiTest" incomplete="true"/>
+    <testcase name="shouldCreateSpecifiedNumberOfRings" classname="com.capgemini.hanoi.HanoiTest" incomplete="true"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionWhenCreating0Rings" classname="com.capgemini.hanoi.HanoiTest" incomplete="true"/>
+    <testcase name="shouldCreateRingsOfDifferentDiameters" classname="com.capgemini.hanoi.HanoiTest" incomplete="true"/>
+  </testsuite>
+</testrun>

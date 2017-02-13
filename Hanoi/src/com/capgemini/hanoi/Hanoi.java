@@ -13,32 +13,37 @@ import java.util.HashSet;
  *
  */
 public class Hanoi {
-	private static Stack originTower;
-	private static Stack intermediateTower;
-	private static Stack targetTower;
-	private static ArrayList<Integer> listOfRings = new ArrayList<>();
-	private static Set<Integer> indexesOfTowers = new HashSet<Integer>();
-	private static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
+	protected static Stack originTower;
+	protected static Stack intermediateTower;
+	protected static Stack targetTower;
+	protected ArrayList<Integer> listOfRings = new ArrayList<>();
+	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
+	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
 
 	/**
 	 * creates the board and runs the game
 	 */
 	public static void setBoard() {
-		indexesOfTowers.add(1);
-		indexesOfTowers.add(2);
-		indexesOfTowers.add(3);
+		Hanoi hanoi=new Hanoi();
+		creatingIndexesForTowers();
 		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
 		System.out.println("How many rings do you want to put on the tower number 1?");
 		Scanner sc = new Scanner(System.in);
 		int numberOfRings = sc.nextInt();
-		listOfRings = createRings(numberOfRings);
-		createTowers(listOfRings);
+		hanoi.listOfRings = hanoi.createRings(numberOfRings);
+		createTowers(hanoi.listOfRings);
 		System.out.println("Tower 1 looks like this:");
 		originTower.displayVertical();
 		Hanoi.getCommandsForMovingRings();
 		System.out.println("Congratulations! You finished the game.");
 		printListOfMoves();
 		sc.close();
+	}
+
+	protected static void creatingIndexesForTowers() {
+		indexesOfTowers.add(1);
+		indexesOfTowers.add(2);
+		indexesOfTowers.add(3);
 	}
 
 	/**
@@ -48,7 +53,7 @@ public class Hanoi {
 	 * @param numberOfRings
 	 * @return ArrayList of integer values meaning rings diameter
 	 */
-	protected static ArrayList<Integer> createRings(int numberOfRings) {
+	protected ArrayList<Integer> createRings(int numberOfRings) {
 		if (numberOfRings <= 0) {
 			throw new IllegalArgumentException("Number of rings must be positive, integer value!");
 		}

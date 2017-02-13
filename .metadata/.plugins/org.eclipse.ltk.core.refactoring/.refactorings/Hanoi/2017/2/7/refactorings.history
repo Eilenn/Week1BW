@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;protected static void creatingIndexesForTowers()&apos; from &apos;com.capgemini.hanoi.Hanoi.setBoard()&apos; to &apos;com.capgemini.hanoi.Hanoi&apos;&#x0D;&#x0A;- Original project: &apos;Hanoi&apos;&#x0D;&#x0A;- Method name: &apos;creatingIndexesForTowers&apos;&#x0D;&#x0A;- Destination type: &apos;com.capgemini.hanoi.Hanoi&apos;&#x0D;&#x0A;- Declared visibility: &apos;protected&apos;" comments="false" description="Extract method &apos;creatingIndexesForTowers&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;com.capgemini.hanoi{Hanoi.java" name="creatingIndexesForTowers" replace="false" selection="757 79" stamp="1486969883496" version="1.0" visibility="4"/>
+</session>
