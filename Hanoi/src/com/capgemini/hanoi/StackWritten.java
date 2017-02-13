@@ -1,10 +1,10 @@
 package com.capgemini.hanoi;
 
-public class Stack {
+public class StackWritten {
 	int[] stackOfRings;
 	int stackTopIndex; // index of last occupied in the stack
 
-	public Stack(int numberOfRings) {
+	public StackWritten(int numberOfRings) {
 		stackOfRings = new int[numberOfRings];
 		stackTopIndex = -1;
 	}

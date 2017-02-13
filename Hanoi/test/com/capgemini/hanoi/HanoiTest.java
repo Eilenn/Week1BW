@@ -32,7 +32,7 @@ public class HanoiTest {
 		// given
 		int numberOfRings = -1;
 		// when
-		ArrayList<Integer> listOfRings = hanoi.createRings(numberOfRings);
+		hanoi.createRings(numberOfRings);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -40,7 +40,7 @@ public class HanoiTest {
 		// given
 		int numberOfRings = 0;
 		// when
-		ArrayList<Integer> listOfRings = hanoi.createRings(numberOfRings);
+		hanoi.createRings(numberOfRings);
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ public class HanoiTest {
 		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
 		hanoi.createTowers(listOfRings);
 		// when
-		boolean isEmpty=Hanoi.intermediateTower.isEmpty();
+		boolean isEmpty=hanoi.intermediateTower.isEmpty();
 		// then
 		assertTrue(isEmpty);
 		}
@@ -75,7 +75,7 @@ public class HanoiTest {
 		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
 		hanoi.createTowers(listOfRings);
 		// when
-		int sizeForEmpty=Hanoi.intermediateTower.getSize();
+		int sizeForEmpty=hanoi.intermediateTower.getSize();
 		// then
 		assertEquals(-1,sizeForEmpty);
 		}
@@ -87,7 +87,7 @@ public class HanoiTest {
 		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
 		hanoi.createTowers(listOfRings);
 		// when
-		boolean isEmpty=Hanoi.targetTower.isEmpty();
+		boolean isEmpty=hanoi.targetTower.isEmpty();
 		// then
 		assertTrue(isEmpty);
 		}

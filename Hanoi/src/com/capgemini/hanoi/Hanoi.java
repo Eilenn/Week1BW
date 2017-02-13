@@ -1,9 +1,9 @@
 package com.capgemini.hanoi;
 
-import java.util.Scanner;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 /**
  * makes playing Hanoi towers game possible. Creates the board and collects
@@ -13,13 +13,13 @@ import java.util.HashSet;
  *
  */
 public class Hanoi {
-	protected  Stack originTower;
-	protected  Stack intermediateTower;
-	protected  Stack targetTower;
-	protected ArrayList<Integer> listOfRings = new ArrayList<>();
+	protected  StackWritten originTower;
+	protected  StackWritten intermediateTower;
+	protected  StackWritten targetTower;
+	protected ArrayList<Integer> listOfRings = new ArrayList<>(); //should be generic type? how?
 	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
 	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
-	protected static Stack[] allTowers = { originTower, intermediateTower, targetTower };
+	protected StackWritten[] allTowers = { originTower, intermediateTower, targetTower };
 
 	/**
 	 * creates the board and runs the game: first it creates indexes
@@ -76,9 +76,9 @@ public class Hanoi {
 	 */
 	protected void createTowers(ArrayList<Integer> listOfRings) {
 		int maximalSizeOfTower = listOfRings.size();
-		intermediateTower = new Stack(maximalSizeOfTower);
-		targetTower = new Stack(maximalSizeOfTower);
-		originTower = new Stack(maximalSizeOfTower);
+		intermediateTower = new StackWritten(maximalSizeOfTower);
+		targetTower = new StackWritten(maximalSizeOfTower);
+		originTower = new StackWritten(maximalSizeOfTower);
 	}
 
 	protected void fillOriginTower(ArrayList<Integer> listOfRings) {
@@ -105,7 +105,7 @@ public class Hanoi {
 		sc.close();
 	}
 
-	protected  boolean isTargetTowerFull() {
+	private  boolean isTargetTowerFull() {
 		return targetTower.getSize() >= targetTower.getMaximumStackSize() - 1;
 	}
 
@@ -118,7 +118,7 @@ public class Hanoi {
 	 * @param allTowers
 	 */
 	protected static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber,
-			Stack[] allTowers) {
+			StackWritten[] allTowers) {
 		if (areEnteredTowerNumbersValid(originTowerNumber, targetTowerNumber)) {
 			if (originTowerNumber != targetTowerNumber) {
 				Integer[] moveFromTo = { originTowerNumber, targetTowerNumber };
@@ -140,7 +140,7 @@ public class Hanoi {
 	 * @param targetTowerNumber
 	 * @return
 	 */
-	protected static boolean areEnteredTowerNumbersValid(int originTowerNumber, int targetTowerNumber) {
+	private static boolean areEnteredTowerNumbersValid(int originTowerNumber, int targetTowerNumber) {
 		return indexesOfTowers.contains(originTowerNumber) && indexesOfTowers.contains(targetTowerNumber);
 	}
 
@@ -152,7 +152,7 @@ public class Hanoi {
 	 * @param originTower
 	 * @param targetTower
 	 */
-	public static void moveRing(Stack originTower, Stack targetTower) {
+	public static void moveRing(StackWritten originTower, StackWritten targetTower) {
 		if (originTower.isEmpty()) {
 			System.out.println("The tower is empty! " + "\n Choose another move.");
 			throw new IllegalStateException("Tower is empty");
@@ -176,14 +176,14 @@ public class Hanoi {
 	 * @return
 	 */
 
-	protected static boolean isTopRingFromOriginSmallerThanTopRingFromTarget(Stack originTower, Stack targetTower) {
+	private static boolean isTopRingFromOriginSmallerThanTopRingFromTarget(StackWritten originTower, StackWritten targetTower) {
 		return originTower.peek() < targetTower.peek();
 	}
 
 	/**
 	 * prints a list of valid moves made by the player
 	 */
-	protected static void printListOfMoves() {
+	private static void printListOfMoves() {
 		System.out.println("Here is the list of your moves:");
 		for (int moveIndex = 0; moveIndex < listOfMoves.size(); moveIndex++) {
 			System.out.println("From " + listOfMoves.get(moveIndex)[0] + " to " + listOfMoves.get(moveIndex)[1]);

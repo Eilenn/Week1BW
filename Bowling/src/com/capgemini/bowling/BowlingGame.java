@@ -49,54 +49,32 @@ public class BowlingGame implements BowlingGameResultCalculator {
 			return true;
 	}
 
-	protected boolean isRollAStrike(int whichRoll) {
+	private boolean isRollAStrike(int whichRoll) {
 		int firstRollOfAFrame = listOfRolls[whichRoll];
 		return firstRollOfAFrame == 10;
 	}
 
-	protected boolean isRollASpare(int whichRoll) {
+	private boolean isRollASpare(int whichRoll) {
 		int firstRollOfAFrame = listOfRolls[whichRoll];
 		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
 		return firstRollOfAFrame + secondRollOfAFrame == 10;
 	}
 
-	protected int standardScoreForFrame(int whichRoll) {
+	private int standardScoreForFrame(int whichRoll) {
 		int firstRollOfAFrame = listOfRolls[whichRoll];
 		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
 		return firstRollOfAFrame + secondRollOfAFrame;
 	}
 
-	protected int spareBonus(int whichRoll) {
+	private int spareBonus(int whichRoll) {
 		int firstRollAfterSpare = listOfRolls[whichRoll + 2];
 		return firstRollAfterSpare;
 	}
 
-	protected int strikeBonus(int whichRoll) {
+	private int strikeBonus(int whichRoll) {
 		int firstRollAfterStrike = listOfRolls[whichRoll + 1];
 		int secondRollAfterStrike = listOfRolls[whichRoll + 2];
 		return firstRollAfterStrike + secondRollAfterStrike;
-	}
-
-	protected void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
-		if (numberOfRolls > MAXIMAL_NUMBER_OF_ROLLS) {
-			throw new IllegalArgumentException("You cannot roll more than 22 times");
-		}
-		for (int i = 0; i < numberOfRolls; i++) {
-			roll(numberOfPinsDown);
-		}
-
-	}
-
-	protected void rollStrike(int numberOfRolls) {
-		for (int i = 0; i < numberOfRolls; i++) {
-			roll(PINS_DOWN_IN_A_STRIKE);
-		}
-	}
-
-	protected void rollSpare(int numberOfRolls) {
-		for (int i = 0; i < numberOfRolls; i++) {
-			rollManyTimes(5, 2);
-		}
 	}
 
 }
