@@ -1,0 +1,66 @@
+package com.starterkit.bank.core;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.starterkit.bank.methods.MoneyTransfer;
+
+public class Bank {
+
+	// TASK 1/08 - such members being public / protected are in fact implementation details leaking into API. They must be repaired / made private with public accessor methods.
+	List<Account> accounts = new ArrayList();
+	ExchangeRates exchangeRates;
+	
+	Money getMoneyInBank() {
+		Money result = Money.noMoney("USD");
+		for(Account account:accounts){
+			result.amount = result.amount.add(account.getBalance().amount);
+		}
+		
+		return result;
+	}
+	
+	void pushMoney(String from, String to, Money amount) {
+		pushMoney(new IBAN(from), new IBAN(to), amount);
+	}
+	
+	void pushMoney(IBAN from, IBAN to, Money amount) {
+		
+		Account fromAccount = null;
+		Account toAccount = null;
+		
+		for (Account a : (List<Account>)accounts) {
+			// TASK 1/10.1 - Introduce a Type
+			if (a.number.number.equals(from.number)) {
+				fromAccount = a;
+			}
+			if (a.number.number.equals(to.number)) {
+				toAccount = a;
+			}
+		}
+		
+		// TASK 1/09 - this code below would look good as a method replaceMoney(Account, Account, Money). 
+		//This would propose a good interface, 3 methods differentiating by the types only, and reusing themselves
+		// XXX there are no validations below!
+		
+		replaceMoney(fromAccount, toAccount, amount);
+	}
+
+	protected void replaceMoney(Account fromAccount, Account toAccount, Money amount) {
+		MoneyTransfer fromTransfer = new MoneyTransfer();
+		fromTransfer.transferDirection = Direction.FROM_ACCOUNT;
+		fromTransfer.setAccount(fromAccount);
+		fromTransfer.setNumber(toAccount.number);
+		fromTransfer.amount = amount;
+		fromAccount.getMoneyTransferHistory().add(fromTransfer);
+		
+		MoneyTransfer toTransfer = new MoneyTransfer();
+		toTransfer.transferDirection = Direction.TO_ACCOUNT;
+		toTransfer.setAccount(toAccount);
+		toTransfer.setNumber(fromAccount.number);
+		toTransfer.amount = amount;
+		toAccount.getMoneyTransferHistory().add(toTransfer);
+	}
+	
+}

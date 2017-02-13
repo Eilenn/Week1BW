@@ -18,13 +18,6 @@ public class Fibonacci {
 	 * @param seriesElementNumber
 	 * @return long value of Fibonacci series for given element
 	 */
-	public static long fib(int seriesElementNumber) {
-		long result = evaluateFib(seriesElementNumber);
-		if (result < 0) {
-			throw new ResultOutOfRangeException("Result of this operation is out of range");
-		}
-		return result;
-	}
 
 	/**
 	 * computes value of Fibonacci series element
@@ -32,7 +25,7 @@ public class Fibonacci {
 	 * @param seriesElementNumber
 	 * @return long value of Fibonacci series for given element
 	 */
-	private static long evaluateFib(int seriesElementNumber) {
+	public static long evaluateFib(int seriesElementNumber) {
 		long result = 0;
 		if (seriesElementNumber <= 0) {
 			throw new IllegalArgumentException("Element's number must be a non-negative number!");
@@ -46,6 +39,9 @@ public class Fibonacci {
 				result = previousElement + previousToPreviousElement;
 				previousToPreviousElement = previousElement;
 				previousElement = result;
+				if (result < 0) {
+					throw new ResultOutOfRangeException("Result of this operation is out of range");
+				}
 			}
 			return result;
 		}

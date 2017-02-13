@@ -1,0 +1,126 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+
+import org.junit.Test;
+
+/**
+ * Tests @Fibonacci class, checks if method fib correctly evaluates values of a
+ * given Fibonacci series' element. Checks if non-positive input throws an
+ * IllegalArgumentException and if arguments too big for long's range throw a
+ * ResultOutOfRangeException.
+ * 
+ * @author BOWROBEL
+ *
+ */
+public class FibonacciTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void shouldReturnValueOfGivenElementOfFibonacci() {
+		// given
+		int seriesElementNumber = 5;
+		// when
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
+		// then
+		assertEquals(5, result, 0);
+
+	}
+
+	@Test
+	public void shouldReturnOneForFirstElementOfFinbonacci() {
+		// given
+		int seriesElementNumber = 1;
+		// when
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
+		// then
+		assertEquals(1, result, 0);
+
+	}
+
+	@Test
+	public void shouldReturnOneForSecondElementOfFibonacci() {
+		// given
+		int seriesElementNumber = 2;
+		// when
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
+		// then
+		assertEquals(1, result, 0);
+
+	}
+
+	@Test
+	public void shouldReturnValueOfFibonacciForBigInteger() {
+		// given
+		final long resultFor92 = 7540113804746346429L;
+		int seriesElemetNumber = 92;
+		// when
+		long result = Fibonacci.evaluateFib(seriesElemetNumber);
+		// then
+		assertEquals(resultFor92, result, 0);
+
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThrowIllegalArgumentExceptionForZero() {
+		// given
+		int seriesElementNumber = 0;
+		// when
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
+	}
+
+	@Test
+	public void testsIllegalArgumentExceptionMessageForZero() throws IllegalArgumentException {
+		// given
+		int seriesElementNumber = 0;
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Element's number must be a non-negative number!");
+		// when
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
+	}
+
+	@Test(expected = ResultOutOfRangeException.class)
+	public void shouldThrowResultOutOfRangeExceptionForElementsTooBigForLong() {
+		// given
+		int seriesElementNumber = 93;
+		// when
+		long result = Fibonacci.fib(seriesElementNumber);
+
+	}
+
+	@Test
+	public void testsResultOutOfRangeExceptionMessage() throws ResultOutOfRangeException {
+		// given
+		int seriesElementNumber = 93;
+		thrown.expect(ResultOutOfRangeException.class);
+		thrown.expectMessage("Result of this operation is out of range");
+		// when
+		long result = Fibonacci.fib(seriesElementNumber);
+
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThrowIllegalArgumentExceptionForNegativeArgument() {
+		// given
+		int seriesElementNumber = -1;
+		// when
+		long result = Fibonacci.fib(seriesElementNumber);
+
+	}
+
+	@Test
+	public void testsIllegalArgumentExceptionMessageForNegativeArgument() throws ResultOutOfRangeException {
+		// given
+		int seriesElementNumber = -1;
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Element's number must be a non-negative number!");
+		// when
+		long result = Fibonacci.fib(seriesElementNumber);
+
+	}
+}

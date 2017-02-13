@@ -1,0 +1,7 @@
+1486981413198	Rename method 'test_Balance_With_Non_Empty_Money_Transfer'
+1486982137567	Rename method 'test_Balance_With_Non_Empty_Money_Transfer2'
+1486982643475	Rename method 'test_Balance_With_Incomming_Outgoing_Transfers'
+1486983440694	Rename local variable 'string'
+1486983681584	Rename method 'giveMoney'
+1486984721573	Extract method 'replaceMoney'
+1486984802325	Extract constant 'PLN'

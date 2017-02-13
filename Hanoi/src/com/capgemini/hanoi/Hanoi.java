@@ -13,9 +13,9 @@ import java.util.HashSet;
  *
  */
 public class Hanoi {
-	protected static Stack originTower;
-	protected static Stack intermediateTower;
-	protected static Stack targetTower;
+	protected  Stack originTower;
+	protected  Stack intermediateTower;
+	protected  Stack targetTower;
 	protected ArrayList<Integer> listOfRings = new ArrayList<>();
 	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
 	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Hanoi {
 	 * list of moves
 	 * 
 	 */
-	public static void setBoard() {
+	public void setBoard() {
 		Hanoi hanoi = new Hanoi();
 		creatingIndexesForTowers();
 		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
@@ -99,14 +99,13 @@ public class Hanoi {
 			originTowerNumber = sc.nextInt();
 			System.out.println("Choose a tower to put a ring on: ");
 			targetTowerNumber = sc.nextInt();
-			// Stack[] allTowers = { originTower, intermediateTower, targetTower
-			// };
+			// Stack[] allTowers = { originTower, intermediateTower, targetTower};
 			moveRingIfTowerNumberIsValid(originTowerNumber, targetTowerNumber, allTowers);
 		}
 		sc.close();
 	}
 
-	protected static boolean isTargetTowerFull() {
+	protected  boolean isTargetTowerFull() {
 		return targetTower.getSize() >= targetTower.getMaximumStackSize() - 1;
 	}
 

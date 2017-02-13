@@ -1,5 +1,5 @@
 package com.capgemini.gameoflife;
 
-public class Cell {
+public interface Cell {
 
 }

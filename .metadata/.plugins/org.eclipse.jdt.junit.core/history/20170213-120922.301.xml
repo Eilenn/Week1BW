@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AccountTests" project="Bank" tests="9" started="9" failures="0" errors="0" ignored="0">
+  <testsuite name="com.starterkit.bank.core.AccountTests" time="0.025">
+    <testcase name="testGetAverageTransaction2" classname="com.starterkit.bank.core.AccountTests" time="0.011"/>
+    <testcase name="test_Balance_With_Non_Empty_Money_Transfer3" classname="com.starterkit.bank.core.AccountTests" time="0.004"/>
+    <testcase name="test_Balance_With_Non_Empty_Money_Transfer4" classname="com.starterkit.bank.core.AccountTests" time="0.004"/>
+    <testcase name="shouldBalanceWithNonEmptyMoneyTransfer" classname="com.starterkit.bank.core.AccountTests" time="0.001"/>
+    <testcase name="shouldGetEmptyBalance" classname="com.starterkit.bank.core.AccountTests" time="0.0"/>
+    <testcase name="shouldBalanceWithIncommingOutgoingTransfers" classname="com.starterkit.bank.core.AccountTests" time="0.001"/>
+    <testcase name="shouldBalanceWithNonEmptyMoneyTransfer2" classname="com.starterkit.bank.core.AccountTests" time="0.0"/>
+    <testcase name="testGetAverageTransaction" classname="com.starterkit.bank.core.AccountTests" time="0.0"/>
+    <testcase name="testGetHistory" classname="com.starterkit.bank.core.AccountTests" time="0.003"/>
+  </testsuite>
+</testrun>

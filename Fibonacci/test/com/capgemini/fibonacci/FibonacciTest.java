@@ -26,7 +26,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = 5;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
 		// then
 		assertEquals(5, result, 0);
 
@@ -37,7 +37,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = 1;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
 		// then
 		assertEquals(1, result, 0);
 
@@ -48,7 +48,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = 2;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		long result = Fibonacci.evaluateFib(seriesElementNumber);
 		// then
 		assertEquals(1, result, 0);
 
@@ -60,7 +60,7 @@ public class FibonacciTest {
 		final long resultFor92 = 7540113804746346429L;
 		int seriesElemetNumber = 92;
 		// when
-		long result = Fibonacci.fib(seriesElemetNumber);
+		long result = Fibonacci.evaluateFib(seriesElemetNumber);
 		// then
 		assertEquals(resultFor92, result, 0);
 
@@ -71,7 +71,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = 0;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class FibonacciTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Element's number must be a non-negative number!");
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 	}
 
 	@Test(expected = ResultOutOfRangeException.class)
@@ -89,7 +89,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = 93;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 
 	}
 
@@ -100,7 +100,7 @@ public class FibonacciTest {
 		thrown.expect(ResultOutOfRangeException.class);
 		thrown.expectMessage("Result of this operation is out of range");
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 
 	}
 
@@ -109,7 +109,7 @@ public class FibonacciTest {
 		// given
 		int seriesElementNumber = -1;
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 
 	}
 
@@ -120,7 +120,7 @@ public class FibonacciTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Element's number must be a non-negative number!");
 		// when
-		long result = Fibonacci.fib(seriesElementNumber);
+		Fibonacci.evaluateFib(seriesElementNumber);
 
 	}
 }

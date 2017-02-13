@@ -11,31 +11,11 @@ import org.junit.Test;
 
 public class HanoiTest {
 
-	/*
-	 * @Test public void shouldPlayCorrectly() { // given Hanoi.setBoard(); //
-	 * when
-	 * 
-	 * fail("Not yet implemented"); }
-	 */
 	private Hanoi hanoi;
-	// private Hanoi hanoi2;
 	@Before
 	public void setUp(){
 		hanoi=new Hanoi();
 	}
-
-/*	@Test
-	public void shouldHave2DifferentOriginTowers(){
-		// given
-		hanoi2=new Hanoi();
-		int numberOfRingsFirstOrigin=5;
-		int numberOfRingsSecondOrigin=10;
-		// when
-		hanoi.createTowers(hanoi.createRings(numberOfRingsFirstOrigin));
-		hanoi2.createTowers(hanoi2.createRings(numberOfRingsFirstOrigin));
-		
-		// then
-	}*/
 	
 	@Test
 	public void shouldCreateSpecifiedNumberOfRings() {
@@ -113,7 +93,8 @@ public class HanoiTest {
 		}
 	
 	
-	/*
-	 * @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }
-	 */
+/*	
+	  @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }
+	 
+*/
 }
