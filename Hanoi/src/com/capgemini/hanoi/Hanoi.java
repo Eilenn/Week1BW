@@ -19,22 +19,27 @@ public class Hanoi {
 	protected ArrayList<Integer> listOfRings = new ArrayList<>();
 	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
 	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
+	protected static Stack[] allTowers = { originTower, intermediateTower, targetTower };
 
 	/**
-	 * creates the board and runs the game
+	 * creates the board and runs the game: first it creates indexes
+	 * corresponding to towers, then it gets number of rings on origin tower and
+	 * creates list of different-sized rings, gets tower numbers from user, gets
+	 * command from user how to move rings ends if target tower is full prints
+	 * list of moves
+	 * 
 	 */
 	public static void setBoard() {
-		Hanoi hanoi=new Hanoi();
+		Hanoi hanoi = new Hanoi();
 		creatingIndexesForTowers();
 		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
 		System.out.println("How many rings do you want to put on the tower number 1?");
 		Scanner sc = new Scanner(System.in);
 		int numberOfRings = sc.nextInt();
 		hanoi.listOfRings = hanoi.createRings(numberOfRings);
-		createTowers(hanoi.listOfRings);
-		System.out.println("Tower 1 looks like this:");
-		originTower.displayVertical();
-		Hanoi.getCommandsForMovingRings();
+		hanoi.createTowers(hanoi.listOfRings);
+		hanoi.fillOriginTower(hanoi.listOfRings);
+		hanoi.getCommandsForMovingRings();
 		System.out.println("Congratulations! You finished the game.");
 		printListOfMoves();
 		sc.close();
@@ -69,46 +74,57 @@ public class Hanoi {
 	 * 
 	 * @param listOfRings
 	 */
-	public static void createTowers(ArrayList<Integer> listOfRings) {
-		intermediateTower = new Stack(listOfRings.size());
-		targetTower = new Stack(listOfRings.size());
-		originTower = new Stack(listOfRings.size());
-		for (int i = 0; i < listOfRings.size(); i++) {
-			originTower.push(listOfRings.get(i).intValue());
+	protected void createTowers(ArrayList<Integer> listOfRings) {
+		int maximalSizeOfTower = listOfRings.size();
+		intermediateTower = new Stack(maximalSizeOfTower);
+		targetTower = new Stack(maximalSizeOfTower);
+		originTower = new Stack(maximalSizeOfTower);
+	}
+
+	protected void fillOriginTower(ArrayList<Integer> listOfRings) {
+		for (int ringIndex = 0; ringIndex < listOfRings.size(); ringIndex++) {
+			int ring = listOfRings.get(ringIndex).intValue();
+			originTower.push(ring);
 		}
 	}
 
 	/**
 	 * collects commands for moving rings in form of tower numbers
 	 */
-	public static void getCommandsForMovingRings() {
+	protected void getCommandsForMovingRings() {
 		Scanner sc = new Scanner(System.in);
-		while (targetTower.getSize() < targetTower.getMaximumStackSize() - 1) {
+		while (!isTargetTowerFull()) {
 			int originTowerNumber, targetTowerNumber;
 			System.out.println("Choose a tower to take a ring from: ");
 			originTowerNumber = sc.nextInt();
 			System.out.println("Choose a tower to put a ring on: ");
 			targetTowerNumber = sc.nextInt();
-			Stack[] allTowers = { originTower, intermediateTower, targetTower };
+			// Stack[] allTowers = { originTower, intermediateTower, targetTower
+			// };
 			moveRingIfTowerNumberIsValid(originTowerNumber, targetTowerNumber, allTowers);
 		}
 		sc.close();
 	}
 
+	protected static boolean isTargetTowerFull() {
+		return targetTower.getSize() >= targetTower.getMaximumStackSize() - 1;
+	}
+
 	/**
-	 * validates tower numbers entered by player, if in range of 1-3, it
-	 * attempts to move the ring, if not it prints a message to the user
+	 * moves the ring, if the move is valid, if not it prints a message to the
+	 * user
 	 * 
 	 * @param originTowerNumber
 	 * @param targetTowerNumber
 	 * @param allTowers
 	 */
-	public static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber, Stack[] allTowers) {
-		if (indexesOfTowers.contains(originTowerNumber) && indexesOfTowers.contains(targetTowerNumber)) {
+	protected static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber,
+			Stack[] allTowers) {
+		if (areEnteredTowerNumbersValid(originTowerNumber, targetTowerNumber)) {
 			if (originTowerNumber != targetTowerNumber) {
 				Integer[] moveFromTo = { originTowerNumber, targetTowerNumber };
 				listOfMoves.add(moveFromTo);
-				Hanoi.moveRing(allTowers[originTowerNumber - 1], allTowers[targetTowerNumber - 1]);
+				moveRing(allTowers[originTowerNumber - 1], allTowers[targetTowerNumber - 1]);
 			} else {
 				System.out.println("Tower numbers you entered are the same!.");
 			}
@@ -118,35 +134,60 @@ public class Hanoi {
 	}
 
 	/**
+	 * validates tower numbers entered by player, checking if they are in range
+	 * of 1-3,
+	 * 
+	 * @param originTowerNumber
+	 * @param targetTowerNumber
+	 * @return
+	 */
+	protected static boolean areEnteredTowerNumbersValid(int originTowerNumber, int targetTowerNumber) {
+		return indexesOfTowers.contains(originTowerNumber) && indexesOfTowers.contains(targetTowerNumber);
+	}
+
+	/**
 	 * moves a ring from origin tower to target tower if origin tower is not
 	 * empty and the moved ring's size is smaller than ring's on top of the
 	 * target tower
 	 * 
-	 * @param origin
-	 * @param target
+	 * @param originTower
+	 * @param targetTower
 	 */
-	public static void moveRing(Stack origin, Stack target) {
-		if (origin.isEmpty()) {
+	public static void moveRing(Stack originTower, Stack targetTower) {
+		if (originTower.isEmpty()) {
 			System.out.println("The tower is empty! " + "\n Choose another move.");
 			throw new IllegalStateException("Tower is empty");
 		} else {
-			if (target.isEmpty() || origin.peek() < target.peek()) {
-				int temp = origin.pop();
-				target.push(temp);
+			if (targetTower.isEmpty() || isTopRingFromOriginSmallerThanTopRingFromTarget(originTower, targetTower)) {
+				int topRingFromOriginTower = originTower.pop();
+				targetTower.push(topRingFromOriginTower);
 			} else {
 				System.out.println("You cannot put a bigger ring on a smaller one! \nChoose another move.");
+				throw new IllegalStateException("You cannot put a bigger ring on a smaller one!");
 			}
-
 		}
+	}
+
+	/**
+	 * checks if top ring from origin tower is smaller than top ring from target
+	 * tower
+	 * 
+	 * @param originTower
+	 * @param targetTower
+	 * @return
+	 */
+
+	protected static boolean isTopRingFromOriginSmallerThanTopRingFromTarget(Stack originTower, Stack targetTower) {
+		return originTower.peek() < targetTower.peek();
 	}
 
 	/**
 	 * prints a list of valid moves made by the player
 	 */
-	public static void printListOfMoves() {
+	protected static void printListOfMoves() {
 		System.out.println("Here is the list of your moves:");
-		for (int i = 0; i < listOfMoves.size(); i++) {
-			System.out.println("From " + listOfMoves.get(i)[0] + " to " + listOfMoves.get(i)[1]);
+		for (int moveIndex = 0; moveIndex < listOfMoves.size(); moveIndex++) {
+			System.out.println("From " + listOfMoves.get(moveIndex)[0] + " to " + listOfMoves.get(moveIndex)[1]);
 		}
 	}
 }

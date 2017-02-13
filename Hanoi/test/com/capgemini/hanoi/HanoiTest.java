@@ -18,11 +18,25 @@ public class HanoiTest {
 	 * fail("Not yet implemented"); }
 	 */
 	private Hanoi hanoi;
+	// private Hanoi hanoi2;
 	@Before
 	public void setUp(){
 		hanoi=new Hanoi();
 	}
 
+/*	@Test
+	public void shouldHave2DifferentOriginTowers(){
+		// given
+		hanoi2=new Hanoi();
+		int numberOfRingsFirstOrigin=5;
+		int numberOfRingsSecondOrigin=10;
+		// when
+		hanoi.createTowers(hanoi.createRings(numberOfRingsFirstOrigin));
+		hanoi2.createTowers(hanoi2.createRings(numberOfRingsFirstOrigin));
+		
+		// then
+	}*/
+	
 	@Test
 	public void shouldCreateSpecifiedNumberOfRings() {
 		// given
@@ -67,7 +81,7 @@ public class HanoiTest {
 		// given
 		int numberOfRings=5;
 		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
-		Hanoi.createTowers(listOfRings);
+		hanoi.createTowers(listOfRings);
 		// when
 		boolean isEmpty=Hanoi.intermediateTower.isEmpty();
 		// then
@@ -75,27 +89,31 @@ public class HanoiTest {
 		}
 	
 	@Test
+	public void shouldReturnMinus1ForEmptyIntermediateTowerAtTheBeginning(){
+		// given
+		int numberOfRings=5;
+		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
+		hanoi.createTowers(listOfRings);
+		// when
+		int sizeForEmpty=Hanoi.intermediateTower.getSize();
+		// then
+		assertEquals(-1,sizeForEmpty);
+		}
+	
+	@Test
 	public void shouldReturnTrueForEmptyTargetTowerAtTheBeginning(){
 		// given
 		int numberOfRings=5;
 		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
-		Hanoi.createTowers(listOfRings);
+		hanoi.createTowers(listOfRings);
 		// when
 		boolean isEmpty=Hanoi.targetTower.isEmpty();
 		// then
 		assertTrue(isEmpty);
 		}
 	
-/*	@Test
-	public void shouldReturnCorrectStackSizeForEmptyTower(){
-		// given
-		
-		// then
-		// when
-	}*/
 	
-/*@Test
-	public void shouldPlayCorrectly(){
-		Hanoi.setBoard();
-	}*/
+	/*
+	 * @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }
+	 */
 }
