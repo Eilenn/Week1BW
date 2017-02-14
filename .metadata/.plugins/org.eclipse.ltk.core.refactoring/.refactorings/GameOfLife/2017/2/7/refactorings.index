@@ -42,3 +42,4 @@
 1487077763724	Delete element
 1487077769589	Delete element
 1487098284307	Rename local variable 'deltaColumn'
+1487103266184	Extract local variable 'boardOfCells'

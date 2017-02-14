@@ -28,14 +28,14 @@ public class Cell {
 		return cellState == CellState.ALIVE;
 	}
 
-	public boolean shouldLiveInTheNextGeneration(int aliveNeighbours){
-		if(isAlive()&&(aliveNeighbours==2||aliveNeighbours==3)){
+	public boolean shouldLiveInTheNextGeneration(int aliveNeighbours) {
+		if (isAlive() && (aliveNeighbours == 2 || aliveNeighbours == 3)) {
 			return true;
-		}
-		else if(!isAlive()&&aliveNeighbours==3){
+		} else if (!isAlive() && aliveNeighbours == 3) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public CellState getCellState() {

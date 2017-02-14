@@ -18,6 +18,53 @@ public class Board {
 		}
 
 	}
+	
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean isEqual(Board board){
+		//boolean equal=true;
+		for (int i = 0; i < board.numberOfRows; i++) {
+			for (int j = 0; j < board.numberOfColumns; j++) {
+				if(this.boardOfCells[i][j].getCellState()!=board.boardOfCells[i][j].getCellState()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public Board nextGeneration(Board previousGeneration){
+		Board nextGeneration=copyBoard(previousGeneration);
+		for (int row = 0; row < nextGeneration.numberOfRows; row++) {
+			for (int column = 0; column < nextGeneration.numberOfColumns; column++) {
+				Cell cellFromPreviousGen=previousGeneration.boardOfCells[row][column];
+				int aliveNeighbours=countAliveNeighbours(cellFromPreviousGen);
+				boolean beAlive=cellFromPreviousGen.shouldLiveInTheNextGeneration(aliveNeighbours);
+				if(beAlive){
+					nextGeneration.boardOfCells[row][column].setCellState(ALIVE);
+				}
+				else{
+					nextGeneration.boardOfCells[row][column].setCellState(DEAD);
+				}
+			}
+		}
+		return nextGeneration;
+	}
+	
+	public static Board copyBoard(Board board) {
+		int numberOfRows = board.numberOfRows;
+		int numberOfColumns = board.numberOfColumns;
+		Board copyOfBoard = new Board(numberOfRows, numberOfColumns);
+		for (int row = 0; row < numberOfRows; row++) {
+			for (int column = 0; column < numberOfColumns; column++) {
+				copyOfBoard.boardOfCells[row][column] = new Cell(row, column,
+						board.boardOfCells[row][column].getCellState());
+			}
+		}
+		return copyOfBoard;
+	}
 
 	public void createBoardInitializedToPlay(Cell[][] initialBoard) {
 		int numberOfRows = initialBoard.length;
@@ -34,35 +81,18 @@ public class Board {
 	public int countAliveNeighbours(Cell cell) {
 		int neighboursCounter = 0;
 		int rowIndex = cell.getRowIndex();
-		int rowIndexLeft=rowIndex-1;
-		int rowIndexRight=rowIndex+1;
+		int rowIndexLeft = rowIndex - 1;
+		int rowIndexRight = rowIndex + 1;
 		int columnIndex = cell.getColumnIndex();
-		int columnIndexLeft=columnIndex-1;
-		int columnIndexRight=columnIndex+1;
-		rowIndexLeft=(rowIndexLeft < 0) ? 0 : rowIndexLeft;
-		rowIndexRight=(rowIndexRight>= numberOfRows) ? numberOfRows-1 : rowIndexRight;
-		columnIndexLeft=(columnIndexLeft < 0) ? 0 : columnIndexLeft;
-		columnIndexRight=(columnIndexRight>= numberOfColumns) ? numberOfColumns-1 : columnIndexRight;
+		int columnIndexLeft = columnIndex - 1;
+		int columnIndexRight = columnIndex + 1;
+		rowIndexLeft = (rowIndexLeft < 0) ? 0 : rowIndexLeft;
+		rowIndexRight = (rowIndexRight >= numberOfRows) ? numberOfRows - 1 : rowIndexRight;
+		columnIndexLeft = (columnIndexLeft < 0) ? 0 : columnIndexLeft;
+		columnIndexRight = (columnIndexRight >= numberOfColumns) ? numberOfColumns - 1 : columnIndexRight;
 		for (int i = rowIndexLeft; i <= rowIndexRight; i++) {
 			for (int j = columnIndexLeft; j <= columnIndexRight; j++) {
-				if (boardOfCells[i][j].isAlive()&&!(i==rowIndex&&j==columnIndex)) {
-					neighboursCounter++;
-				}
-			}
-		}
-		return neighboursCounter;
-	}
-
-	public int countAliveNeighbours2(Cell cell) {
-		int neighboursCounter = 0;
-		int rowIndex = cell.getRowIndex();
-		int columnIndex = cell.getColumnIndex();
-		
-		for (int deltaRow = -1; deltaRow <= 1; deltaRow++) {
-			if((rowIndex + deltaRow)>0&&(rowIndex + deltaRow)<numberOfRows)
-			for (int deltaColumn = -1; deltaColumn <= 1; deltaColumn++) 
-				if((columnIndex + deltaColumn)>0&&(columnIndex + deltaColumn)<numberOfColumns){
-				if (boardOfCells[rowIndex + deltaRow][columnIndex + deltaColumn].isAlive()&&!(deltaRow==0&&deltaColumn==0)) {
+				if (boardOfCells[i][j].isAlive() && !(i == rowIndex && j == columnIndex)) {
 					neighboursCounter++;
 				}
 			}

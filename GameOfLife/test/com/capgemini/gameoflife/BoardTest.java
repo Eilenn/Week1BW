@@ -2,7 +2,6 @@ package com.capgemini.gameoflife;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class BoardTest {
@@ -102,7 +101,7 @@ public class BoardTest {
 		board.setCellStateToAlive(1, 1, boardOfCells); // my cell
 		board.setCellStateToAlive(0, 0, boardOfCells);
 		Cell cell = boardOfCells[1][1];
-		int neighbours = board.countAliveNeighbours2(cell);
+		int neighbours = board.countAliveNeighbours(cell);
 		// when
 		boolean shouldLive = cell.shouldLiveInTheNextGeneration(neighbours);
 		// then
@@ -231,11 +230,98 @@ public class BoardTest {
 		board.setCellStateToAlive(0, 1, boardOfCells);
 		board.setCellStateToAlive(1, 1, boardOfCells);
 		board.setCellStateToAlive(1, 2, boardOfCells);
-		Cell cell = boardOfCells[2][2]; // my alive cell
+		Cell cell = boardOfCells[2][2]; // my dead cell
 		// when
 		int neighbours = board.countAliveNeighbours(cell);
 		// then
 		assertEquals(2, neighbours);
+	}
+	
+	@Test
+	public void shouldCopyBoardWithOneAliveCell(){
+		// given
+		board = new Board(2,2);
+		Cell[][] boardOfCells = board.getBoardOfCells();
+		board.setCellStateToAlive(0, 0, boardOfCells);
+		// when
+		Board copyOfBoard=Board.copyBoard(board);
+		CellState cell00OfBoard=boardOfCells[0][0].getCellState();
+		CellState cell00OfCopyOfBoard=copyOfBoard.getBoardOfCells()[0][0].getCellState();
+		// then
+		//assertEquals(cell00OfBoard, cell00OfCopyOfBoard);
+		assertTrue(board.isEqual(copyOfBoard));
+	}
+	
+	@Test
+	public void shouldProduceDeadGenerationForAliveCellWith1Neighbour(){
+		// given
+		board=new Board(3,3);
+		board.setCellStateToAlive(1, 0, board.getBoardOfCells());
+		board.setCellStateToAlive(1, 1, board.getBoardOfCells());
+		// when
+		Board nextGeneration=board.nextGeneration(board);
+		boolean isAlive=nextGeneration.getBoardOfCells()[1][0].isAlive()||nextGeneration.getBoardOfCells()[1][1].isAlive();
+		// then
+		assertFalse(isAlive);
+	}
+	
+	public void shouldProduceAlivePlusOneRebornGenerationForAliveCellWith2Neighbours(){
+		// given
+		board=new Board(3,3);
+		board.setCellStateToAlive(1, 0, board.getBoardOfCells());
+		board.setCellStateToAlive(1, 1, board.getBoardOfCells());
+		board.setCellStateToAlive(0, 1, board.getBoardOfCells());
+		// when
+		Board nextGeneration=board.nextGeneration(board);
+		boolean isAlive=nextGeneration.getBoardOfCells()[1][0].isAlive()&&nextGeneration.getBoardOfCells()[1][1].isAlive()&&nextGeneration.getBoardOfCells()[0][1].isAlive()&&nextGeneration.getBoardOfCells()[0][0].isAlive();
+		// then
+		assertTrue(isAlive);
+	}
+	
+	public void shouldProduceAllAliveExcept00InNextGenerationForAliveCellWith3Neighbours(){
+		// given
+		board=new Board(3,3);
+		board.setCellStateToAlive(2, 1, board.getBoardOfCells());
+		board.setCellStateToAlive(1, 1, board.getBoardOfCells());
+		board.setCellStateToAlive(0, 1, board.getBoardOfCells());
+		board.setCellStateToAlive(1, 2, board.getBoardOfCells());
+		// when
+		Board nextGeneration=board.nextGeneration(board);
+		boolean isAlive=nextGeneration.getBoardOfCells()[0][0].isAlive();
+		// then
+		//assertFalse(isAlive);
+		assertFalse(board.isEqual(nextGeneration));
+		//assertEquals(ALIVE,nextGeneration.getBoardOfCells()[0][2].getCellState());
+	}
+	
+	@Test
+	public void shouldReturnTrueForEqualBoards(){
+		// given
+		Cell[][] cellBoard={{new Cell(DEAD),new Cell(DEAD)},{new Cell(DEAD),new Cell(DEAD)}};
+		Cell[][] cellBoard2={{new Cell(DEAD),new Cell(DEAD)},{new Cell(DEAD),new Cell(DEAD)}};
+		board=new Board(2,2);
+		board.setBoardOfCells(cellBoard);
+		Board board2=new Board(2,2);
+		board2.setBoardOfCells(cellBoard2);
+		//when
+		boolean areTheSame=board.isEqual(board2);
+		// then
+		assertTrue(areTheSame);
+	}
+	
+	@Test
+	public void shouldReturnFalseForUnequalBoards(){
+		// given
+		Cell[][] cellBoard={{new Cell(ALIVE),new Cell(DEAD)},{new Cell(DEAD),new Cell(DEAD)}};
+		Cell[][] cellBoard2={{new Cell(DEAD),new Cell(DEAD)},{new Cell(DEAD),new Cell(DEAD)}};
+		board=new Board(2,2);
+		board.setBoardOfCells(cellBoard);
+		Board board2=new Board(2,2);
+		board2.setBoardOfCells(cellBoard2);
+		//when
+		boolean areTheSame=board.isEqual(board2);
+		// then
+		assertFalse(areTheSame);
 	}
 
 }
