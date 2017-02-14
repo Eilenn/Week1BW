@@ -31,3 +31,14 @@
 1487068657081	Rename method 'test'
 1487072146049	Rename method 'countNeighbours'
 1487072429729	Rename local variable 'result'
+1487074072816	Rename local variable 'i'
+1487074086811	Rename local variable 'j'
+1487075160346	Rename method 'shouldReturn8ForCellInTheMiddle'
+1487076126899	Rename method 'shouldDie'
+1487076993621	Extract local variable 'boardOfCells'
+1487077059461	Extract local variable 'cell'
+1487077161163	Rename method 'shouldDieIfAliveAndLessThan2Neighbours'
+1487077759601	Delete element
+1487077763724	Delete element
+1487077769589	Delete element
+1487098284307	Rename local variable 'deltaColumn'

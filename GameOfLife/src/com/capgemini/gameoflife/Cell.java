@@ -28,6 +28,16 @@ public class Cell {
 		return cellState == CellState.ALIVE;
 	}
 
+	public boolean shouldLiveInTheNextGeneration(int aliveNeighbours){
+		if(isAlive()&&(aliveNeighbours==2||aliveNeighbours==3)){
+			return true;
+		}
+		else if(!isAlive()&&aliveNeighbours==3){
+			return true;
+		}
+		return false;
+	}
+
 	public CellState getCellState() {
 		return cellState;
 	}

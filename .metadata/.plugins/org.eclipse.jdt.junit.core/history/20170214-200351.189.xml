@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardTest" project="GameOfLife" tests="12" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.gameoflife.BoardTest" incomplete="true">
+    <testcase name="shouldReturnDeadForAnyCellOfTheInitialBoard" classname="com.capgemini.gameoflife.BoardTest" time="0.0"/>
+    <testcase name="shouldReturnCorrectNumberOfColumnsForCreatedBoard" classname="com.capgemini.gameoflife.BoardTest" time="0.0"/>
+    <testcase name="shouldReturnFalseIfAliveAndLessThan2Neighbours" classname="com.capgemini.gameoflife.BoardTest" time="0.0"/>
+    <testcase name="shouldReturnTrueIfDeadAnd3AliveNeigbours" classname="com.capgemini.gameoflife.BoardTest" time="322.814"/>
+    <testcase name="shouldCountNeighboursFor00Corner" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturnFalseIfAliveAndMoreThen3Neighbours" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturnDeadForDeadCellInInitializedBoard" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturnAliveForAliveCellInInitializedBoard" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturn0ForCellInTheMiddleIfTheOnlyOneAlive" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturnCorrectNumberOfRowsForCreatedBoard" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturn3ForCellInTheMiddleIfFirstRowOfCellsIsAlive" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+    <testcase name="shouldReturnTrueIfAliveAnd2Or3Neighbours" classname="com.capgemini.gameoflife.BoardTest" incomplete="true"/>
+  </testsuite>
+</testrun>

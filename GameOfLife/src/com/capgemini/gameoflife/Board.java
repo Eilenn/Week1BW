@@ -5,6 +5,8 @@ public class Board {
 	private static final CellState DEAD = CellState.DEAD;
 	private int numberOfColumns;
 	private int numberOfRows;
+	private Cell[][] boardOfCells;
+
 	public Board(int numberOfRows, int numberOfColumns) {
 		this.numberOfRows = numberOfRows;
 		this.numberOfColumns = numberOfColumns;
@@ -29,6 +31,45 @@ public class Board {
 		}
 	}
 
+	public int countAliveNeighbours(Cell cell) {
+		int neighboursCounter = 0;
+		int rowIndex = cell.getRowIndex();
+		int rowIndexLeft=rowIndex-1;
+		int rowIndexRight=rowIndex+1;
+		int columnIndex = cell.getColumnIndex();
+		int columnIndexLeft=columnIndex-1;
+		int columnIndexRight=columnIndex+1;
+		rowIndexLeft=(rowIndexLeft < 0) ? 0 : rowIndexLeft;
+		rowIndexRight=(rowIndexRight>= numberOfRows) ? numberOfRows-1 : rowIndexRight;
+		columnIndexLeft=(columnIndexLeft < 0) ? 0 : columnIndexLeft;
+		columnIndexRight=(columnIndexRight>= numberOfColumns) ? numberOfColumns-1 : columnIndexRight;
+		for (int i = rowIndexLeft; i <= rowIndexRight; i++) {
+			for (int j = columnIndexLeft; j <= columnIndexRight; j++) {
+				if (boardOfCells[i][j].isAlive()&&!(i==rowIndex&&j==columnIndex)) {
+					neighboursCounter++;
+				}
+			}
+		}
+		return neighboursCounter;
+	}
+
+	public int countAliveNeighbours2(Cell cell) {
+		int neighboursCounter = 0;
+		int rowIndex = cell.getRowIndex();
+		int columnIndex = cell.getColumnIndex();
+		
+		for (int deltaRow = -1; deltaRow <= 1; deltaRow++) {
+			if((rowIndex + deltaRow)>0&&(rowIndex + deltaRow)<numberOfRows)
+			for (int deltaColumn = -1; deltaColumn <= 1; deltaColumn++) 
+				if((columnIndex + deltaColumn)>0&&(columnIndex + deltaColumn)<numberOfColumns){
+				if (boardOfCells[rowIndex + deltaRow][columnIndex + deltaColumn].isAlive()&&!(deltaRow==0&&deltaColumn==0)) {
+					neighboursCounter++;
+				}
+			}
+		}
+		return neighboursCounter;
+	}
+
 	public void setCellStateToAlive(int rowIndex, int columnIndex, Cell[][] board) {
 		board[rowIndex][columnIndex].setCellState(ALIVE);
 	}
@@ -36,6 +77,7 @@ public class Board {
 	public void setCellStateToDead(int rowIndex, int columnIndex, Cell[][] board) {
 		board[rowIndex][columnIndex].setCellState(DEAD);
 	}
+
 	public Cell[][] getBoardOfCells() {
 		return boardOfCells;
 	}
@@ -43,8 +85,6 @@ public class Board {
 	public void setBoardOfCells(Cell[][] boardOfCells) {
 		this.boardOfCells = boardOfCells;
 	}
-
-	private Cell[][] boardOfCells;
 
 	public int getNumberOfColumns() {
 		return numberOfColumns;
@@ -61,7 +101,5 @@ public class Board {
 	public void setNumberOfRows(int numberOfRows) {
 		this.numberOfRows = numberOfRows;
 	}
-
-	
 
 }

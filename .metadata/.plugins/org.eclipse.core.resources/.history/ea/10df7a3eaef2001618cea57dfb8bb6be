@@ -1,0 +1,28 @@
+package com.capgemini.gameoflife;
+
+public class GameOfLife implements GameOfLifeInterface {
+
+	@Override
+	public Cell nextGeneration() {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public int countAliveNeighbours(Cell cell) {
+		// TODO Auto-generated method stub
+		int neighboursCounter=0;
+		int rowIndex=cell.getRowIndex();
+		int columnIndex=cell.getColumnIndex();
+		for(int deltaRow=rowIndex-1;deltaRow<=rowIndex+1;deltaRow++){
+			for(int j=columnIndex-1;j<=columnIndex+1;j++){
+				
+			}
+		}
+		return 0;
+	}
+
+}
