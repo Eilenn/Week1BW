@@ -1,0 +1,53 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CellTest {
+	
+	private Cell cell;
+	@Test
+	public void shouldReturnCorrectRowIndexForExistingCell() {
+		// given
+		int rowIndex=1;
+		int columnIndex=1;
+		cell=new Cell(rowIndex,columnIndex);
+		// when
+		int actualRowIndex=cell.getRowIndex();
+		// then
+		assertEquals(rowIndex, actualRowIndex);
+	}
+	
+	@Test
+	public void shouldReturnCorrectColumnIndexForExistingCell() {
+		// given
+		int rowIndex=1;
+		int columnIndex=1;
+		cell=new Cell(rowIndex,columnIndex);
+		// when
+		int actualColumnIndex=cell.getColumnIndex();
+		// then
+		assertEquals(rowIndex, actualColumnIndex);
+	}
+	
+	@Test
+	public void shouldReturnAliveWhenCellIsAlive(){
+		// given
+		cell=new Cell();
+		setCellState(CellState.ALIVE);
+		// when
+		// then
+		fail("not yet");
+	}
+	
+	@Test
+	public void shouldReturnTrueForAliveCell(){
+		fail("not done");
+	}
+	@Test
+	public void shouldReturnFalseForDeadCell(){
+		fail("not done");
+	}
+
+}

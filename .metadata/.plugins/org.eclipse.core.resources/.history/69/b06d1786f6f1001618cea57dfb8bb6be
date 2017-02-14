@@ -1,0 +1,102 @@
+package com.capgemini.bowling;
+
+public class BowlingGame implements BowlingGameResultCalculator {
+	final int NUMBER_OF_FRAMES = 10;
+	final int PINS_DOWN_IN_A_STRIKE = 10;
+	final int MAXIMAL_NUMBER_OF_ROLLS = 22;
+	private int[] listOfRolls = new int[MAXIMAL_NUMBER_OF_ROLLS - 1];
+	private int currentRoll = 0;
+	private int currentFrame = 0;
+
+	@Override
+	public void roll(int numberOfPins) {
+		if (numberOfPins < 0) {
+			throw new IllegalArgumentException("You cannot knock down negative number of pins");
+		} else if (numberOfPins > 10) {
+			throw new IllegalArgumentException("You cannot knock down more than 10 pins!");
+		} else {
+			listOfRolls[currentRoll] = numberOfPins;
+			currentRoll++;
+		}
+
+	}
+
+	@Override
+	public int score() {
+		int score = 0;
+		int whichRoll = 0;
+		while (!isFinished()) {
+			if (isRollAStrike(whichRoll)) {
+				score += 10 + strikeBonus(whichRoll);
+				whichRoll++;
+			} else if (isRollASpare(whichRoll)) {
+				score += 10 + spareBonus(whichRoll);
+				whichRoll += 2;
+			} else {
+				score += standardScoreForFrame(whichRoll);
+				whichRoll += 2;
+			}
+			currentFrame++;
+		}
+		return score;
+	}
+
+	@Override
+	public boolean isFinished() {
+		if (currentFrame < NUMBER_OF_FRAMES)
+			return false;
+		else
+			return true;
+	}
+
+	private boolean isRollAStrike(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		return firstRollOfAFrame == 10;
+	}
+
+	private boolean isRollASpare(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
+		return firstRollOfAFrame + secondRollOfAFrame == 10;
+	}
+
+	private int standardScoreForFrame(int whichRoll) {
+		int firstRollOfAFrame = listOfRolls[whichRoll];
+		int secondRollOfAFrame = listOfRolls[whichRoll + 1];
+		return firstRollOfAFrame + secondRollOfAFrame;
+	}
+
+	private int spareBonus(int whichRoll) {
+		int firstRollAfterSpare = listOfRolls[whichRoll + 2];
+		return firstRollAfterSpare;
+	}
+
+	private int strikeBonus(int whichRoll) {
+		int firstRollAfterStrike = listOfRolls[whichRoll + 1];
+		int secondRollAfterStrike = listOfRolls[whichRoll + 2];
+		return firstRollAfterStrike + secondRollAfterStrike;
+	}
+
+	protected void rollManyTimes(int numberOfPinsDown, int numberOfRolls) {
+		if (numberOfRolls > MAXIMAL_NUMBER_OF_ROLLS) {
+			throw new IllegalArgumentException("You cannot roll more than 22 times");
+		}
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(numberOfPinsDown);
+		}
+
+	}
+
+	protected void rollStrike(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			roll(PINS_DOWN_IN_A_STRIKE);
+		}
+	}
+
+	protected void rollSpare(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
+			rollManyTimes(5, 2);
+		}
+	}
+
+}

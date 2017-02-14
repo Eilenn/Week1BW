@@ -1,0 +1,22 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class BoardTest {
+	private Board board;
+
+	@Test
+	public void shouldReturnCorrectWidthForCreatedBoard() {
+		// given
+		int width=10;
+		int height=10;
+		board=new Board(width, height);
+		// when
+		int actualWidth=board.getWidth();
+		// then
+		assertEquals(width, actualWidth);
+	}
+
+}

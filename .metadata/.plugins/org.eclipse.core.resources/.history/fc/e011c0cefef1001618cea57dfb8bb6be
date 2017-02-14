@@ -1,0 +1,12 @@
+package com.capgemini.gameoflife;
+
+public class CellImpl implements Cell {
+	public int columnIndex;
+	public int rowIndex;
+	@Override
+	public boolean isAlive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

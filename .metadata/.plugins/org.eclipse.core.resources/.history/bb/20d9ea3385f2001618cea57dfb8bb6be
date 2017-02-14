@@ -1,0 +1,73 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CellTest {
+
+	private Cell cell;
+
+	@Test
+	public void shouldReturnCorrectRowIndexForExistingCell() {
+		// given
+		int rowIndex = 1;
+		int columnIndex = 1;
+		cell = new Cell(rowIndex, columnIndex);
+		// when
+		int actualRowIndex = cell.getRowIndex();
+		// then
+		assertEquals(rowIndex, actualRowIndex);
+	}
+
+	@Test
+	public void shouldReturnCorrectColumnIndexForExistingCell() {
+		// given
+		int rowIndex = 1;
+		int columnIndex = 1;
+		cell = new Cell(rowIndex, columnIndex);
+		// when
+		int actualColumnIndex = cell.getColumnIndex();
+		// then
+		assertEquals(rowIndex, actualColumnIndex);
+	}
+
+	@Test
+	public void shouldReturnAliveWhenCellIsAlive() {
+		// given
+		cell = new Cell();
+		cell.setCellState(CellState.ALIVE);
+		// when
+		CellState actualCellState = cell.getCellState();
+		// then
+		assertEquals(CellState.ALIVE, actualCellState);
+	}
+
+	@Test
+	public void shouldReturnDeadWhenCellIsDead() {
+		// given
+		cell = new Cell();
+		cell.setCellState(CellState.DEAD);
+		// when
+		CellState actualCellState = cell.getCellState();
+		// then
+		assertEquals(CellState.DEAD, actualCellState);
+	}
+
+	@Test
+	public void shouldReturnTrueForAliveCell() {
+		// given
+		cell=new Cell(CellState.ALIVE);
+		// when
+		boolean isCellAlive=cell.isAlive();
+		// then
+		assertEquals(true, isCellAlive);
+		//fail("not done");
+	}
+
+	@Test
+	public void shouldReturnFalseForDeadCell() {
+		fail("not done");
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class BoardTest {
+	private Board board;
+
+	@Test
+	public void shouldReturnCorrectWidthForCreatedBoard() {
+		// given
+		board=new Board(width, height);
+		fail("Not yet implemented");
+	}
+
+}
