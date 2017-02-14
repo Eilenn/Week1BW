@@ -29,3 +29,5 @@
 1487067651144	Extract constant 'ALIVE'
 1487068558723	Delete element
 1487068657081	Rename method 'test'
+1487072146049	Rename method 'countNeighbours'
+1487072429729	Rename local variable 'result'

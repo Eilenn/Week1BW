@@ -10,7 +10,7 @@ public class GameOfLife implements GameOfLifeInterface {
 	}
 
 	@Override
-	public int countNeighbours() {
+	public int countAliveNeighbours() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -5,29 +5,35 @@ public class Cell {
 	private int rowIndex;
 	private CellState cellState;
 
+	public Cell(CellState cellState) {
+		this.cellState = cellState;
+	}
+
+	public Cell(int rowIndex, int columnIndex) {
+		this.rowIndex = rowIndex;
+		this.columnIndex = columnIndex;
+	}
+
+	public Cell(int rowIndex, int columnIndex, CellState cellState) {
+		this.rowIndex = rowIndex;
+		this.columnIndex = columnIndex;
+		this.cellState = cellState;
+	}
+
+	public Cell() {
+	}
+
+	public boolean isAlive() {
+
+		return cellState == CellState.ALIVE;
+	}
+
 	public CellState getCellState() {
 		return cellState;
 	}
 
 	public void setCellState(CellState cellState) {
 		this.cellState = cellState;
-	}
-	
-	public Cell( CellState cellState) {
-		this.cellState=cellState;
-	}
-	public Cell(int rowIndex, int columnIndex) {
-		this.rowIndex = rowIndex;
-		this.columnIndex = columnIndex;
-	}
-	
-	public Cell(int rowIndex, int columnIndex, CellState cellState) {
-		this.rowIndex = rowIndex;
-		this.columnIndex = columnIndex;
-		this.cellState=cellState;
-	}
-
-	public Cell() {
 	}
 
 	public int getColumnIndex() {
@@ -44,11 +50,6 @@ public class Cell {
 
 	public void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
-	}
-
-	public boolean isAlive() {
-		
-		return cellState==CellState.ALIVE;
 	}
 
 }

@@ -5,7 +5,37 @@ public class Board {
 	private static final CellState DEAD = CellState.DEAD;
 	private int numberOfColumns;
 	private int numberOfRows;
+	public Board(int numberOfRows, int numberOfColumns) {
+		this.numberOfRows = numberOfRows;
+		this.numberOfColumns = numberOfColumns;
+		boardOfCells = new Cell[numberOfRows][numberOfColumns];
+		for (int i = 0; i < numberOfRows; i++) {
+			for (int j = 0; j < numberOfColumns; j++) {
+				boardOfCells[i][j] = new Cell(i, j, DEAD);
+			}
+		}
 
+	}
+
+	public void createBoardInitializedToPlay(Cell[][] initialBoard) {
+		int numberOfRows = initialBoard.length;
+		int numberOfColumns = initialBoard[0].length;
+		for (int i = 0; i < numberOfRows; i++) {
+			for (int j = 0; j < numberOfColumns; j++) {
+				if (initialBoard[i][j].isAlive()) {
+					boardOfCells[i][j].setCellState(ALIVE);
+				}
+			}
+		}
+	}
+
+	public void setCellStateToAlive(int rowIndex, int columnIndex, Cell[][] board) {
+		board[rowIndex][columnIndex].setCellState(ALIVE);
+	}
+
+	public void setCellStateToDead(int rowIndex, int columnIndex, Cell[][] board) {
+		board[rowIndex][columnIndex].setCellState(DEAD);
+	}
 	public Cell[][] getBoardOfCells() {
 		return boardOfCells;
 	}
@@ -32,40 +62,6 @@ public class Board {
 		this.numberOfRows = numberOfRows;
 	}
 
-	public Board(int numberOfRows, int numberOfColumns) {
-		this.numberOfRows = numberOfRows;
-		this.numberOfColumns = numberOfColumns;
-		boardOfCells = new Cell[numberOfRows][numberOfColumns];
-
-	}
-
-	public void createBoard() {
-		for (int i = 0; i < numberOfRows; i++) {
-			for (int j = 0; j < numberOfColumns; j++) {
-				boardOfCells[i][j] = new Cell(i, j, DEAD);
-			}
-		}
-	}
-
-	public void createBoardInitializedToPlay(Cell[][] initialBoard) {
-		int numberOfRows = initialBoard.length;
-		int numberOfColumns = initialBoard[0].length;
-		for (int i = 0; i < numberOfRows; i++) {
-			for (int j = 0; j < numberOfColumns; j++) {
-				if (initialBoard[i][j].isAlive()) {
-					boardOfCells[i][j] = new Cell(i, j, ALIVE);
-				} else {
-					boardOfCells[i][j] = new Cell(i, j, DEAD);
-				}
-			}
-		}
-	}
-	public void setCellStateToAlive(int rowIndex, int columnIndex, Cell[][] board){
-		board[rowIndex][columnIndex].setCellState(ALIVE);
-	}
 	
-	public void setCellStateToDead(int rowIndex, int columnIndex, Cell[][] board){
-		board[rowIndex][columnIndex].setCellState(DEAD);
-	}
 
 }
