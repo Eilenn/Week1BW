@@ -1,9 +1,0 @@
-package com.capgemini.fibonacci;
-
-public class Fibonacci {
-	// n - który element ciagu
-	public static long fib(int n) {
-		
-        return 0;
-	}
-}

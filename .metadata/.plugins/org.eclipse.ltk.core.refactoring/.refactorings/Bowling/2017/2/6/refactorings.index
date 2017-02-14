@@ -1,5 +1,0 @@
-1486914877808	Extract method 'isRollASpare'
-1486915310390	Rename method 'standardScore'
-1486915368894	Rename method 'canRollSpare'
-1486919362772	Extract method 'isRollAStrike'
-1486920662619	Extract local variable 'i'

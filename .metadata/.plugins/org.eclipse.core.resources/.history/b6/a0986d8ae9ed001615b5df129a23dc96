@@ -1,5 +1,0 @@
-package com.capgemini.fibonacci;
-
-public class ResultOutOfRangeException {
-
-}

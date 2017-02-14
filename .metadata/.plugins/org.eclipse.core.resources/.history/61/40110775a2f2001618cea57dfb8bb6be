@@ -1,6 +1,0 @@
-package com.capgemini.gameoflife;
-
-public interface GameOfLifeInterface {
-	void nextGeneration();
-	int countNeighbours();
-}
