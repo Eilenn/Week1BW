@@ -1,5 +1,7 @@
 package com.capgemini.gameoflife;
 
+import java.util.Arrays;
+
 public class Board {
 	private static final CellState ALIVE = CellState.ALIVE;
 	private static final CellState DEAD = CellState.DEAD;
@@ -21,6 +23,34 @@ public class Board {
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.deepHashCode(boardOfCells);
+		result = prime * result + numberOfColumns;
+		result = prime * result + numberOfRows;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Board other = (Board) obj;
+		if (!Arrays.deepEquals(boardOfCells, other.boardOfCells))
+			return false;
+		if (numberOfColumns != other.numberOfColumns)
+			return false;
+		if (numberOfRows != other.numberOfRows)
+			return false;
+		return true;
 	}
 
 	public boolean isEqual(Board board){

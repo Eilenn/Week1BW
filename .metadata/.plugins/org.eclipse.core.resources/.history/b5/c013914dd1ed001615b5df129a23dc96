@@ -1,0 +1,14 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciTestText {
+
+	@Test
+	public void testFibText() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CellTest {
+	
+
+	@Test
+	public void shouldReturnCorrectIndexForExistingCell() {
+		// given
+		Cell cell=new Cell(1, 1);
+		// when
+		// then
+		fail("Not yet implemented");
+	}
+
+}

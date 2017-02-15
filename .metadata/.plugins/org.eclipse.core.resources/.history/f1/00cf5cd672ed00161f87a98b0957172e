@@ -1,0 +1,12 @@
+package com.capgemini.fibonacci;
+
+public class Fibonacci {
+	// n - ktory element ciagu
+	public static long fib(int n) {
+		long[] elementyCiagu=new long[n+1];
+		elementyCiagu[0]=0;
+		elementyCiagu[1]=1;
+		
+        return 0;
+	}
+}

@@ -1,0 +1,8 @@
+package com.capgemini.fibonacci;
+
+public class Fibonacci {
+
+	public static long fib(int n) {
+        return 0;
+	}
+}

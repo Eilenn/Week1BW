@@ -1,0 +1,21 @@
+package com.capgemini.fraudanalyser;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+public class Transaction {
+	public Transaction(int userID, long userAccount, long recipientAccount, BigDecimal amountOfMoneyTransferred,
+			LocalDate dateOfTransfer) {
+		super();
+		this.userID = userID;
+		this.userAccount = userAccount;
+		this.recipientAccount = recipientAccount;
+		this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+		this.dateOfTransfer = dateOfTransfer;
+	}
+	private int userID;
+	private long userAccount;
+	private long recipientAccount;
+	private BigDecimal amountOfMoneyTransferred;
+	private LocalDate dateOfTransfer;
+}

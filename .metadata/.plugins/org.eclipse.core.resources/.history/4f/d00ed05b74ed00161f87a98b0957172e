@@ -1,0 +1,16 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciTest {
+	private Fibonacci fibonacci=new Fibonacci();
+	@Test
+	public void testFib() {
+		long wynik=fibonacci.fib(5);
+		assertEquals(5, wynik,0);
+		fail("Not yet implemented");
+	}
+
+}

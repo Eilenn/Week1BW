@@ -1,0 +1,8 @@
+package com.capgemini.fibonacci;
+
+public class ResultOutOfRangeException extends Exception {
+	 public ResultOutOfRangeException(String message)
+     {
+        super(message);
+     }
+}

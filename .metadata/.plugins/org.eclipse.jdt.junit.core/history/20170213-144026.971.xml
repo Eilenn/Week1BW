@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FibonacciTest" project="Fibonacci" tests="10" started="10" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.fibonacci.FibonacciTest" time="0.026">
+    <testcase name="testsResultOutOfRangeExceptionMessage" classname="com.capgemini.fibonacci.FibonacciTest" time="0.021"/>
+    <testcase name="shouldReturnOneForSecondElementOfFibonacci" classname="com.capgemini.fibonacci.FibonacciTest" time="0.001"/>
+    <testcase name="shouldReturnValueOfGivenElementOfFibonacci" classname="com.capgemini.fibonacci.FibonacciTest" time="0.0"/>
+    <testcase name="shouldReturnValueOfFibonacciForBigInteger" classname="com.capgemini.fibonacci.FibonacciTest" time="0.0"/>
+    <testcase name="testsIllegalArgumentExceptionMessageForZero" classname="com.capgemini.fibonacci.FibonacciTest" time="0.001"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionForNegativeArgument" classname="com.capgemini.fibonacci.FibonacciTest" time="0.001"/>
+    <testcase name="shouldThrowResultOutOfRangeExceptionForElementsTooBigForLong" classname="com.capgemini.fibonacci.FibonacciTest" time="0.0"/>
+    <testcase name="shouldThrowIllegalArgumentExceptionForZero" classname="com.capgemini.fibonacci.FibonacciTest" time="0.0"/>
+    <testcase name="shouldReturnOneForFirstElementOfFinbonacci" classname="com.capgemini.fibonacci.FibonacciTest" time="0.001"/>
+    <testcase name="testsIllegalArgumentExceptionMessageForNegativeArgument" classname="com.capgemini.fibonacci.FibonacciTest" time="0.001"/>
+  </testsuite>
+</testrun>

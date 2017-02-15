@@ -1,0 +1,14 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciDoubleTest {
+
+	@Test
+	public void testFibDouble() {
+		fail("Not yet implemented");
+	}
+
+}

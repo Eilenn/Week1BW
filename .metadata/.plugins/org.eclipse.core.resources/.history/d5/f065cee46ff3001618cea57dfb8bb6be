@@ -1,0 +1,34 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import org.junit.Test;
+
+public class TransactionTest {
+	private Transaction transaction;
+
+	@Test
+	public void shouldCreateTransactionWithCorrectFields() {
+		// given
+		int userID = 101;
+		long recipientAccount = 100000000L;
+		BigDecimal amountOfMoneyTransferred = new BigDecimal("1500.0");
+		LocalDateTime dateOfTransfer = LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0);
+		// when
+		transaction = new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+		boolean correctUser=(userID==transaction.getUserID());
+		boolean correctAccount=(recipientAccount==transaction.getRecipientAccount());
+		boolean correctAmount=(amountOfMoneyTransferred==transaction.getAmountOfMoneyTransferred());
+		boolean correctDate=(dateOfTransfer==transaction.getDateOfTransfer());
+		// then
+		assertEquals(userID,transaction.getUserID());
+		assertEquals(recipientAccount,transaction.getRecipientAccount());
+		//fail("Not yet implemented");
+	}
+
+}

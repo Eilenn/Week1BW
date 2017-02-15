@@ -23,6 +23,34 @@ public class Cell {
 	public Cell() {
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cellState == null) ? 0 : cellState.hashCode());
+		result = prime * result + columnIndex;
+		result = prime * result + rowIndex;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cell other = (Cell) obj;
+		if (cellState != other.cellState)
+			return false;
+		if (columnIndex != other.columnIndex)
+			return false;
+		if (rowIndex != other.rowIndex)
+			return false;
+		return true;
+	}
+
 	public boolean isAlive() {
 
 		return cellState == CellState.ALIVE;

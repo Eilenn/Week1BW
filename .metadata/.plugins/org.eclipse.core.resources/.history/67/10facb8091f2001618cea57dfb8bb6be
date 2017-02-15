@@ -1,0 +1,63 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class BoardTest {
+	private Board board;
+
+	@Test
+	public void shouldReturnCorrectNumberOfColumnsForCreatedBoard() {
+		// given
+		int numberOfColumns = 10;
+		int numberOfRows = 11;
+		board = new Board(numberOfRows, numberOfColumns);
+		// when
+		int actualNumberOfColumns = board.getNumberOfColumns();
+		// then
+		assertEquals(numberOfColumns, actualNumberOfColumns);
+	}
+
+	@Test
+	public void shouldReturnCorrectNumberOfRowsForCreatedBoard() {
+		// given
+		int numberOfColumns = 10;
+		int numberOfRows = 11;
+		board = new Board(numberOfRows, numberOfColumns);
+		// when
+		int actualNumberOfRows = board.getNumberOfRows();
+		// then
+		assertEquals(numberOfRows, actualNumberOfRows);
+	}
+	@Test
+	public void shouldReturnCorrectNumberOfRowsForInitialBoard(){
+		// given
+		int numberOfColumns = 10;
+		int numberOfRows = 11;
+		board = new Board(numberOfRows, numberOfColumns);
+		board.createBoard();
+		Cell [][] boardOfCells=board.getBoardOfCells();
+		// when
+		int actualNumberOfRows=boardOfCells.length;
+		System.out.println(actualNumberOfRows);
+		// then
+		assertEquals(numberOfRows, actualNumberOfRows);
+	}
+	
+	@Test
+	public void shouldReturnCorrectNumberOfColumnsForInitialBoard(){
+		// given
+		int numberOfColumns = 10;
+		int numberOfRows = 11;
+		board = new Board(numberOfRows, numberOfColumns);
+		board.createBoard();
+		Cell [][] boardOfCells=board.getBoardOfCells();
+		// when
+		int actualNumberOfColumns=boardOfCells[0].length;
+		System.out.println(actualNumberOfColumns);
+		// then
+		assertEquals(numberOfColumns, actualNumberOfColumns);
+	}
+
+}

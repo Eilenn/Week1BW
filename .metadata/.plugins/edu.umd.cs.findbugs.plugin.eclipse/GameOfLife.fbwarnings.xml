@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="1" timestamp="1487099013539" analysisTimestamp="1487098996102" release="">
+  <Project projectName="GameOfLife">
+    <Jar>C:\Users\bowrobel\Week1BW\GameOfLife\bin\com\capgemini\gameoflife\BoardTest.class</Jar>
+    <AuxClasspathEntry>C:\Users\bowrobel\Week1BW\GameOfLife\bin</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\bowrobel\Downloads\hamcrest-core-1.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\projects\crash_course\eclipse\jre\jre\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>C:\Users\bowrobel\Week1BW\GameOfLife\test</SrcDir>
+    <SrcDir>C:\Users\bowrobel\Week1BW\GameOfLife\src</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Tue, 14 Feb 2017 15:36:53 +0100" total_classes="1" referenced_classes="12" total_bugs="0" total_size="114" num_packages="1" java_version="1.8.0_66" vm_version="25.66-b18" cpu_seconds="42.26" clock_seconds="17.51" peak_mbytes="914.13" alloc_mbytes="910.50" gc_seconds="0.24">
+    <PackageStats package="com.capgemini.gameoflife" total_bugs="0" total_types="1" total_size="114">
+      <ClassStats class="com.capgemini.gameoflife.BoardTest" sourceFile="BoardTest.java" interface="false" size="114" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="1116" invocations="2" avgMicrosecondsPerInvocation="558124" maxMicrosecondsPerInvocation="765991" standardDeviationMircosecondsPerInvocation="207867"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="422" invocations="293" avgMicrosecondsPerInvocation="1443" maxMicrosecondsPerInvocation="97706" standardDeviationMircosecondsPerInvocation="6094"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="113" invocations="14" avgMicrosecondsPerInvocation="8076" maxMicrosecondsPerInvocation="106721" standardDeviationMircosecondsPerInvocation="27362"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="100" invocations="12" avgMicrosecondsPerInvocation="8372" maxMicrosecondsPerInvocation="31940" standardDeviationMircosecondsPerInvocation="10685"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="98" invocations="293" avgMicrosecondsPerInvocation="337" maxMicrosecondsPerInvocation="3212" standardDeviationMircosecondsPerInvocation="389"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="76" invocations="26" avgMicrosecondsPerInvocation="2939" maxMicrosecondsPerInvocation="53169" standardDeviationMircosecondsPerInvocation="10273"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="74" invocations="12" avgMicrosecondsPerInvocation="6207" maxMicrosecondsPerInvocation="25740" standardDeviationMircosecondsPerInvocation="7586"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="62" invocations="51" avgMicrosecondsPerInvocation="1228" maxMicrosecondsPerInvocation="4618" standardDeviationMircosecondsPerInvocation="1122"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="54" invocations="14" avgMicrosecondsPerInvocation="3919" maxMicrosecondsPerInvocation="31464" standardDeviationMircosecondsPerInvocation="7664"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="50" invocations="14" avgMicrosecondsPerInvocation="3591" maxMicrosecondsPerInvocation="31209" standardDeviationMircosecondsPerInvocation="7672"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1487099013534" release="" codeSize="0" numClasses="0"/>
+  </History>
+</BugCollection>

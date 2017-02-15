@@ -1,0 +1,15 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciFloatTest {
+
+	@Test
+	public void testFibFloat() {
+		long wynik = Fibonacci.fib(5.0);
+		assertEquals(5, wynik, 0);
+	}
+
+}

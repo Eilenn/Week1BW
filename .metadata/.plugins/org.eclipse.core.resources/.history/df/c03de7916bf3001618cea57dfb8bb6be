@@ -1,0 +1,22 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+
+import org.junit.Test;
+
+public class TransactionTest {
+	private Transaction transaction;
+
+	@Test
+	public void shouldCreateTransactionWithCorrectFields() {
+		// given
+		int userID=101;
+		long recipientAccount=100000000L;
+		BigDecimal amountOfMoneyTransferred=1500.0;
+		transaction=new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+		fail("Not yet implemented");
+	}
+
+}

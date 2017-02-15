@@ -1,0 +1,34 @@
+package com.capgemini.gameoflife;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CellTest {
+	
+
+	@Test
+	public void shouldReturnCorrectRowIndexForExistingCell() {
+		// given
+		int rowIndex=1;
+		int columnIndex=1;
+		Cell cell=new Cell(rowIndex,columnIndex);
+		// when
+		int actualRowIndex=cell.getRowIndex();
+		// then
+		assertEquals(rowIndex, actualRowIndex);
+	}
+	
+	@Test
+	public void shouldReturnCorrectColumnIndexForExistingCell() {
+		// given
+		int rowIndex=1;
+		int columnIndex=1;
+		Cell cell=new Cell(rowIndex,columnIndex);
+		// when
+		int actualColumnIndex=cell.getColumnIndex();
+		// then
+		assertEquals(rowIndex, actualColumnIndex);
+	}
+
+}

@@ -21,6 +21,7 @@ public class StackWritten {
 		if (stackTopIndex < 0) {
 			throw new ArrayIndexOutOfBoundsException("Stack is empty, you cannot remove any elements");
 		} else {
+			//memory leak - stackOfRings[stackTopIndex]=null;
 			return stackOfRings[stackTopIndex--];
 		}
 	}

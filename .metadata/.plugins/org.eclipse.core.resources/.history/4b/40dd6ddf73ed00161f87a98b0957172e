@@ -1,0 +1,15 @@
+package com.capgemini.fibonacci;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FibonacciTest {
+	private Fibonacci fibonacci=new Fibonacci();
+	@Test
+	public void testFib() {
+		long wynik=fibonacci.testFib(5);
+		fail("Not yet implemented");
+	}
+
+}
