@@ -8,3 +8,4 @@
 1487181180620	Rename method 'getUsers'
 1487181206487	Rename method 'getDate'
 1487183198954	Rename method 'shouldCreateTransactionWithCorrectFieldsForFactory'
+1487186264885	Rename local variable 'o'

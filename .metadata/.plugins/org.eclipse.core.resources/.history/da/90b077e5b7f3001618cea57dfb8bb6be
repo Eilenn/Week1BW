@@ -126,13 +126,13 @@ public class Transaction implements Comparable<Transaction>{
 	
     public static Comparator<Transaction> COMPARE_BY_AMOUNT_OF_MONEY_TRANSFERRED = new Comparator<Transaction>() {
         public int compare(Transaction one, Transaction other) {
-            return one.amountOfMoneyTransferred.compareTo(other.amountOfMoneyTransferred);
+            return one.dateOfTransfer.compareTo(other.dateOfTransfer);
         }
     };
     
     public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER = new Comparator<Transaction>() {
         public int compare(Transaction one, Transaction other) {
-            return one.dateOfTransfer.compareTo(other.dateOfTransfer);
+            return one.amountOfMoneyTransferred.compareTo(other.amountOfMoneyTransferred);
         }
     };
 	@Override

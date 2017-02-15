@@ -1,6 +1,6 @@
 package com.capgemini.fraudanalyser;
 
-import java.util.List;
+import java.awt.List;
 import java.util.Set;
 
 public class FilteringByAmount implements Filter{
