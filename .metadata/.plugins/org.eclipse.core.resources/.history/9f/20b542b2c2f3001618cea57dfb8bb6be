@@ -1,0 +1,24 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FraudAnalyserTest {
+
+	@Test
+	public void testGenerateListOfSuspectTransactions() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsUserAboveSuspicion() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testIsUserSuspectForSure() {
+		fail("Not yet implemented");
+	}
+
+}

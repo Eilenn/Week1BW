@@ -22,6 +22,8 @@ public class FilteringByUserTest {
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
 		transactionsToAnalyze.add(new Transaction.Builder(102, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
 		filteringByUser = new FilteringByUser();
 	}
 

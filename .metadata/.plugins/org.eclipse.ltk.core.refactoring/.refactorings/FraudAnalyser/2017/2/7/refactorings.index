@@ -17,3 +17,7 @@
 1487190851588	Rename field 'suspect2'
 1487190858902	Rename field 'suspect3'
 1487192653056	Delete element
+1487192822401	Move compilation unit
+1487193288434	Rename method 'testIsUserAboveSuspicion'
+1487193696474	Rename local variable 'isHonest'
+1487196225995	Rename method 'testGenerateListOfSuspectTransactions'

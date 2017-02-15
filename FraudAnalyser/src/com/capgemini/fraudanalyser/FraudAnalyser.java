@@ -32,7 +32,19 @@ public class FraudAnalyser {
 
 	public Set generateListOfSuspectTransactions(ArrayList<Transaction> transactionsForAnalize) {
 		Set listOfSuspectTransactions = new HashSet<>();
-		for (Transaction t : transactionsForAnalize) {
+		Set<Transaction> suspectTransactionInList=new HashSet<>();
+		for(int i=0;i<transactionsForAnalize.size();i++){
+			Transaction t=transactionsForAnalize.get(i);
+			if (isUserAboveSuspicion(t.getUserID())){
+				suspectTransactionInList.add(t);
+			}
+			else if(isUserSuspectForSure(t.getUserID())){
+				listOfSuspectTransactions.add(t);
+			}
+		}
+		transactionsForAnalize.removeAll(suspectTransactionInList);
+	
+/*		for (Transaction t : transactionsForAnalize) {
 			if (isUserAboveSuspicion(t.getUserID())) {
 				transactionsForAnalize.remove(t);
 			}
@@ -40,13 +52,16 @@ public class FraudAnalyser {
 				listOfSuspectTransactions.add(t);
 			}
 
-		}
+		}*/
 
 		// check conditions
 		// add suspects to list
 		// return
-
-		return listOfTransactions;
+		if(listOfSuspectTransactions.isEmpty()){
+			return null;
+			//throw new IllegalStateException("There are no suspect transactions");
+		}
+		return listOfSuspectTransactions;
 	}
 
 	public boolean isUserAboveSuspicion(int userID) {
