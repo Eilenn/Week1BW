@@ -3,7 +3,12 @@ package com.capgemini.fraudanalyser;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Transaction {
+public class Transaction implements Comparable<Transaction>{
+	private final int userID;
+	private final long recipientAccount;
+	private final BigDecimal amountOfMoneyTransferred;
+	private final LocalDateTime dateOfTransfer;
+
 	public Transaction(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
 			LocalDateTime dateOfTransfer) {
 		super();
@@ -12,19 +17,74 @@ public class Transaction {
 		this.amountOfMoneyTransferred = amountOfMoneyTransferred;
 		this.dateOfTransfer = dateOfTransfer;
 	}
+	private Transaction(Builder builder) {
+		userID = builder.userID;
+		dateOfTransfer = builder.dateOfTransfer;
+		amountOfMoneyTransferred = builder.amountOfMoneyTransferred;
+		recipientAccount = builder.recipientAccount;
+	}
+
+	public static class Builder {
+		private int userID;
+		private long recipientAccount;
+		private BigDecimal amountOfMoneyTransferred;
+		private LocalDateTime dateOfTransfer;
+		
+		public Builder(){
+			
+		}
+
+		public Builder(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
+				LocalDateTime dateOfTransfer) {
+			this.userID = userID;
+			this.recipientAccount = recipientAccount;
+			this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+			this.dateOfTransfer = dateOfTransfer;
+		}
+
+		public Builder withUserID(int userID) {
+			this.userID = userID;
+			return this;
+		}
+
+		public Builder withRecipientAccount(long recipientAccount) {
+			this.recipientAccount = recipientAccount;
+			return this;
+		}
+
+		public Builder withAmountOfMoneyTransferred(BigDecimal amountOfMoneyTransferred) {
+			this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+			return this;
+		}
+
+		public Builder withDateOfTransfer(LocalDateTime dateOfTransfer) {
+			this.dateOfTransfer = dateOfTransfer;
+			return this;
+		}
+
+		public Transaction build() {
+			return new Transaction(this);
+		}
+
+	}
 
 	public int getUserID() {
 		return userID;
 	}
+
 	public long getRecipientAccount() {
 		return recipientAccount;
 	}
+
 	public BigDecimal getAmountOfMoneyTransferred() {
 		return amountOfMoneyTransferred;
 	}
+
 	public LocalDateTime getDateOfTransfer() {
 		return dateOfTransfer;
 	}
+
+	
 
 	@Override
 	public int hashCode() {
@@ -62,54 +122,12 @@ public class Transaction {
 			return false;
 		return true;
 	}
-
-	private final int userID;
-	private final long recipientAccount;
-	private final BigDecimal amountOfMoneyTransferred;
-	private final LocalDateTime dateOfTransfer;
-
-	public static Transaction build(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
-			LocalDateTime dateOfTransfer){
-		return new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+	@Override
+	/**
+	 * compares by date
+	 */
+	public int compareTo(Transaction o) {
+		return dateOfTransfer.compareTo(o.dateOfTransfer);
 	}
 	
-	public static class Builder{
-		private int userID;
-		private long recipientAccount;
-		private BigDecimal amountOfMoneyTransferred;
-		private LocalDateTime dateOfTransfer;
-		
-		public Builder(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
-				LocalDateTime dateOfTransfer){
-			this.userID = userID;
-			this.recipientAccount = recipientAccount;
-			this.amountOfMoneyTransferred = amountOfMoneyTransferred;
-			this.dateOfTransfer = dateOfTransfer;
-		}
-		
-		public Builder withUserID(int userID){
-			this.userID=userID;
-			return this;
-		}
-		
-		public Builder withRecipientAccount(long recipientAccount){
-			this.recipientAccount=recipientAccount;
-			return this;
-		}
-		
-		public Builder withRecipientAccount(BigDecimal amountOfMoneyTransferred){
-			this.amountOfMoneyTransferred=amountOfMoneyTransferred;
-			return this;
-		}
-		
-		public Builder withDateOfTransfer(LocalDateTime dateOfTransfer){
-			this.dateOfTransfer=dateOfTransfer;
-			return this;
-		}
-		
-	}
-	
-	public Builder aBuilder(int userID,long recipientAccount, BigDecimal amountOfMoneyTransferred,LocalDateTime dateOfTransfer){
-		return new Builder(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
-	}
 }

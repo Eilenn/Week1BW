@@ -1,6 +1,5 @@
 package com.capgemini.fraudanalyser;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Set;
 

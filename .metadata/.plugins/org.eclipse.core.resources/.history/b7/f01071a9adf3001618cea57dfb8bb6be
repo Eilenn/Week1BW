@@ -1,0 +1,130 @@
+package com.capgemini.fraudanalyser;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+public class Transaction implements Comparable{
+	private final int userID;
+	private final long recipientAccount;
+	private final BigDecimal amountOfMoneyTransferred;
+	private final LocalDateTime dateOfTransfer;
+
+	public Transaction(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
+			LocalDateTime dateOfTransfer) {
+		super();
+		this.userID = userID;
+		this.recipientAccount = recipientAccount;
+		this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+		this.dateOfTransfer = dateOfTransfer;
+	}
+	private Transaction(Builder builder) {
+		userID = builder.userID;
+		dateOfTransfer = builder.dateOfTransfer;
+		amountOfMoneyTransferred = builder.amountOfMoneyTransferred;
+		recipientAccount = builder.recipientAccount;
+	}
+
+	public static class Builder {
+		private int userID;
+		private long recipientAccount;
+		private BigDecimal amountOfMoneyTransferred;
+		private LocalDateTime dateOfTransfer;
+		
+		public Builder(){
+			
+		}
+
+		public Builder(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
+				LocalDateTime dateOfTransfer) {
+			this.userID = userID;
+			this.recipientAccount = recipientAccount;
+			this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+			this.dateOfTransfer = dateOfTransfer;
+		}
+
+		public Builder withUserID(int userID) {
+			this.userID = userID;
+			return this;
+		}
+
+		public Builder withRecipientAccount(long recipientAccount) {
+			this.recipientAccount = recipientAccount;
+			return this;
+		}
+
+		public Builder withAmountOfMoneyTransferred(BigDecimal amountOfMoneyTransferred) {
+			this.amountOfMoneyTransferred = amountOfMoneyTransferred;
+			return this;
+		}
+
+		public Builder withDateOfTransfer(LocalDateTime dateOfTransfer) {
+			this.dateOfTransfer = dateOfTransfer;
+			return this;
+		}
+
+		public Transaction build() {
+			return new Transaction(this);
+		}
+
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public long getRecipientAccount() {
+		return recipientAccount;
+	}
+
+	public BigDecimal getAmountOfMoneyTransferred() {
+		return amountOfMoneyTransferred;
+	}
+
+	public LocalDateTime getDateOfTransfer() {
+		return dateOfTransfer;
+	}
+
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amountOfMoneyTransferred == null) ? 0 : amountOfMoneyTransferred.hashCode());
+		result = prime * result + ((dateOfTransfer == null) ? 0 : dateOfTransfer.hashCode());
+		result = prime * result + (int) (recipientAccount ^ (recipientAccount >>> 32));
+		result = prime * result + userID;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transaction other = (Transaction) obj;
+		if (amountOfMoneyTransferred == null) {
+			if (other.amountOfMoneyTransferred != null)
+				return false;
+		} else if (!amountOfMoneyTransferred.equals(other.amountOfMoneyTransferred))
+			return false;
+		if (dateOfTransfer == null) {
+			if (other.dateOfTransfer != null)
+				return false;
+		} else if (!dateOfTransfer.equals(other.dateOfTransfer))
+			return false;
+		if (recipientAccount != other.recipientAccount)
+			return false;
+		if (userID != other.userID)
+			return false;
+		return true;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

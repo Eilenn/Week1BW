@@ -1,4 +1,2 @@
 INDEX VERSION 1.127+C:\Users\bowrobel\Week1BW\.metadata\.plugins\org.eclipse.jdt.core
-3050676863.index
-3438990737.index
 3460079731.index

@@ -1,0 +1,15 @@
+package com.capgemini.fraudanalyser;
+
+import java.util.Set;
+
+public class FraudAnalyser {
+
+	private Set listOfTransactions;
+	private Set users;
+	private Set dates;
+	
+	
+	public void generateListOfTransactions(){
+		
+	}
+}

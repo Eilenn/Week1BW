@@ -29,15 +29,16 @@ public class TransactionTest {
 	}
 	
 	@Test
-	public void shouldCreateTransactionWithCorrectFieldsForFactory() {
+	public void shouldCreateTransactionWithCorrectFieldsForBuilder() {
 		// given
 		int userID = 101;
 		long recipientAccount = 100000000L;
 		BigDecimal amountOfMoneyTransferred = new BigDecimal("1500.0");
 		LocalDateTime dateOfTransfer = LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0);
 		// when
-		//transaction = new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
-		transaction=Transaction.build(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+		//transaction=new Transaction.Builder(userID,recipientAccount,amountOfMoneyTransferred,dateOfTransfer).build();
+		transaction=new Transaction.Builder().withUserID(userID).withRecipientAccount(recipientAccount).
+				withAmountOfMoneyTransferred(amountOfMoneyTransferred).withDateOfTransfer(dateOfTransfer).build();
 		boolean correctUser = (userID == transaction.getUserID());
 		boolean correctAccount = (recipientAccount == transaction.getRecipientAccount());
 		boolean correctAmount = (amountOfMoneyTransferred == transaction.getAmountOfMoneyTransferred());
