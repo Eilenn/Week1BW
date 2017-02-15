@@ -1,0 +1,14 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class FilteringByUserTest {
+
+	@Test
+	public void testFilter() {
+		fail("Not yet implemented");
+	}
+
+}

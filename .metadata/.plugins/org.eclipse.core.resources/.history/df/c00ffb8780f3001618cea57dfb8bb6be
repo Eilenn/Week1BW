@@ -1,0 +1,33 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class FilteringByUserTest {
+
+	private ArrayList<Transaction> transactionsToAnalyze;
+	private FilteringByUser filteringByUser;
+	@Before
+	public void init(){
+		transactionsToAnalyze.add(Transaction.build(100, 12345L, new BigDecimal("200.0"), LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)));
+		transactionsToAnalyze.add(Transaction.build(102, 12346L, new BigDecimal("200.0"), LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)));
+		filteringByUser=new FilteringByUser();
+	}
+	
+	@Test
+	public void shouldReturnEmptyListForUserNotOnTheList() {
+		// given
+		ArrayList<Transaction> filteredTransactions;
+		// when
+		filteredTransactions=filteringByUser.filter(transactionsToAnalyze, 101);
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,25 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class FilteringByUserTest {
+
+	private ArrayList<Transaction> transactionsToAnalyze;
+	@Before
+	public void init(){
+		transactionsToAnalyze.add(Transaction.build(100, new BigDecimal("12345L"), 200.0, LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)));
+	}
+	
+	@Test
+	public void shouldReturnEmptyListForUserNotOnTheList() {
+		fail("Not yet implemented");
+	}
+
+}

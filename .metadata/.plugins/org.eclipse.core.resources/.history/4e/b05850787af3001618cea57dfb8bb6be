@@ -1,0 +1,9 @@
+package com.capgemini.fraudanalyser;
+
+import java.util.Set;
+
+public interface Filter {
+	List<Transaction> filter(List<Transaction> transactionsToAnalyze);
+	boolean isSuspect(Transaction transaction);
+	Set returnListOfSuspectTransactions();
+}

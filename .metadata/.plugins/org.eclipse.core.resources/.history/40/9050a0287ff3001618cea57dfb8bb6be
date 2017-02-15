@@ -1,0 +1,21 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class FilteringByUserTest {
+
+	private ArrayList<Transaction> transactionsToAnalyze;
+	@Before
+	public void init(){
+		
+	}
+	
+	@Test
+	public void shouldReturnEmptyListForUserNotOnTheList() {
+		fail("Not yet implemented");
+	}
+
+}
