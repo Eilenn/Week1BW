@@ -9,6 +9,7 @@ public class FraudAnalyser {
 	private Set listOfTransactions;
 	private int[] suspects = { 542, 1052, 2103 };
 	private int[] honestUsers = { 101, 606 };
+	private final int honestUser1 = 101, honestUser2 = 606;
 	// private Set users;
 	// private Set dates;
 
@@ -36,12 +37,11 @@ public class FraudAnalyser {
 			if (isUserAboveSuspicion(t.getUserID())) {
 				transactionsForAnalize.remove(t);
 			}
-			else if(isUserSuspectForSure(t.getUserID())){
-				listOfSuspectTransactions.add(t);
-			}
 
 		}
-
+		// import list
+		// remove honest users
+		// create empty set of suspects
 		// check conditions
 		// add suspects to list
 		// return
@@ -50,12 +50,10 @@ public class FraudAnalyser {
 	}
 
 	public boolean isUserAboveSuspicion(int userID) {
-		for (int i = 0; i < honestUsers.length; i++) {
-			if (userID == honestUsers[i]) {
-				return true;
-			}
-		}
-		return false;
+		if (userID == 101 || userID == 606) {
+			return true;
+		} else
+			return false;
 	}
 
 	public boolean isUserSuspectForSure(int userID) {

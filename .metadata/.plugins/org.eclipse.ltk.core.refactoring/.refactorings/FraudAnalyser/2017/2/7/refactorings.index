@@ -9,3 +9,11 @@
 1487181206487	Rename method 'getDate'
 1487183198954	Rename method 'shouldCreateTransactionWithCorrectFieldsForFactory'
 1487186264885	Rename local variable 'o'
+1487188709635	Rename local variable 'transactionsForAnalyze'
+1487188719257	Rename local variable 'transactionsForAnalyze'
+1487190443475	Rename method 'isAboveSuspicion'
+1487190501711	Delete element
+1487190845193	Rename field 'suspect1'
+1487190851588	Rename field 'suspect2'
+1487190858902	Rename field 'suspect3'
+1487192653056	Delete element

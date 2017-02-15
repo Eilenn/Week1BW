@@ -36,12 +36,11 @@ public class FraudAnalyser {
 			if (isUserAboveSuspicion(t.getUserID())) {
 				transactionsForAnalize.remove(t);
 			}
-			else if(isUserSuspectForSure(t.getUserID())){
-				listOfSuspectTransactions.add(t);
-			}
 
 		}
-
+		// import list
+		// remove honest users
+		// create empty set of suspects
 		// check conditions
 		// add suspects to list
 		// return
@@ -56,6 +55,11 @@ public class FraudAnalyser {
 			}
 		}
 		return false;
+		
+		if (userID == 101 || userID == 606) {
+			return true;
+		} else
+			return false;
 	}
 
 	public boolean isUserSuspectForSure(int userID) {

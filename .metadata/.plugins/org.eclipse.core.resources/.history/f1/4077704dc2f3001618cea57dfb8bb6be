@@ -1,10 +1,11 @@
 package com.capgemini.fraudanalyser;
 
-import java.awt.List;
+import java.util.List;
 import java.util.Set;
 
-public class FilteringByDate{
-	
+public class FilteringByAmount {
+
+
 	public List filter(List transactionsToAnalyze) {
 		// TODO Auto-generated method stub
 		return null;
@@ -17,7 +18,9 @@ public class FilteringByDate{
 	}
 
 	
-	public Set<Transaction>  returnListOfSuspectTransactions() {
+	public Set<Transaction> returnListOfSuspectTransactions() {
 		// TODO Auto-generated method stub
 		return null;
-}}
+	}
+
+}

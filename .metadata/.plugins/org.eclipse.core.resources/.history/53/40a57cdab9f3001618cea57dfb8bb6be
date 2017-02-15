@@ -1,0 +1,41 @@
+package com.capgemini.fraudanalyser;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+public class FraudAnalyser {
+
+	private Set listOfTransactions;
+	//private Set users;
+	//private Set dates;
+	
+	public static Set getUniqueUsers(ArrayList<Transaction> transactionsForAnalize){
+		Set users=new HashSet<>();
+		for(int i=0;i<transactionsForAnalize.size();i++){
+			users.add(transactionsForAnalize.get(i).getUserID());
+		}
+		
+		return users;
+	}
+	
+	public static Set getUniqueDates(ArrayList<Transaction> transactionsForAnalize){
+		Set dates=new HashSet<>();
+		for(int i=0;i<transactionsForAnalize.size();i++){
+			dates.add(transactionsForAnalize.get(i).getDateOfTransfer());
+		}
+		
+		return dates;
+	}
+	
+	public Set generateListOfSuspectTransactions(ArrayList<Transaction> transactionsForAnalize){
+		// import list
+		// remove honest users
+		// create empty set of suspects
+		// check conditions
+		// add/remove
+		
+		
+		return listOfTransactions;
+	}
+}

@@ -18,10 +18,10 @@ public class FilteringByUserTest {
 	@Before
 	public void init() {
 		transactionsToAnalyze=new ArrayList<>();
-		transactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
-		transactionsToAnalyze.add(new Transaction.Builder(102, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyze.add(Transaction.build(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)));
+		transactionsToAnalyze.add(Transaction.build(102, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)));
 		filteringByUser = new FilteringByUser();
 	}
 

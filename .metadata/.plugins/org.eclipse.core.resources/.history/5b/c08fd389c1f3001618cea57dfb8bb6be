@@ -41,7 +41,9 @@ public class FraudAnalyser {
 			}
 
 		}
-
+		// import list
+		// remove honest users
+		// create empty set of suspects
 		// check conditions
 		// add suspects to list
 		// return
