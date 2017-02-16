@@ -37,22 +37,22 @@ public class FraudAnalyserTest {
 	}
 	
 	@Test
-	public void shouldReturnNullForSixTransactionsByHonestUserByDate(){
+	public void shouldReturnZeroElementListForSixTransactionsByHonestUserByDate(){
 		// given
 		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12345L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 4)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
+		eightTransactionsToAnalyze.add(new Transaction.Builder(542, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
 		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
@@ -62,7 +62,7 @@ public class FraudAnalyserTest {
 		// when
 		suspect=fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
 		// then
-		assertEquals(null,suspect);
+		assertEquals(7,suspect.size());
 	}
 	
 	@Test

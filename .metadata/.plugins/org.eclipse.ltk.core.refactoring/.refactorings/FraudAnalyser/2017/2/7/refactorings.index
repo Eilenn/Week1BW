@@ -43,3 +43,4 @@
 1487236558647	Rename field 'suspects'
 1487236591776	Rename field 'honestUsers'
 1487236817733	Rename local variable 'countTransactions'
+1487238063494	Rename method 'shouldReturnZeroElementListForSixTransactionsByHonestUserByDate'

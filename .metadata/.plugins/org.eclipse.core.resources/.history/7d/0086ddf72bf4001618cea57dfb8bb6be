@@ -37,7 +37,7 @@ public class FraudAnalyserTest {
 	}
 	
 	@Test
-	public void shouldReturnNullForSixTransactionsByHonestUserByDate(){
+	public void shouldReturnZeroElementListForSixTransactionsByHonestUserByDate(){
 		// given
 		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();
 		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12345L, new BigDecimal("200.0"),
@@ -62,7 +62,7 @@ public class FraudAnalyserTest {
 		// when
 		suspect=fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
 		// then
-		assertEquals(null,suspect);
+		assertEquals(null,suspect.size());
 	}
 	
 	@Test

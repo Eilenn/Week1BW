@@ -37,64 +37,6 @@ public class FraudAnalyserTest {
 	}
 	
 	@Test
-	public void shouldReturnNullForSixTransactionsByHonestUserByDate(){
-		// given
-		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12345L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 4)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
-		Set users=FraudAnalyser.getUniqueUsers(eightTransactionsToAnalyze);
-		Set dates=FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
-		Set<Transaction> suspect=new HashSet<>();
-		// when
-		suspect=fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
-		// then
-		assertEquals(null,suspect);
-	}
-	
-	@Test
-	public void shouldReturnSevenElementListForSixTransactionsByUserByDateForOneSuspectUser(){
-		// given
-		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 4)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(542, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
-		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
-		Set users=FraudAnalyser.getUniqueUsers(eightTransactionsToAnalyze);
-		Set dates=FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
-		Set<Transaction> suspect=new HashSet<>();
-		// when
-		suspect=fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
-		// then
-		assertEquals(7,suspect.size());
-	}
-	
-	@Test
 	public void shouldReturnSixElementListForSixTransactionsByUserByDateNoSuspectOrHonest(){
 		// given
 		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();

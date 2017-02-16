@@ -15,7 +15,8 @@ public class FraudAnalyser {
 	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
 		Set<Transaction> temporarySuspectTransactionsInAnalyzedList = new HashSet<>();
-		// checking list by users - adding all transactions of suspect users to listOfSuspectTransactions
+		// checking list by users - adding all transactions of suspect users to listOfSuspectTransactions and 
+		// removing all transactions for honest users from transactionsToAnalyze
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			Transaction t = transactionsToAnalyze.get(i);
 			if (isUserAboveSuspicion(t.getUserID())) {
@@ -24,12 +25,11 @@ public class FraudAnalyser {
 				listOfSuspectTransactions.add(t);
 			}
 		}
-		// removing all transactions of honest users from transactionsToAnalyze
 		transactionsToAnalyze.removeAll(temporarySuspectTransactionsInAnalyzedList);
-		// creating unique values of userIDs and dates to filter list later
+
 		Set<LocalDate> uniqueDatesInAnalyzedList = getUniqueDatesWithoutHour(transactionsToAnalyze);
 		Set uniqueUsersInAnalyzedList = getUniqueUsers(transactionsToAnalyze);
-		//adding all transactions for suspiciously active users (more than 5 transactions per user per day) to listOfSuspectTransactions
+		//
 		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsPerUserPerDay(transactionsToAnalyze, uniqueUsersInAnalyzedList,
 				uniqueDatesInAnalyzedList));
 		
@@ -41,7 +41,6 @@ public class FraudAnalyser {
 		// add suspects to list
 		// returns
 		if (listOfSuspectTransactions.isEmpty()) {
-			System.out.println("There are no suspicious transactions in set.");
 			return null;
 		}
 		return listOfSuspectTransactions;

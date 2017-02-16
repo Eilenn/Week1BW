@@ -41,7 +41,6 @@ public class FraudAnalyser {
 		// add suspects to list
 		// returns
 		if (listOfSuspectTransactions.isEmpty()) {
-			System.out.println("There are no suspicious transactions in set.");
 			return null;
 		}
 		return listOfSuspectTransactions;
