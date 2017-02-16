@@ -53,3 +53,4 @@
 1487241942954	Rename local variable 'numberOfUniqueUsers'
 1487242049665	Rename local variable 'numberOfUniqueTransactionsByUser'
 1487242149492	Rename local variable 'filteredTransactions'
+1487253465456	Rename method 'generateListOfSuspectTransactions'

@@ -17,7 +17,7 @@ public class FraudAnalyser {
 																								// than
 																								// 4
 
-	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
+	public Set<Transaction> getSuspiciousTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
 		Set<Transaction> temporarySuspectTransactionsInAnalyzedList = new HashSet<>();
 		// checking list by users - adding all transactions of suspect users to
@@ -41,13 +41,12 @@ public class FraudAnalyser {
 		// transactions per user per day) to listOfSuspectTransactions
 		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsPerUserPerDay(transactionsToAnalyze,
 				uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList));
+		// adding all transactions for  users having more than 4 transactions per day to one account
+		// to listOfSuspectTransactions
+		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyze, uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList, uniqueRecipientAccountsList));
 
-		/*
-		 * for (int i = 0; i < transactionsToAnalyze.size(); i++) { Transaction
-		 * t = transactionsToAnalyze.get(i); }
-		 */
 
-		// check conditions
+		// check conditions 2 and 3, other implemented
 		// add suspects to list
 		// returns
 		if (listOfSuspectTransactions.isEmpty()) {
@@ -116,11 +115,11 @@ public class FraudAnalyser {
 							(Long) accounts.get(account));
 					Set<Transaction> filtered = new HashSet<>();
 					filtered.addAll(filteredByAccount);
-					// if more than five on one day by user - suspect
+					// if more than four on one day by user - suspect
 					// transaction
 					int numberOfTransactions = filtered.size();
 					if (isNumerOfTransactionsToOneAccountSuspicious(numberOfTransactions)) {
-						suspectTransactions.addAll(filteredByUserAndDay);
+						suspectTransactions.addAll(filteredByAccount);
 					}
 				}
 			}
@@ -164,7 +163,7 @@ public class FraudAnalyser {
 
 		return dates;
 	}
-
+// TODO change to private and remove tests
 	public static boolean isUserAboveSuspicion(int userID) {
 		for (int i = 0; i < HONEST_USERS.length; i++) {
 			if (userID == HONEST_USERS[i]) {
@@ -173,7 +172,7 @@ public class FraudAnalyser {
 		}
 		return false;
 	}
-
+// TODO change to private and remove tests
 	public static boolean isUserSuspectForSure(int userID) {
 		for (int i = 0; i < SUSPECT_USERS.length; i++) {
 			if (userID == SUSPECT_USERS[i]) {

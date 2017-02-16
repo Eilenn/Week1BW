@@ -37,6 +37,32 @@ public class FraudAnalyserTest {
 	}
 
 	@Test
+	public void shouldReturn5For5TransactionsToOneAccount() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyzeByAccount = new ArrayList<>();
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 6)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12,5)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
+		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAccount);
+		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAccount);
+		Set accounts = FraudAnalyser.getUniqueRecipientAccounts(transactionsToAnalyzeByAccount);
+		Set<Transaction> suspect = new HashSet<>();
+		// when
+		suspect = fraudAnalyser.analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyzeByAccount, users, dates, accounts);
+		// then
+		assertEquals(5,suspect.size());
+	}
+
+	@Test
 	public void shouldReturnNullForSixTransactionsByHonestUserByDate() {
 		// given
 		ArrayList<Transaction> eightTransactionsToAnalyze = new ArrayList<>();
@@ -60,7 +86,7 @@ public class FraudAnalyserTest {
 		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
 		Set<Transaction> suspect = new HashSet<>();
 		// when
-		suspect = fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
+		suspect = fraudAnalyser.getSuspiciousTransactions(eightTransactionsToAnalyze);
 		// then
 		assertEquals(null, suspect);
 	}
@@ -89,7 +115,7 @@ public class FraudAnalyserTest {
 		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
 		Set<Transaction> suspect = new HashSet<>();
 		// when
-		suspect = fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
+		suspect = fraudAnalyser.getSuspiciousTransactions(eightTransactionsToAnalyze);
 		// then
 		assertEquals(7, suspect.size());
 	}
@@ -118,7 +144,7 @@ public class FraudAnalyserTest {
 		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
 		Set<Transaction> suspect = new HashSet<>();
 		// when
-		suspect = fraudAnalyser.generateListOfSuspectTransactions(eightTransactionsToAnalyze);
+		suspect = fraudAnalyser.getSuspiciousTransactions(eightTransactionsToAnalyze);
 		// then
 		assertEquals(6, suspect.size());
 	}
@@ -223,7 +249,7 @@ public class FraudAnalyserTest {
 		// given
 		Set transactions = new HashSet<>();
 		// when
-		transactions = fraudAnalyser.generateListOfSuspectTransactions(transactionsToAnalyze);
+		transactions = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyze);
 		// then
 		assertEquals(1, transactions.size());
 	}
@@ -235,7 +261,7 @@ public class FraudAnalyserTest {
 		// given
 		Set transactions = new HashSet<>();
 		// when
-		transactions = fraudAnalyser.generateListOfSuspectTransactions(transactionsToAnalyze);
+		transactions = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyze);
 		// then
 		assertEquals(null, transactions);
 	}

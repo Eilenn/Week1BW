@@ -32,7 +32,7 @@ public class FilteringByRecipientAccountTest {
 
 	@Test
 	public void shouldReturnEmptyListForAccountNotOnTheList() {
-		//given
+		// given
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>(); // when
 		filteredTransactions = FilteringByRecipientAccount.filter(transactionsToAnalyze, 12340L);
 		// then
@@ -47,6 +47,29 @@ public class FilteringByRecipientAccountTest {
 		filteredTransactions = FilteringByRecipientAccount.filter(transactionsToAnalyze, 12345L);
 		// then
 		assertEquals(1, filteredTransactions.size());
+	}
+
+	@Test
+	public void shouldReturnFiveFor5TransactionsWithRecipientAccountOnTheList() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyzeByAccount = new ArrayList<>();
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(101, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 2, 12, 0)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 3, 12, 0)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 4, 12, 0)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 5, 12, 0)).build());
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 6, 12, 0)).build());
+		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+		// when
+		filteredTransactions = FilteringByRecipientAccount.filter(transactionsToAnalyzeByAccount, 12346L);
+		// then
+		assertEquals(5, filteredTransactions.size());
 	}
 
 }
