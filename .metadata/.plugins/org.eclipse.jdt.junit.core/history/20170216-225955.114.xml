@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AllRulesTogetherTest" project="FraudAnalyser" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.151">
+    <testcase name="shouldReturnEmptyListForOrdinaryUser" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.151"/>
+  </testsuite>
+</testrun>
