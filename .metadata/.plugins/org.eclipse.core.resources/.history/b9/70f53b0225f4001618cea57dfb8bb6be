@@ -57,7 +57,9 @@ public class FraudAnalyserTest {
 		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
 		Set users=FraudAnalyser.getUniqueUsers(eightTransactionsToAnalyze);
+		//System.out.println(users.size());
 		Set dates=FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
+		//System.out.println(dates.size());
 		Set<Transaction> suspect=new HashSet<>();
 		// when
 		suspect=fraudAnalyser.analyseNumberOfTransactionsPerUserPerDay(eightTransactionsToAnalyze, users, dates);
@@ -85,12 +87,15 @@ public class FraudAnalyserTest {
 		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
 		Set users=FraudAnalyser.getUniqueUsers(eightTransactionsToAnalyze);
+		//System.out.println(users.size());
 		Set dates=FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
+		//System.out.println(dates.size());
 		Set<Transaction> suspect=new HashSet<>();
 		// when
 		suspect=fraudAnalyser.analyseNumberOfTransactionsPerUserPerDay(eightTransactionsToAnalyze, users, dates);
 		// then
 		assertEquals(0,suspect.size());
+		//fail("not");
 	}
 	
 	@Test

@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class FraudAnalyser {
 
-	private static final int[] SUSPECT_USERS = { 542, 1052, 2103 };
-	private static final int[] HONEST_USERS = { 101, 606 };
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY = 6;
+	// private Set listOfTransactions;
+	private int[] suspects = { 542, 1052, 2103 };
+	private int[] honestUsers = { 101, 606 };
 
 	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
@@ -25,12 +25,15 @@ public class FraudAnalyser {
 		}
 		transactionsToAnalyze.removeAll(temporarySuspectTransactionsInAnalyzedList);
 
-		Set<LocalDate> uniqueDatesInAnalyzedList = getUniqueDatesWithoutHour(transactionsToAnalyze);
-		Set uniqueUsersInAnalyzedList = getUniqueUsers(transactionsToAnalyze);
+		Set<LocalDate> uniqueDatesInAnalyzedList = new HashSet<>();
+		uniqueDatesInAnalyzedList = getUniqueDatesWithoutHour(transactionsToAnalyze);
+		Set uniqueUsersInAnalyzedList = new HashSet<>();
+		uniqueUsersInAnalyzedList = getUniqueUsers(transactionsToAnalyze);
 		analyseNumberOfTransactionsPerUserPerDay(transactionsToAnalyze, uniqueUsersInAnalyzedList,
 				uniqueDatesInAnalyzedList);
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			Transaction t = transactionsToAnalyze.get(i);
+
 		}
 
 		// check conditions
@@ -68,8 +71,8 @@ public class FraudAnalyser {
 				Set<Transaction> filteredTransactions = getTransactionsOfUserOnDay(transactionsToAnalyze,
 						(Integer) users.get(user), dates.get(date));
 				// if more than five on one day by user - suspect transaction
-				int numberOfTransactions = filteredTransactions.size();
-				if (isNumerOfTransactionsSuspicious(numberOfTransactions)) {
+				int countTransactions = filteredTransactions.size();
+				if (countTransactions > 5) {
 					suspectTransactions.addAll(filteredTransactions);
 				}
 			}
@@ -77,10 +80,6 @@ public class FraudAnalyser {
 
 		return suspectTransactions;
 
-	}
-
-	private static boolean isNumerOfTransactionsSuspicious(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY) ? true : false;
 	}
 
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
@@ -102,18 +101,18 @@ public class FraudAnalyser {
 		return dates;
 	}
 
-	public static boolean isUserAboveSuspicion(int userID) {
-		for (int i = 0; i < HONEST_USERS.length; i++) {
-			if (userID == HONEST_USERS[i]) {
+	public boolean isUserAboveSuspicion(int userID) {
+		for (int i = 0; i < honestUsers.length; i++) {
+			if (userID == honestUsers[i]) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean isUserSuspectForSure(int userID) {
-		for (int i = 0; i < SUSPECT_USERS.length; i++) {
-			if (userID == SUSPECT_USERS[i]) {
+	public boolean isUserSuspectForSure(int userID) {
+		for (int i = 0; i < suspects.length; i++) {
+			if (userID == suspects[i]) {
 				return true;
 			}
 		}

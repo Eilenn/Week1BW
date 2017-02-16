@@ -10,7 +10,7 @@ public class FraudAnalyser {
 
 	private static final int[] SUSPECT_USERS = { 542, 1052, 2103 };
 	private static final int[] HONEST_USERS = { 101, 606 };
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY = 6;
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY=6;
 
 	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
@@ -31,6 +31,7 @@ public class FraudAnalyser {
 				uniqueDatesInAnalyzedList);
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			Transaction t = transactionsToAnalyze.get(i);
+
 		}
 
 		// check conditions
@@ -79,10 +80,10 @@ public class FraudAnalyser {
 
 	}
 
-	private static boolean isNumerOfTransactionsSuspicious(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY) ? true : false;
+	private static boolean isNumerOfTransactionsSuspicious(int numberOfTransactions){
+		return (numberOfTransactions>=SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY)?true:false;
 	}
-
+	
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
 		Set users = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {

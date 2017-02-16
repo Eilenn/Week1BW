@@ -40,3 +40,6 @@
 1487231876806	Rename local variable 'j'
 1487232597999	Rename local variable 'transactionsToAnalyze'
 1487232673509	Rename method 'getUniqueDatesWithourHour'
+1487236558647	Rename field 'suspects'
+1487236591776	Rename field 'honestUsers'
+1487236817733	Rename local variable 'countTransactions'
