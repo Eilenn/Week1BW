@@ -11,7 +11,24 @@ public class FraudAnalyser {
 	private int[] suspects = { 542, 1052, 2103 };
 	private int[] honestUsers = { 101, 606 };
 
+	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
+		Set users = new HashSet<>();
+		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
+			users.add(transactionsToAnalyze.get(i).getUserID());
+		}
 
+		return users;
+	}
+
+	public static Set<LocalDate> getUniqueDatesWithourHour(ArrayList<Transaction> transactionsToAnalyze) {
+		Set<LocalDate> dates = new HashSet<>();
+		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
+			Transaction t = transactionsToAnalyze.get(i);
+			dates.add(t.getDateWithoutHour());
+		}
+
+		return dates;
+	}
 
 	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
@@ -45,25 +62,7 @@ public class FraudAnalyser {
 		}
 		return listOfSuspectTransactions;
 	}
-	
-	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
-		Set users = new HashSet<>();
-		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
-			users.add(transactionsToAnalyze.get(i).getUserID());
-		}
 
-		return users;
-	}
-
-	public static Set<LocalDate> getUniqueDatesWithourHour(ArrayList<Transaction> transactionsToAnalyze) {
-		Set<LocalDate> dates = new HashSet<>();
-		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
-			Transaction t = transactionsToAnalyze.get(i);
-			dates.add(t.getDateWithoutHour());
-		}
-
-		return dates;
-	}
 	public boolean isUserAboveSuspicion(int userID) {
 		for (int i = 0; i < honestUsers.length; i++) {
 			if (userID == honestUsers[i]) {

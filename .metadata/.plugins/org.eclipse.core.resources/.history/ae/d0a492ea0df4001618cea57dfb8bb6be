@@ -45,6 +45,7 @@ public class FraudAnalyserTest {
 		// when
 		Set uniqueUsers=FraudAnalyser.getUniqueUsers(transactionsToAnalyze);
 		int numberOfUniqueUsers=uniqueUsers.size();
+		//System.out.println(transactionsToAnalyze.size());
 		// then
 		assertEquals(numberOfUniqueTransactionsByUser,numberOfUniqueUsers);
 	}
@@ -58,6 +59,7 @@ public class FraudAnalyserTest {
 		// when
 		Set uniqueDates=FraudAnalyser.getUniqueDatesWithourHour(transactionsToAnalyze);
 		int numberOfUniqueDates=uniqueDates.size();
+		//System.out.println(transactionsToAnalyze.size());
 		// then
 		assertEquals(numberOfUniqueTransactionsByDate,numberOfUniqueDates);
 	}

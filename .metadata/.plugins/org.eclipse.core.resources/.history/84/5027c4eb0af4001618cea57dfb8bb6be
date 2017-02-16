@@ -140,12 +140,6 @@ public class Transaction implements Comparable<Transaction>{
             return one.dateOfTransfer.compareTo(other.dateOfTransfer);
         }
     };
-    
-    public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER_IGNORING_HOUR = new Comparator<Transaction>() {
-        public int compare(Transaction one, Transaction other) {
-            return one.getDateWithoutHour().compareTo(other.getDateWithoutHour());
-        }
-    };
 	@Override
 	/**
 	 * compares by userID

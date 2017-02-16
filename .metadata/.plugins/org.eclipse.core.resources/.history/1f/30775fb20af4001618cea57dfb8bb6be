@@ -1,7 +1,6 @@
 package com.capgemini.fraudanalyser;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
@@ -85,10 +84,6 @@ public class Transaction implements Comparable<Transaction>{
 	public LocalDateTime getDateOfTransfer() {
 		return dateOfTransfer;
 	}
-	
-	public LocalDate getDateWithoutHour() {
-		return dateOfTransfer.toLocalDate();
-	}
 
 	
 
@@ -138,12 +133,6 @@ public class Transaction implements Comparable<Transaction>{
     public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER = new Comparator<Transaction>() {
         public int compare(Transaction one, Transaction other) {
             return one.dateOfTransfer.compareTo(other.dateOfTransfer);
-        }
-    };
-    
-    public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER_IGNORING_HOUR = new Comparator<Transaction>() {
-        public int compare(Transaction one, Transaction other) {
-            return one.getDateWithoutHour().compareTo(other.getDateWithoutHour());
         }
     };
 	@Override

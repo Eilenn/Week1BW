@@ -11,41 +11,6 @@ public class FraudAnalyser {
 	private int[] suspects = { 542, 1052, 2103 };
 	private int[] honestUsers = { 101, 606 };
 
-
-
-	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
-		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
-		Set<Transaction> temporarySuspectTransactionsInAnalyzedList = new HashSet<>();
-		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
-			Transaction t = transactionsToAnalyze.get(i);
-			if (isUserAboveSuspicion(t.getUserID())) {
-				temporarySuspectTransactionsInAnalyzedList.add(t);
-			} else if (isUserSuspectForSure(t.getUserID())) {
-				listOfSuspectTransactions.add(t);
-			}
-		}
-		transactionsToAnalyze.removeAll(temporarySuspectTransactionsInAnalyzedList);
-		
-		Set <LocalDate> datesInAnalyzedList=new HashSet<>();
-		datesInAnalyzedList=getUniqueDatesWithourHour(transactionsToAnalyze);
-		Set usersInAnalyzedList=new HashSet<>();
-		usersInAnalyzedList=getUniqueUsers(transactionsToAnalyze);
-		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
-			Transaction t = transactionsToAnalyze.get(i);
-			
-		}
-
-		// check conditions
-		// add suspects to list
-		// return
-		if (listOfSuspectTransactions.isEmpty()) {
-			return null;
-			// throw new IllegalStateException("There are no suspect
-			// transactions");
-		}
-		return listOfSuspectTransactions;
-	}
-	
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
 		Set users = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
@@ -58,12 +23,46 @@ public class FraudAnalyser {
 	public static Set<LocalDate> getUniqueDatesWithourHour(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<LocalDate> dates = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
-			Transaction t = transactionsToAnalyze.get(i);
-			dates.add(t.getDateWithoutHour());
+			dates.add(transactionsToAnalyze.get(i).getDateWithoutHour());
 		}
 
 		return dates;
 	}
+
+	public Set<Transaction> generateListOfSuspectTransactions(ArrayList<Transaction> transactionsToAnalyze) {
+		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
+		Set<Transaction> suspectTransactionInList = new HashSet<>();
+		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
+			Transaction t = transactionsToAnalyze.get(i);
+			if (isUserAboveSuspicion(t.getUserID())) {
+				suspectTransactionInList.add(t);
+			} else if (isUserSuspectForSure(t.getUserID())) {
+				listOfSuspectTransactions.add(t);
+			}
+		}
+		transactionsToAnalyze.removeAll(suspectTransactionInList);
+
+		/*
+		 * for (Transaction t : transactionsForAnalize) { if
+		 * (isUserAboveSuspicion(t.getUserID())) {
+		 * transactionsForAnalize.remove(t); } else
+		 * if(isUserSuspectForSure(t.getUserID())){
+		 * listOfSuspectTransactions.add(t); }
+		 * 
+		 * }
+		 */
+
+		// check conditions
+		// add suspects to list
+		// return
+		if (listOfSuspectTransactions.isEmpty()) {
+			return null;
+			// throw new IllegalStateException("There are no suspect
+			// transactions");
+		}
+		return listOfSuspectTransactions;
+	}
+
 	public boolean isUserAboveSuspicion(int userID) {
 		for (int i = 0; i < honestUsers.length; i++) {
 			if (userID == honestUsers[i]) {
