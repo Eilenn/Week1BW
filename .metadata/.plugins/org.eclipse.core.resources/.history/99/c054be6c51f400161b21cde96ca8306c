@@ -61,32 +61,6 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(5,suspect.size());
 	}
-	
-	@Test
-	public void shouldReturn5For5TransactionsToOneAccountUsingGetTrans() {
-		// given
-		ArrayList<Transaction> transactionsToAnalyzeByAccount = new ArrayList<>();
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 6)).build());
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12,5)).build());
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
-		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAccount);
-		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAccount);
-		Set accounts = FraudAnalyser.getUniqueRecipientAccounts(transactionsToAnalyzeByAccount);
-		Set<Transaction> suspect = new HashSet<>();
-		// when
-		suspect = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyzeByAccount);
-		// then
-		assertEquals(5,suspect.size());
-	}
 
 	@Test
 	public void shouldReturnNullForSixTransactionsByHonestUserByDate() {

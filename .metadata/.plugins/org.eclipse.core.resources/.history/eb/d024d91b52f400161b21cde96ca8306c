@@ -66,7 +66,7 @@ public class FraudAnalyserTest {
 	public void shouldReturn5For5TransactionsToOneAccountUsingGetTrans() {
 		// given
 		ArrayList<Transaction> transactionsToAnalyzeByAccount = new ArrayList<>();
-		transactionsToAnalyzeByAccount.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 6)).build());
@@ -83,7 +83,7 @@ public class FraudAnalyserTest {
 		Set accounts = FraudAnalyser.getUniqueRecipientAccounts(transactionsToAnalyzeByAccount);
 		Set<Transaction> suspect = new HashSet<>();
 		// when
-		suspect = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyzeByAccount);
+		suspect = fraudAnalyser.analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyzeByAccount, users, dates, accounts);
 		// then
 		assertEquals(5,suspect.size());
 	}
