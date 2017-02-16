@@ -61,3 +61,5 @@
 1487269807635	Rename field 'SUSPECT_USERS'
 1487278588571	Rename local variable 'eightTransactionsToAnalyze'
 1487278601813	Rename local variable 'transactionsToAnalyze'
+1487282723095	Rename field 't'
+1487284833792	Rename field 'transThird1000'

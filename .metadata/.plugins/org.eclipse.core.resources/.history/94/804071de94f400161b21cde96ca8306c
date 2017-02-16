@@ -1,0 +1,83 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class AllRulesTogetherTest {
+	private ArrayList<Transaction> listOfTransactions;
+	private Transaction transOrd, transSuspID, transSuspID2, transSuspID3, transHon1, transHon2;
+	private FraudAnalyser analyser;
+
+	@Before
+	public void init() {
+		listOfTransactions = new ArrayList<>();
+		analyser = new FraudAnalyser();
+		transOrd = new Transaction.Builder().withUserID(100).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+		transSuspID = new Transaction.Builder().withUserID(542).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+		transSuspID2=new Transaction.Builder().withUserID(1052).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+		transSuspID3=new Transaction.Builder().withUserID(2103).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+		transHon1=new Transaction.Builder().withUserID(101).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+		transHon2=new Transaction.Builder().withUserID(606).withRecipientAccount(1200L)
+				.withAmountOfMoneyTransferred(new BigDecimal(200)).withDateOfTransfer(LocalDateTime.now()).build();
+
+	}
+
+	@Test
+	public void shouldReturnNullForOrdinaryUser() {
+		// given
+		listOfTransactions.add(transOrd);
+		// when
+		Set<Transaction> suspiciousTransactions = analyser.getSuspiciousTransactions(listOfTransactions);
+		// then
+		assertEquals(null, suspiciousTransactions);
+	}
+	
+	@Test
+	public void shouldReturnOneForSuspectUser542() {
+		// given
+		listOfTransactions.add(transSuspID);
+		// when
+		Set<Transaction> suspiciousTransactions = analyser.getSuspiciousTransactions(listOfTransactions);
+		// then
+		assertEquals(1, suspiciousTransactions.size());
+	}
+	
+	@Test
+	public void shouldReturnOneForSuspectUser1052() {
+		// given
+		listOfTransactions.add(transSuspID2);
+		// when
+		Set<Transaction> suspiciousTransactions = analyser.getSuspiciousTransactions(listOfTransactions);
+		// then
+		assertEquals(1, suspiciousTransactions.size());
+	}
+	
+	@Test
+	public void shouldReturnOneForSuspectUser2103() {
+		// given
+		listOfTransactions.add(transSuspID3);
+		// when
+		Set<Transaction> suspiciousTransactions = analyser.getSuspiciousTransactions(listOfTransactions);
+		// then
+		assertEquals(1, suspiciousTransactions.size());
+	}
+	
+	@Test
+	public void shouldReturnNullForHonestUser101(){
+		
+	}
+
+}

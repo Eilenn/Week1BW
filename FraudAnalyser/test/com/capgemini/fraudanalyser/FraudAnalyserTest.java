@@ -107,7 +107,7 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(3, suspect.size());
 	}
-	
+
 	@Test
 	public void shouldReturnZeroForTwoTransactionsAbove10000() {
 		// given
@@ -126,7 +126,7 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(0, suspect.size());
 	}
-	
+
 	@Test
 	public void shouldReturnFourForFourTransactionsAbove5000() {
 		// given
@@ -149,7 +149,7 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(4, suspect.size());
 	}
-	
+
 	@Test
 	public void shouldReturnZeroForThreeTransactionsAbove5000() {
 		// given
@@ -364,58 +364,4 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(1, transactions.size());
 	}
-
-	@Ignore // works when changing id542, because then there are no suspect
-			// transactions
-	@Test
-	public void shouldReturnNullInsteadOfListOfSuspectTransactionsForNoSuspect() {
-		// given
-		Set transactions = new HashSet<>();
-		// when
-		transactions = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyze);
-		// then
-		assertEquals(null, transactions);
-	}
-
-	@Test
-	public void shouldReturnFalseForUser100() {
-		// given
-		Transaction transaction = transactionsToAnalyze.get(0);
-		// when
-		boolean isHonest = fraudAnalyser.isUserAboveSuspicion(transaction.getUserID());
-		// then
-		assertFalse(isHonest);
-	}
-
-	@Test
-	public void shouldReturnTrueForUser101() {
-		// given
-		Transaction transaction = transactionsToAnalyze.get(2);
-		// when
-		boolean isHonest = fraudAnalyser.isUserAboveSuspicion(transaction.getUserID());
-		// then
-		assertTrue(isHonest);
-		// fail("Not yet implemented");
-	}
-
-	@Test
-	public void shouldReturnTrueForUser542() {
-		// given
-		Transaction transaction = transactionsToAnalyze.get(4);
-		// when
-		boolean isSuspect = fraudAnalyser.isUserSuspectForSure(transaction.getUserID());
-		// then
-		assertTrue(isSuspect);
-	}
-
-	@Test
-	public void shouldReturnFalseForUser543() {
-		// given
-		Transaction transaction = transactionsToAnalyze.get(5);
-		// when
-		boolean isSuspect = fraudAnalyser.isUserSuspectForSure(transaction.getUserID());
-		// then
-		assertFalse(isSuspect);
-	}
-
 }

@@ -66,7 +66,7 @@ public class FraudAnalyser {
 		// to listOfSuspectTransactions
 		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyze,
 				uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList, uniqueRecipientAccountsList));
-		listOfSuspectTransactions.addAll(analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyze, 
+		listOfSuspectTransactions.addAll(analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyze,
 				uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList));
 		if (listOfSuspectTransactions.isEmpty()) {
 			System.out.println("There are no suspicious transactions in set.");
@@ -287,8 +287,7 @@ public class FraudAnalyser {
 		return dates;
 	}
 
-	// TODO change to private and remove tests
-	public static boolean isUserAboveSuspicion(int userID) {
+	private static boolean isUserAboveSuspicion(int userID) {
 		for (int i = 0; i < HONEST_USERS.length; i++) {
 			if (userID == HONEST_USERS[i]) {
 				return true;
@@ -297,8 +296,7 @@ public class FraudAnalyser {
 		return false;
 	}
 
-	// TODO change to private and remove tests
-	public static boolean isUserSuspectForSure(int userID) {
+	private static boolean isUserSuspectForSure(int userID) {
 		for (int i = 0; i < SUSPICIOUS_USERS.length; i++) {
 			if (userID == SUSPICIOUS_USERS[i]) {
 				return true;

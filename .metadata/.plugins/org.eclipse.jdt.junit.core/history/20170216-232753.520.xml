@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AllRulesTogetherTest" project="FraudAnalyser" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.211">
+    <testcase name="shouldReturnNullForHonestUser101" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.198"/>
+    <testcase name="shouldReturnNullForHonestUser606" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+    <testcase name="shouldReturnOneForSuspectUser1052" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.006"/>
+    <testcase name="shouldReturnOneForSuspectUser2103" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+    <testcase name="shouldReturnThreeForAllHonestSuspiciousAndOrdinary" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+    <testcase name="shouldReturnOneForSuspectUser542" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+    <testcase name="shouldReturnNullForOrdinaryUser" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+    <testcase name="shouldReturnFourForFourTransactionsForMoreThan5000" classname="com.capgemini.fraudanalyser.AllRulesTogetherTest" time="0.001"/>
+  </testsuite>
+</testrun>
