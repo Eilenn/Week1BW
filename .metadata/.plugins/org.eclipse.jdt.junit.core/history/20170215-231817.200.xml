@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FraudAnalyserTest" project="FraudAnalyser" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.015">
-    <testcase name="shouldReturnFalseForUser100" classname="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.012"/>
-    <testcase name="shouldReturnFalseForUser543" classname="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.0"/>
-    <testcase name="shouldGenerateListOfSuspectTransactionsWithOneElement" classname="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.001"/>
-    <testcase name="shouldReturnTrueForUser101" classname="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.0"/>
-    <testcase name="shouldReturnTrueForUser542" classname="com.capgemini.fraudanalyser.FraudAnalyserTest" time="0.001"/>
-  </testsuite>
-</testrun>

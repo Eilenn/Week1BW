@@ -1,0 +1,21 @@
+package com.capgemini.fraudanalyser;
+
+import java.util.ArrayList;
+import java.util.Set;
+
+public class FilteringByUser{
+
+
+	public static ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, long recipientAccount) {
+		ArrayList<Transaction> transactionsByRecipient = new ArrayList<>();
+		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
+			Transaction analyzedTransaction = transactionsToAnalyze.get(i);
+			if (analyzedTransaction.getUserID() == userID) {
+				transactionsByRecipient.add(analyzedTransaction);
+			}
+		}
+
+		return transactionsByRecipient;
+	}
+
+}

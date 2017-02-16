@@ -44,3 +44,6 @@
 1487236591776	Rename field 'honestUsers'
 1487236817733	Rename local variable 'countTransactions'
 1487238063494	Rename method 'shouldReturnZeroElementListForSixTransactionsByHonestUserByDate'
+1487240441102	Rename local variable 'transactionsByUser'
+1487240463883	Rename local variable 'transactionsByAmount'
+1487240639009	Rename field 'filteringByDate'
