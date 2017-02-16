@@ -1,0 +1,70 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class FilteringByDateTest {
+
+	private ArrayList<Transaction> transactionsToAnalyze;
+	private FilteringByDate filteringByDate;
+
+	@Before
+	public void init() {
+		transactionsToAnalyze = new ArrayList<>();
+		transactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyze.add(new Transaction.Builder(102, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 2, 12, 0)).build());
+		transactionsToAnalyze.add(new Transaction.Builder(101, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 3, 12, 0)).build());
+		transactionsToAnalyze.add(new Transaction.Builder(103, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 3, 12, 0)).build());
+		filteringByDate = new FilteringByDate();
+	}
+
+	/*
+	 * @Test public void shouldReturnEmptyListForDateNotOnTheList() {
+	 * System.out.println(transactionsToAnalyze.size()); // given
+	 * ArrayList<Transaction> filteredTransactions = new ArrayList<>(); // when
+	 * filteredTransactions = filteringByDate.filter(transactionsToAnalyze,
+	 * LocalDate.of(2014, Month.JANUARY, 30));
+	 * System.out.println(filteredTransactions.size()); // then assertEquals(0,
+	 * filteredTransactions.size()); }
+	 */
+
+	@Test
+	public void shouldReturn1ElementListForOneTransactionOfTheDateOnTheList() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyze2 = new ArrayList<>();
+		transactionsToAnalyze2.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+		// when
+		filteredTransactions = filteringByDate.filter(transactionsToAnalyze2, LocalDate.of(2014, Month.JANUARY, 1));
+		// then
+		assertEquals(1, filteredTransactions.size());
+	}
+
+	@Test
+	public void shouldcompareDateTimeFieldWithSpecifiedDate() {
+		// given
+		Transaction transaction;
+		transaction = new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build();
+
+		// when
+		boolean areDatesTheSame;
+		areDatesTheSame = (transaction.getDateWithoutHour().equals(LocalDate.of(2014, Month.JANUARY, 1)));
+		// then
+		assertTrue(areDatesTheSame);
+	}
+
+}

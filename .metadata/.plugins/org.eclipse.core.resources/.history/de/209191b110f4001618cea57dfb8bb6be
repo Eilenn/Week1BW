@@ -1,0 +1,32 @@
+package com.capgemini.fraudanalyser;
+
+import java.awt.List;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Set;
+
+public class FilteringByDate{
+	
+	public ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, LocalDate dateOfTransaction) {
+		ArrayList<Transaction> transactionsByDate=new ArrayList<>();
+		for (int i=0;i<transactionsToAnalyze.size();i++) {
+			Transaction analyzedTransaction=transactionsToAnalyze.get(i);
+			if(analyzedTransaction.getUserID()==dateOfTransaction){
+				transactionsByDate.add(analyzedTransaction);
+			}
+		}
+		
+		return transactionsByDate;
+	}
+
+	
+	public boolean isSuspect(Transaction transaction) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public Set<Transaction>  returnListOfSuspectTransactions() {
+		// TODO Auto-generated method stub
+		return null;
+}}

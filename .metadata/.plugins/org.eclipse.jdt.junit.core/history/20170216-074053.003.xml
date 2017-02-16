@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TransactionTest" project="FraudAnalyser" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.capgemini.fraudanalyser.TransactionTest" time="0.001">
+    <testcase name="shouldCreateTransactionWithCorrectFields" classname="com.capgemini.fraudanalyser.TransactionTest" time="0.001"/>
+    <testcase name="shouldReturnLocalDateFromLocalDateTimeField" classname="com.capgemini.fraudanalyser.TransactionTest" time="0.0"/>
+    <testcase name="shouldCreateTransactionWithCorrectFieldsForBuilder" classname="com.capgemini.fraudanalyser.TransactionTest" time="0.0"/>
+  </testsuite>
+</testrun>

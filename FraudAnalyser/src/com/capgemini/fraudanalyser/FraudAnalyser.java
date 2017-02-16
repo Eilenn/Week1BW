@@ -26,10 +26,11 @@ public class FraudAnalyser {
 		}
 		transactionsToAnalyze.removeAll(temporarySuspectTransactionsInAnalyzedList);
 		
-		Set <LocalDate> datesInAnalyzedList=new HashSet<>();
-		datesInAnalyzedList=getUniqueDatesWithourHour(transactionsToAnalyze);
-		Set usersInAnalyzedList=new HashSet<>();
-		usersInAnalyzedList=getUniqueUsers(transactionsToAnalyze);
+		Set <LocalDate> uniqueDatesInAnalyzedList=new HashSet<>();
+		uniqueDatesInAnalyzedList=getUniqueDatesWithourHour(transactionsToAnalyze);
+		Set uniqueUsersInAnalyzedList=new HashSet<>();
+		uniqueUsersInAnalyzedList=getUniqueUsers(transactionsToAnalyze);
+		analyseNumberOfTransactionsPerUserPerDay(transactionsToAnalyze,uniqueUsersInAnalyzedList,uniqueDatesInAnalyzedList);
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			Transaction t = transactionsToAnalyze.get(i);
 			
@@ -46,6 +47,21 @@ public class FraudAnalyser {
 		return listOfSuspectTransactions;
 	}
 	
+	private void analyseNumberOfTransactionsPerUserPerDay(ArrayList<Transaction> transactionsToAnalyze,
+			Set uniqueUsersInAnalyzedList, Set<LocalDate> uniqueDatesInAnalyzedList) {
+		Set<Transaction> suspectTransactions=new HashSet<>();
+		transactionsToAnalyze.sort(Transaction.COMPARE_BY_DATE_OF_TRANSFER);
+		for(int i=0;i<uniqueDatesInAnalyzedList.size();i++){
+			int countTransactions=0;
+			for(int j=0;j<uniqueUsersInAnalyzedList.size();j++){
+				
+			}
+		}
+		
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
 		Set users = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {

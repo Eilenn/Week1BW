@@ -1,0 +1,64 @@
+package com.capgemini.fraudanalyser;
+
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import org.junit.Test;
+
+public class TransactionTest {
+	private Transaction transaction;
+
+	@Test
+	public void shouldCreateTransactionWithCorrectFields() {
+		// given
+		int userID = 101;
+		long recipientAccount = 100000000L;
+		BigDecimal amountOfMoneyTransferred = new BigDecimal("1500.0");
+		LocalDateTime dateOfTransfer = LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0);
+		// when
+		transaction = new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+		boolean correctUser = (userID == transaction.getUserID());
+		boolean correctAccount = (recipientAccount == transaction.getRecipientAccount());
+		boolean correctAmount = (amountOfMoneyTransferred == transaction.getAmountOfMoneyTransferred());
+		boolean correctDate = (dateOfTransfer == transaction.getDateOfTransfer());
+		// then
+		assertTrue(correctUser && correctAccount && correctAccount && correctAmount);
+	}
+
+	@Test
+	public void shouldReturnLocalDateFromLocalDateTimeField() {
+		// given
+		int userID = 101;
+		long recipientAccount = 100000000L;
+		BigDecimal amountOfMoneyTransferred = new BigDecimal("1500.0");
+		LocalDateTime dateOfTransfer = LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0);
+		// when
+		transaction = new Transaction(userID, recipientAccount, amountOfMoneyTransferred, dateOfTransfer);
+		// then
+
+	}
+
+	@Test
+	public void shouldCreateTransactionWithCorrectFieldsForBuilder() {
+		// given
+		int userID = 101;
+		long recipientAccount = 100000000L;
+		BigDecimal amountOfMoneyTransferred = new BigDecimal("1500.0");
+		LocalDateTime dateOfTransfer = LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0);
+		// when
+		// transaction=new
+		// Transaction.Builder(userID,recipientAccount,amountOfMoneyTransferred,dateOfTransfer).build();
+		transaction = new Transaction.Builder().withUserID(userID).withRecipientAccount(recipientAccount)
+				.withAmountOfMoneyTransferred(amountOfMoneyTransferred).withDateOfTransfer(dateOfTransfer).build();
+		boolean correctUser = (userID == transaction.getUserID());
+		boolean correctAccount = (recipientAccount == transaction.getRecipientAccount());
+		boolean correctAmount = (amountOfMoneyTransferred == transaction.getAmountOfMoneyTransferred());
+		boolean correctDate = (dateOfTransfer == transaction.getDateOfTransfer());
+		// then
+		assertTrue(correctUser && correctAccount && correctAccount && correctAmount);
+	}
+
+}

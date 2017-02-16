@@ -32,3 +32,7 @@
 1487225054443	Rename local variable 'numberOfUniqueTransactionsByUser'
 1487225062854	Rename local variable 'uniqueUsers'
 1487225090659	Rename local variable 'numberOfUniqueUsers'
+1487225389662	Rename local variable 'usersInAnalyzedList'
+1487225396727	Rename local variable 'datesInAnalyzedList'
+1487226271604	Rename local variable 'userID'
+1487226295835	Rename local variable 'transactionsByUser'
