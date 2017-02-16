@@ -32,7 +32,7 @@ public class FilteringByUserTest {
 		// given
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 		// when
-		filteredTransactions = filteringByUser.filter(transactionsToAnalyze, 200);
+		filteredTransactions = FilteringByUser.filter(transactionsToAnalyze, 200);
 		// then
 		assertEquals(0, filteredTransactions.size());
 	}
@@ -42,7 +42,7 @@ public class FilteringByUserTest {
 		// given
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 		// when
-		filteredTransactions = filteringByUser.filter(transactionsToAnalyze, 100);
+		filteredTransactions = FilteringByUser.filter(transactionsToAnalyze, 100);
 		// then
 		assertEquals(1, filteredTransactions.size());
 	}
@@ -52,7 +52,7 @@ public class FilteringByUserTest {
 		// given
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 		// when
-		filteredTransactions = filteringByUser.filter(transactionsToAnalyze, 100);
+		filteredTransactions = FilteringByUser.filter(transactionsToAnalyze, 100);
 		boolean isUser100=filteredTransactions.get(0).getUserID()==100;;
 		// then
 		assertTrue(isUser100);

@@ -36,3 +36,7 @@
 1487225396727	Rename local variable 'datesInAnalyzedList'
 1487226271604	Rename local variable 'userID'
 1487226295835	Rename local variable 'transactionsByUser'
+1487231871636	Rename local variable 'i'
+1487231876806	Rename local variable 'j'
+1487232597999	Rename local variable 'transactionsToAnalyze'
+1487232673509	Rename method 'getUniqueDatesWithourHour'

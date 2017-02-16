@@ -37,6 +37,38 @@ public class FraudAnalyserTest {
 	}
 	
 	@Test
+	public void shouldReturnSixElementListForSixTransactionsByUserByDate(){
+		// given
+		ArrayList<Transaction> eightTransactionsToAnalyze=new ArrayList<>();
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 3)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 4)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
+		eightTransactionsToAnalyze.add(new Transaction.Builder(108, 12346L, new BigDecimal("200.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
+		Set users=FraudAnalyser.getUniqueUsers(eightTransactionsToAnalyze);
+		//System.out.println(users.size());
+		Set dates=FraudAnalyser.getUniqueDatesWithoutHour(eightTransactionsToAnalyze);
+		//System.out.println(dates.size());
+		Set<Transaction> suspect=new HashSet<>();
+		// when
+		suspect=fraudAnalyser.analyseNumberOfTransactionsPerUserPerDay(eightTransactionsToAnalyze, users, dates);
+		// then
+		assertEquals(6,suspect.size());
+		//fail("not");
+	}
+	
+	@Test
 	public void shouldReturnSetOfSixValuesForOneDuplicateTransactionByUser(){
 		// given
 		transactionsToAnalyze.add(new Transaction.Builder(100, 12345L, new BigDecimal("205.0"),
@@ -56,7 +88,7 @@ public class FraudAnalyserTest {
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
 		int numberOfUniqueTransactionsByDate=transactionsToAnalyze.size()-1;
 		// when
-		Set uniqueDates=FraudAnalyser.getUniqueDatesWithourHour(transactionsToAnalyze);
+		Set uniqueDates=FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyze);
 		int numberOfUniqueDates=uniqueDates.size();
 		// then
 		assertEquals(numberOfUniqueTransactionsByDate,numberOfUniqueDates);

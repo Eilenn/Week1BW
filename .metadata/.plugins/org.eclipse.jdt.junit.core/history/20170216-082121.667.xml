@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FilteringByDateTest" project="FraudAnalyser" tests="3" started="3" failures="0" errors="0" ignored="1">
+  <testsuite name="com.capgemini.fraudanalyser.FilteringByDateTest" time="0.0">
+    <testcase name="shouldReturnEmptyListForDateNotOnTheList" classname="com.capgemini.fraudanalyser.FilteringByDateTest" time="0.0"/>
+    <testcase name="shouldReturnOneElementListForOneTransactionOfTheDateOnTheList" classname="com.capgemini.fraudanalyser.FilteringByDateTest" time="0.0"/>
+    <testcase name="shouldcompareDateTimeFieldWithSpecifiedDate" classname="com.capgemini.fraudanalyser.FilteringByDateTest" time="0.0" ignored="true"/>
+  </testsuite>
+</testrun>

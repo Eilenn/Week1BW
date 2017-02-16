@@ -33,25 +33,31 @@ public class FilteringByDateTest {
 
 	@Test
 	public void shouldReturnEmptyListForDateNotOnTheList() {
-		System.out.println(transactionsToAnalyze.size()); // given
+		//given
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>(); // when
-		filteredTransactions = filteringByDate.filter(transactionsToAnalyze, LocalDate.of(2014, Month.JANUARY, 30));
-		System.out.println(filteredTransactions.size());
+		filteredTransactions = FilteringByDate.filter(transactionsToAnalyze, LocalDate.of(2014, Month.JANUARY, 30));
 		// then
 		assertEquals(0, filteredTransactions.size());
 	}
 
 	@Test
-	public void shouldReturn1ElementListForOneTransactionOfTheDateOnTheList() {
+	public void shouldReturnOneElementListForOneTransactionOfTheDateOnTheList() {
 		// given
-		ArrayList<Transaction> transactionsToAnalyze2 = new ArrayList<>();
-		transactionsToAnalyze2.add(new Transaction.Builder(100, 12345L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
 		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
 		// when
-		filteredTransactions = filteringByDate.filter(transactionsToAnalyze2, LocalDate.of(2014, Month.JANUARY, 1));
+		filteredTransactions = FilteringByDate.filter(transactionsToAnalyze, LocalDate.of(2014, Month.JANUARY, 1));
 		// then
 		assertEquals(1, filteredTransactions.size());
+	}
+	
+	@Test
+	public void shouldReturnTwoElementListForTwoTransactionsOfTheDateOnTheList() {
+		// given
+		ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+		// when
+		filteredTransactions = FilteringByDate.filter(transactionsToAnalyze, LocalDate.of(2014, Month.JANUARY, 3));
+		// then
+		assertEquals(2, filteredTransactions.size());
 	}
 
 	@Ignore // test to help debug FilterByDate - == exchanged to equals in

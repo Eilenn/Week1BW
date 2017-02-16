@@ -6,7 +6,7 @@ import java.util.Set;
 public class FilteringByUser{
 
 
-	public ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, int userID) {
+	public static ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, int userID) {
 		ArrayList<Transaction> transactionsByUser=new ArrayList<>();
 		for (int i=0;i<transactionsToAnalyze.size();i++) {
 			Transaction analyzedTransaction=transactionsToAnalyze.get(i);

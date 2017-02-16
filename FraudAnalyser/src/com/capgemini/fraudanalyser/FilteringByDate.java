@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class FilteringByDate{
 	
-	public ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, LocalDate dateOfTransaction) {
+	public static ArrayList<Transaction> filter(ArrayList<Transaction> transactionsToAnalyze, LocalDate dateOfTransaction) {
 		ArrayList<Transaction> transactionsByDate=new ArrayList<>();
 		for (int i=0;i<transactionsToAnalyze.size();i++) {
 			Transaction analyzedTransaction=transactionsToAnalyze.get(i);
