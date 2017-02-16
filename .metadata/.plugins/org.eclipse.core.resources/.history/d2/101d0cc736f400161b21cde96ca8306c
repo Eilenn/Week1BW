@@ -110,11 +110,10 @@ public class FraudAnalyser {
 				for (int account = 0; account < accounts.size(); account++) {
 					Set<Transaction> filteredByUserAndDay = getTransactionsOfUserOnDay(transactionsToAnalyze,
 							(Integer) users.get(user), dates.get(date));
-					ArrayList<Transaction> helper = new ArrayList<>();
+					ArrayList<Transaction> helper=new ArrayList<>();
 					helper.addAll(filteredByUserAndDay);
-					ArrayList<Transaction> filteredByAccount = FilteringByRecipientAccount.filter(helper,
-							(Long) accounts.get(account));
-					Set<Transaction> filtered = new HashSet<>();
+					ArrayList<Transaction> filteredByAccount=FilteringByRecipientAccount.filter(helper, (Long)accounts.get(account));
+					Set<Transaction> filtered=new HashSet<>();
 					filtered.addAll(filteredByAccount);
 					// if more than five on one day by user - suspect
 					// transaction

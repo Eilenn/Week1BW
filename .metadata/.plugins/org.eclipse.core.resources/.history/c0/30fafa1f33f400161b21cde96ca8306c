@@ -19,4 +19,14 @@ public class FilteringByDate{
 		return transactionsByDate;
 	}
 
+	
+	public boolean isSuspect(Transaction transaction) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+	
+	public Set<Transaction>  returnListOfSuspectTransactions() {
+		// TODO Auto-generated method stub
+		return null;
+}}
