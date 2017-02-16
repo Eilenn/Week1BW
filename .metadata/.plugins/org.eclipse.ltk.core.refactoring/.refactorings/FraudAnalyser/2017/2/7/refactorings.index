@@ -55,3 +55,6 @@
 1487242149492	Rename local variable 'filteredTransactions'
 1487253465456	Rename method 'generateListOfSuspectTransactions'
 1487257823680	Rename method 'isNumerOfTransactionsSuspicious'
+1487259152458	Rename method 'isNumberOfTransactionsSuspiciousForSum5000'
+1487259846045	Rename field 'SUSPICIOUS_SUM_FOR_MORE_THAN_2_TRANSACTIONS'
+1487260742374	Rename field 'SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS'

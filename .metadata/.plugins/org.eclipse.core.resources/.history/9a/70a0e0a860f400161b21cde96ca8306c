@@ -17,20 +17,10 @@ public class FraudAnalyser {
 	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY = 5; // more
 																								// than
 																								// 4
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO = 4; // more
-																				// than
-																				// 3
-																				// when
-																				// sum
-																				// 5000
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO = 3; // more
-																				// than
-																				// 2
-																				// when
-																				// sum
-																				// 10000
-	private static final BigDecimal SUSPICIOUS_SUM_5000 = new BigDecimal(5000.00);
-	private static final BigDecimal SUSPICIOUS_SUM_10000 = new BigDecimal(10000.00);
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO=4; // more than 3 when sum 5000
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO=3; // more than 2 when sum 10000
+	private static final BigDecimal SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS=new BigDecimal(5000.00);
+	private static final BigDecimal SUSPICIOUS_SUM_10000=new BigDecimal(10000.00);
 
 	public Set<Transaction> getSuspiciousTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
@@ -56,11 +46,10 @@ public class FraudAnalyser {
 		// transactions per user per day) to listOfSuspectTransactions
 		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsPerUserPerDay(transactionsToAnalyze,
 				uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList));
-		// adding all transactions for users having more than 4 transactions per
-		// day to one account
+		// adding all transactions for  users having more than 4 transactions per day to one account
 		// to listOfSuspectTransactions
-		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyze,
-				uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList, uniqueRecipientAccountsList));
+		listOfSuspectTransactions.addAll(analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyze, uniqueUsersInAnalyzedList, uniqueDatesInAnalyzedList, uniqueRecipientAccountsList));
+
 
 		// check conditions 2 and 3, other implemented
 		// add suspects to list
@@ -106,9 +95,9 @@ public class FraudAnalyser {
 		return suspectTransactions;
 
 	}
-
+	
 	public Set<Transaction> analyseAmountOfMoneyPerUserPerDay(ArrayList<Transaction> transactionsToAnalyze,
-			Set uniqueUsersInAnalyzedList, Set<LocalDate> uniqueDatesInAnalyzedList) {
+			Set uniqueUsersInAnalyzedList, Set<LocalDate> uniqueDatesInAnalyzedList){
 		Set<Transaction> suspectTransactions = new HashSet<>();
 		// converting set to list, so it's navigable
 		List users = new ArrayList();
@@ -120,17 +109,16 @@ public class FraudAnalyser {
 			for (int date = 0; date < dates.size(); date++) {
 				Set<Transaction> filteredTransactions = getTransactionsOfUserOnDay(transactionsToAnalyze,
 						(Integer) users.get(user), dates.get(date));
-				BigDecimal sumForUserForDay = addTransferAmounts(filteredTransactions);
+				BigDecimal sumForUserForDay=addTransferAmounts(filteredTransactions);
 				int numberOfTransactions = filteredTransactions.size();
-			}
-		}
+			}}
 		return suspectTransactions;
 	}
-
-	private static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions) {
-		BigDecimal sum = new BigDecimal(0);
-		for (Transaction t : filteredTransactions) {
-			sum = sum.add(t.getAmountOfMoneyTransferred());
+	
+	private static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions){
+		BigDecimal sum=new BigDecimal(0);
+		for(Transaction t:filteredTransactions){
+			sum=sum.add(t.getAmountOfMoneyTransferred());
 		}
 		return sum;
 	}
@@ -179,18 +167,15 @@ public class FraudAnalyser {
 	private static boolean isNumerOfTransactionsToOneAccountSuspicious(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY) ? true : false;
 	}
-
+	
 	private static boolean isSuspiciousForAmountOfMoney(int numberOfTransactions, BigDecimal sum) {
-		if (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO
-				&& sum.compareTo(SUSPICIOUS_SUM_10000) == 1) {
+		if(numberOfTransactions>=SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO&&sum.compareTo(SUSPICIOUS_SUM_10000)==1){
 			return true;
-		} else if (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO
-				&& sum.compareTo(SUSPICIOUS_SUM_5000) == 1) {
-			return true;
-		} else
-			return false;
+		}
+		else if(numberOfTransactions>=SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO&&sum.compareTo(SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO)==1)
+		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO) ? true : false;
 	}
-
+	
 	private static boolean isNumberOfTransactionsSuspiciousForSum10000(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO) ? true : false;
 	}
@@ -222,8 +207,7 @@ public class FraudAnalyser {
 
 		return dates;
 	}
-
-	// TODO change to private and remove tests
+// TODO change to private and remove tests
 	public static boolean isUserAboveSuspicion(int userID) {
 		for (int i = 0; i < HONEST_USERS.length; i++) {
 			if (userID == HONEST_USERS[i]) {
@@ -232,8 +216,7 @@ public class FraudAnalyser {
 		}
 		return false;
 	}
-
-	// TODO change to private and remove tests
+// TODO change to private and remove tests
 	public static boolean isUserSuspectForSure(int userID) {
 		for (int i = 0; i < SUSPECT_USERS.length; i++) {
 			if (userID == SUSPECT_USERS[i]) {

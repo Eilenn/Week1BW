@@ -88,7 +88,7 @@ public class FraudAnalyserTest {
 		assertEquals(5,suspect.size());
 	}
 	
-/*	@Test
+	@Test
 	public void shouldReturn10ForTwoFives(){
 		// given
 		Set<Transaction> trans=new HashSet<>();
@@ -101,7 +101,7 @@ public class FraudAnalyserTest {
 		BigDecimal expectedSum=new BigDecimal("10.0");
 		// then
 		assertEquals(expectedSum,sum);
-	}*/
+	}
 
 	@Test
 	public void shouldReturnNullForSixTransactionsByHonestUserByDate() {

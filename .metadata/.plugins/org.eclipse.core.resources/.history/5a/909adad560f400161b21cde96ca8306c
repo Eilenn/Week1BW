@@ -29,7 +29,7 @@ public class FraudAnalyser {
 																				// when
 																				// sum
 																				// 10000
-	private static final BigDecimal SUSPICIOUS_SUM_5000 = new BigDecimal(5000.00);
+	private static final BigDecimal SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS = new BigDecimal(5000.00);
 	private static final BigDecimal SUSPICIOUS_SUM_10000 = new BigDecimal(10000.00);
 
 	public Set<Transaction> getSuspiciousTransactions(ArrayList<Transaction> transactionsToAnalyze) {
@@ -185,7 +185,7 @@ public class FraudAnalyser {
 				&& sum.compareTo(SUSPICIOUS_SUM_10000) == 1) {
 			return true;
 		} else if (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO
-				&& sum.compareTo(SUSPICIOUS_SUM_5000) == 1) {
+				&& sum.compareTo(SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS) == 1) {
 			return true;
 		} else
 			return false;
