@@ -113,14 +113,6 @@ public class FraudAnalyser {
 			}}
 		return suspectTransactions;
 	}
-	
-	public static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions){
-		BigDecimal sum=new BigDecimal(0);
-		for(Transaction t:filteredTransactions){
-			sum=sum.add(t.getAmountOfMoneyTransferred());
-		}
-		return sum;
-	}
 
 	public Set<Transaction> analyseNumberOfTransactionsToOneAccountPerUserPerDay(
 			ArrayList<Transaction> transactionsToAnalyze, Set uniqueUsersInAnalyzedList,
@@ -167,12 +159,8 @@ public class FraudAnalyser {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY) ? true : false;
 	}
 	
-	private static boolean isNumberOfTransactionsSuspiciousForSum5000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO) ? true : false;
-	}
-	
-	private static boolean isNumberOfTransactionsSuspiciousForSum10000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO) ? true : false;
+	private static boolean isNumberOfTransactionsSuspiciousForSum(int numberOfTransactions) {
+		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY) ? true : false;
 	}
 
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {

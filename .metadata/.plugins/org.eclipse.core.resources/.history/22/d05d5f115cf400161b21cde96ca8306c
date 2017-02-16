@@ -98,9 +98,8 @@ public class FraudAnalyserTest {
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
 		// when
 		BigDecimal sum=FraudAnalyser.addTransferAmounts(trans);
-		BigDecimal expectedSum=new BigDecimal("10.0");
 		// then
-		assertEquals(expectedSum,sum);
+		assertEquals(new BigDecimal(10.0),sum);
 	}
 
 	@Test

@@ -1,7 +1,6 @@
 package com.capgemini.fraudanalyser;
 
 import java.util.List;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,10 +16,6 @@ public class FraudAnalyser {
 	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY = 5; // more
 																								// than
 																								// 4
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO=4; // more than 3 when sum 5000
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO=3; // more than 2 when sum 10000
-	private static final BigDecimal SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS=new BigDecimal(5000.01);
-	private static final BigDecimal SUSPICIOUS_SUM_FOR_MORE_THAN_2_TRANSACTIONS=new BigDecimal(10000.01);
 
 	public Set<Transaction> getSuspiciousTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
@@ -86,7 +81,7 @@ public class FraudAnalyser {
 						(Integer) users.get(user), dates.get(date));
 				// if more than five on one day by user - suspect transaction
 				int numberOfTransactions = filteredTransactions.size();
-				if (isNumberOfTransactionsSuspicious(numberOfTransactions)) {
+				if (isNumerOfTransactionsSuspicious(numberOfTransactions)) {
 					suspectTransactions.addAll(filteredTransactions);
 				}
 			}
@@ -112,14 +107,6 @@ public class FraudAnalyser {
 				int numberOfTransactions = filteredTransactions.size();
 			}}
 		return suspectTransactions;
-	}
-	
-	public static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions){
-		BigDecimal sum=new BigDecimal(0);
-		for(Transaction t:filteredTransactions){
-			sum=sum.add(t.getAmountOfMoneyTransferred());
-		}
-		return sum;
 	}
 
 	public Set<Transaction> analyseNumberOfTransactionsToOneAccountPerUserPerDay(
@@ -159,20 +146,12 @@ public class FraudAnalyser {
 
 	}
 
-	private static boolean isNumberOfTransactionsSuspicious(int numberOfTransactions) {
+	private static boolean isNumerOfTransactionsSuspicious(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY) ? true : false;
 	}
 
 	private static boolean isNumerOfTransactionsToOneAccountSuspicious(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY) ? true : false;
-	}
-	
-	private static boolean isNumberOfTransactionsSuspiciousForSum5000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO) ? true : false;
-	}
-	
-	private static boolean isNumberOfTransactionsSuspiciousForSum10000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO) ? true : false;
 	}
 
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {

@@ -86,7 +86,7 @@ public class FraudAnalyser {
 						(Integer) users.get(user), dates.get(date));
 				// if more than five on one day by user - suspect transaction
 				int numberOfTransactions = filteredTransactions.size();
-				if (isNumberOfTransactionsSuspicious(numberOfTransactions)) {
+				if (isNumerOfTransactionsSuspicious(numberOfTransactions)) {
 					suspectTransactions.addAll(filteredTransactions);
 				}
 			}
@@ -112,14 +112,6 @@ public class FraudAnalyser {
 				int numberOfTransactions = filteredTransactions.size();
 			}}
 		return suspectTransactions;
-	}
-	
-	public static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions){
-		BigDecimal sum=new BigDecimal(0);
-		for(Transaction t:filteredTransactions){
-			sum=sum.add(t.getAmountOfMoneyTransferred());
-		}
-		return sum;
 	}
 
 	public Set<Transaction> analyseNumberOfTransactionsToOneAccountPerUserPerDay(
@@ -159,20 +151,12 @@ public class FraudAnalyser {
 
 	}
 
-	private static boolean isNumberOfTransactionsSuspicious(int numberOfTransactions) {
+	private static boolean isNumerOfTransactionsSuspicious(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY) ? true : false;
 	}
 
 	private static boolean isNumerOfTransactionsToOneAccountSuspicious(int numberOfTransactions) {
 		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY) ? true : false;
-	}
-	
-	private static boolean isNumberOfTransactionsSuspiciousForSum5000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO) ? true : false;
-	}
-	
-	private static boolean isNumberOfTransactionsSuspiciousForSum10000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO) ? true : false;
 	}
 
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {

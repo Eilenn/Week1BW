@@ -87,21 +87,6 @@ public class FraudAnalyserTest {
 		// then
 		assertEquals(5,suspect.size());
 	}
-	
-	@Test
-	public void shouldReturn10ForTwoFives(){
-		// given
-		Set<Transaction> trans=new HashSet<>();
-		trans.add(new Transaction.Builder(101, 12346L, new BigDecimal("5.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
-		trans.add(new Transaction.Builder(101, 12346L, new BigDecimal("5.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
-		// when
-		BigDecimal sum=FraudAnalyser.addTransferAmounts(trans);
-		BigDecimal expectedSum=new BigDecimal("10.0");
-		// then
-		assertEquals(expectedSum,sum);
-	}
 
 	@Test
 	public void shouldReturnNullForSixTransactionsByHonestUserByDate() {
