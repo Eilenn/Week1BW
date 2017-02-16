@@ -1,0 +1,100 @@
+package com.capgemini.hanoi;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class HanoiTest {
+
+	private Hanoi hanoi;
+	@Before
+	public void setUp(){
+		hanoi=new Hanoi();
+	}
+	
+	@Test
+	public void shouldCreateSpecifiedNumberOfRings() {
+		// given
+		int numberOfRings = 10;
+		// when
+		ArrayList<Integer> listOfRings = hanoi.createRings(numberOfRings);
+		// then
+		assertTrue(listOfRings.size() == numberOfRings);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThrowIllegalArgumentExceptionWhenCreatingNegativeNumberOfRings() {
+		// given
+		int numberOfRings = -1;
+		// when
+		hanoi.createRings(numberOfRings);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThrowIllegalArgumentExceptionWhenCreating0Rings() {
+		// given
+		int numberOfRings = 0;
+		// when
+		hanoi.createRings(numberOfRings);
+	}
+	
+	@Test
+	public void shouldCreateRingsOfDifferentDiameters() {
+		// given
+		int numberOfRings = 5;
+		Set<Integer> set; 
+		// when
+		ArrayList<Integer> listOfRings = hanoi.createRings(numberOfRings);
+		set= new HashSet<Integer>(listOfRings);
+		boolean areThereRingsWithTheSameDiameter=set.size() <listOfRings.size();
+		// then
+		assertFalse(areThereRingsWithTheSameDiameter);
+	}
+	
+	@Test
+	public void shouldReturnTrueForEmptyIntermediateTowerAtTheBeginning(){
+		// given
+		int numberOfRings=5;
+		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
+		hanoi.createTowers(listOfRings);
+		// when
+		boolean isEmpty=hanoi.intermediateTower.isEmpty();
+		// then
+		assertTrue(isEmpty);
+		}
+	
+	@Test
+	public void shouldReturnMinus1ForEmptyIntermediateTowerAtTheBeginning(){
+		// given
+		int numberOfRings=5;
+		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
+		hanoi.createTowers(listOfRings);
+		// when
+		int sizeForEmpty=hanoi.intermediateTower.getSize();
+		// then
+		assertEquals(-1,sizeForEmpty);
+		}
+	
+	@Test
+	public void shouldReturnTrueForEmptyTargetTowerAtTheBeginning(){
+		// given
+		int numberOfRings=5;
+		ArrayList<Integer> listOfRings=hanoi.createRings(numberOfRings);
+		hanoi.createTowers(listOfRings);
+		// when
+		boolean isEmpty=hanoi.targetTower.isEmpty();
+		// then
+		assertTrue(isEmpty);
+		}
+	
+	
+
+	  @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }
+	 
+
+}

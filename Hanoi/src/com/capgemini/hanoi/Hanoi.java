@@ -19,7 +19,7 @@ public class Hanoi {
 	protected ArrayList<Integer> listOfRings = new ArrayList<>(); //should be generic type? how?
 	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
 	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
-	protected StackWritten[] allTowers = { originTower, intermediateTower, targetTower };
+	//protected StackWritten[] allTowers = { originTower, intermediateTower, targetTower };
 
 	/**
 	 * creates the board and runs the game: first it creates indexes
@@ -29,7 +29,7 @@ public class Hanoi {
 	 * list of moves
 	 * 
 	 */
-	public void setBoard() {
+	public static void setBoard() {
 		Hanoi hanoi = new Hanoi();
 		creatingIndexesForTowers();
 		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
@@ -99,7 +99,7 @@ public class Hanoi {
 			originTowerNumber = sc.nextInt();
 			System.out.println("Choose a tower to put a ring on: ");
 			targetTowerNumber = sc.nextInt();
-			// Stack[] allTowers = { originTower, intermediateTower, targetTower};
+			 StackWritten[] allTowers = { originTower, intermediateTower, targetTower};
 			moveRingIfTowerNumberIsValid(originTowerNumber, targetTowerNumber, allTowers);
 		}
 		sc.close();
@@ -155,14 +155,14 @@ public class Hanoi {
 	public static void moveRing(StackWritten originTower, StackWritten targetTower) {
 		if (originTower.isEmpty()) {
 			System.out.println("The tower is empty! " + "\n Choose another move.");
-			throw new IllegalStateException("Tower is empty");
+			//throw new IllegalStateException("Tower is empty");
 		} else {
 			if (targetTower.isEmpty() || isTopRingFromOriginSmallerThanTopRingFromTarget(originTower, targetTower)) {
 				int topRingFromOriginTower = originTower.pop();
 				targetTower.push(topRingFromOriginTower);
 			} else {
 				System.out.println("You cannot put a bigger ring on a smaller one! \nChoose another move.");
-				throw new IllegalStateException("You cannot put a bigger ring on a smaller one!");
+				//throw new IllegalStateException("You cannot put a bigger ring on a smaller one!");
 			}
 		}
 	}

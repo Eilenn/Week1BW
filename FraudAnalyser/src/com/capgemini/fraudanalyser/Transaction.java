@@ -5,7 +5,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
-public class Transaction implements Comparable<Transaction>{
+/**
+ * This class models a transaction in the system. Transaction contains userID,
+ * recipient account, amount of money transferred and a date of transfer,
+ * consisting of year,month,day, hour and minute. Transaction contains an inner
+ * Builder class to construct new objects with specific parameters. It
+ * implements Comparable to support sorting by dare of transfer (full or without
+ * hour and minute) and amount of money transferred. Sorting by users is
+ * possible with overridden method compareTo.
+ * 
+ * @author BOWROBEL
+ *
+ */
+public class Transaction implements Comparable<Transaction> {
 	private final int userID;
 	private final long recipientAccount;
 	private final BigDecimal amountOfMoneyTransferred;
@@ -19,6 +31,7 @@ public class Transaction implements Comparable<Transaction>{
 		this.amountOfMoneyTransferred = amountOfMoneyTransferred;
 		this.dateOfTransfer = dateOfTransfer;
 	}
+
 	private Transaction(Builder builder) {
 		userID = builder.userID;
 		dateOfTransfer = builder.dateOfTransfer;
@@ -26,14 +39,21 @@ public class Transaction implements Comparable<Transaction>{
 		recipientAccount = builder.recipientAccount;
 	}
 
+	/**
+	 * supports creation of new instances of Transaction with different
+	 * parameters.
+	 * 
+	 * @author BOWROBEL
+	 *
+	 */
 	public static class Builder {
 		private int userID;
 		private long recipientAccount;
 		private BigDecimal amountOfMoneyTransferred;
 		private LocalDateTime dateOfTransfer;
-		
-		public Builder(){
-			
+
+		public Builder() {
+
 		}
 
 		public Builder(int userID, long recipientAccount, BigDecimal amountOfMoneyTransferred,
@@ -85,13 +105,19 @@ public class Transaction implements Comparable<Transaction>{
 	public LocalDateTime getDateOfTransfer() {
 		return dateOfTransfer;
 	}
-	
+
+	/**
+	 * returns date of transfer shortened to year,month,day.
+	 * 
+	 * @return
+	 */
 	public LocalDate getDateWithoutHour() {
 		return dateOfTransfer.toLocalDate();
 	}
 
-	
-
+	/**
+	 * overridden methods hashCode and equals to enable comparing by all fields.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,34 +154,35 @@ public class Transaction implements Comparable<Transaction>{
 			return false;
 		return true;
 	}
-	
-    public static Comparator<Transaction> COMPARE_BY_AMOUNT_OF_MONEY_TRANSFERRED = new Comparator<Transaction>() {
-        public int compare(Transaction one, Transaction other) {
-            return one.amountOfMoneyTransferred.compareTo(other.amountOfMoneyTransferred);
-        }
-    };
-    
-    public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER = new Comparator<Transaction>() {
-        public int compare(Transaction one, Transaction other) {
-            return one.dateOfTransfer.compareTo(other.dateOfTransfer);
-        }
-    };
-    
-    public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER_IGNORING_HOUR = new Comparator<Transaction>() {
-        public int compare(Transaction one, Transaction other) {
-            return one.getDateWithoutHour().compareTo(other.getDateWithoutHour());
-        }
-    };
+
+	public static Comparator<Transaction> COMPARE_BY_AMOUNT_OF_MONEY_TRANSFERRED = new Comparator<Transaction>() {
+		public int compare(Transaction one, Transaction other) {
+			return one.amountOfMoneyTransferred.compareTo(other.amountOfMoneyTransferred);
+		}
+	};
+
+	public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER = new Comparator<Transaction>() {
+		public int compare(Transaction one, Transaction other) {
+			return one.dateOfTransfer.compareTo(other.dateOfTransfer);
+		}
+	};
+
+	public static Comparator<Transaction> COMPARE_BY_DATE_OF_TRANSFER_IGNORING_HOUR = new Comparator<Transaction>() {
+		public int compare(Transaction one, Transaction other) {
+			return one.getDateWithoutHour().compareTo(other.getDateWithoutHour());
+		}
+	};
+
 	@Override
 	/**
-	 * compares by userID
+	 * compares transactions by userID.
 	 */
 	public int compareTo(Transaction one) {
-		int userIDdiff =  userID - one.userID;
-        if(userIDdiff == 0) {
-            return this.compareTo(one);
-        }
-        return userIDdiff;
+		int userIDdiff = userID - one.userID;
+		if (userIDdiff == 0) {
+			return this.compareTo(one);
+		}
+		return userIDdiff;
 	}
-	
+
 }

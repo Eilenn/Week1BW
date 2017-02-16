@@ -45,7 +45,7 @@ public class FraudAnalyserTest {
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 6)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12,5)).build());
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
@@ -57,11 +57,12 @@ public class FraudAnalyserTest {
 		Set accounts = FraudAnalyser.getUniqueRecipientAccounts(transactionsToAnalyzeByAccount);
 		Set<Transaction> suspect = new HashSet<>();
 		// when
-		suspect = fraudAnalyser.analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyzeByAccount, users, dates, accounts);
+		suspect = fraudAnalyser.analyseNumberOfTransactionsToOneAccountPerUserPerDay(transactionsToAnalyzeByAccount,
+				users, dates, accounts);
 		// then
-		assertEquals(5,suspect.size());
+		assertEquals(5, suspect.size());
 	}
-	
+
 	@Test
 	public void shouldReturn5For5TransactionsToOneAccountUsingGetTrans() {
 		// given
@@ -71,7 +72,7 @@ public class FraudAnalyserTest {
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 6)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12,5)).build());
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
 		transactionsToAnalyzeByAccount.add(new Transaction.Builder(100, 12346L, new BigDecimal("200.0"),
@@ -85,23 +86,92 @@ public class FraudAnalyserTest {
 		// when
 		suspect = fraudAnalyser.getSuspiciousTransactions(transactionsToAnalyzeByAccount);
 		// then
-		assertEquals(5,suspect.size());
+		assertEquals(5, suspect.size());
+	}
+
+	@Test
+	public void shouldReturnThreeForThreeTransactionsAbove10000() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyzeByAmount = new ArrayList<>();
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12345L, new BigDecimal("2000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("5000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("3001.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAmount);
+		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAmount);
+		Set<Transaction> suspect = new HashSet<>();
+		// when
+		suspect = fraudAnalyser.analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyzeByAmount, users, dates);
+		// then
+		assertEquals(3, suspect.size());
 	}
 	
-/*	@Test
-	public void shouldReturn10ForTwoFives(){
+	@Test
+	public void shouldReturnZeroForTwoTransactionsAbove10000() {
 		// given
-		Set<Transaction> trans=new HashSet<>();
-		trans.add(new Transaction.Builder(101, 12346L, new BigDecimal("5.0"),
-				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 7)).build());
-		trans.add(new Transaction.Builder(101, 12346L, new BigDecimal("5.0"),
+		ArrayList<Transaction> transactionsToAnalyzeByAmount = new ArrayList<>();
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12345L, new BigDecimal("5000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("5000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(109, 12346L, new BigDecimal("3000.0"),
 				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAmount);
+		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAmount);
+		Set<Transaction> suspect = new HashSet<>();
 		// when
-		BigDecimal sum=FraudAnalyser.addTransferAmounts(trans);
-		BigDecimal expectedSum=new BigDecimal("10.0");
+		suspect = fraudAnalyser.analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyzeByAmount, users, dates);
 		// then
-		assertEquals(expectedSum,sum);
-	}*/
+		assertEquals(0, suspect.size());
+	}
+	
+	@Test
+	public void shouldReturnFourForFourTransactionsAbove5000() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyzeByAmount = new ArrayList<>();
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12345L, new BigDecimal("2000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("1001.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("1000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("1000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 10)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(108, 12346L, new BigDecimal("3001.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAmount);
+		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAmount);
+		Set<Transaction> suspect = new HashSet<>();
+		// when
+		suspect = fraudAnalyser.analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyzeByAmount, users, dates);
+		// then
+		assertEquals(4, suspect.size());
+	}
+	
+	@Test
+	public void shouldReturnZeroForThreeTransactionsAbove5000() {
+		// given
+		ArrayList<Transaction> transactionsToAnalyzeByAmount = new ArrayList<>();
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12345L, new BigDecimal("1000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 0)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("1001.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 1)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(101, 12346L, new BigDecimal("1000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 5)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(107, 12346L, new BigDecimal("1000.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 10)).build());
+		transactionsToAnalyzeByAmount.add(new Transaction.Builder(108, 12346L, new BigDecimal("3001.0"),
+				LocalDateTime.of(2014, Month.JANUARY, 1, 12, 2)).build());
+		Set users = FraudAnalyser.getUniqueUsers(transactionsToAnalyzeByAmount);
+		Set dates = FraudAnalyser.getUniqueDatesWithoutHour(transactionsToAnalyzeByAmount);
+		Set<Transaction> suspect = new HashSet<>();
+		// when
+		suspect = fraudAnalyser.analyseAmountOfMoneyPerUserPerDay(transactionsToAnalyzeByAmount, users, dates);
+		// then
+		assertEquals(0, suspect.size());
+	}
 
 	@Test
 	public void shouldReturnNullForSixTransactionsByHonestUserByDate() {

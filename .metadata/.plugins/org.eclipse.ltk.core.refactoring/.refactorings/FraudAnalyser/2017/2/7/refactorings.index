@@ -58,3 +58,6 @@
 1487259152458	Rename method 'isNumberOfTransactionsSuspiciousForSum5000'
 1487259846045	Rename field 'SUSPICIOUS_SUM_FOR_MORE_THAN_2_TRANSACTIONS'
 1487260742374	Rename field 'SUSPICIOUS_SUM_FOR_MORE_THAN_3_TRANSACTIONS'
+1487269807635	Rename field 'SUSPECT_USERS'
+1487278588571	Rename local variable 'eightTransactionsToAnalyze'
+1487278601813	Rename local variable 'transactionsToAnalyze'

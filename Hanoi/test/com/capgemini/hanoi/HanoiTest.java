@@ -93,8 +93,8 @@ public class HanoiTest {
 		}
 	
 	
-/*	
-	  @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }
+
+	/*  @Test public void shouldPlayCorrectly(){ Hanoi.setBoard(); }*/
 	 
-*/
+
 }

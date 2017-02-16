@@ -8,30 +8,35 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FraudAnalyser {
-
-	private static final int[] SUSPECT_USERS = { 542, 1052, 2103 };
+	/**
+	 * class fields specify constants used to distinguish between suspicious and
+	 * ordinary transactions.
+	 * 
+	 * @SUSPICIOUS_USERS refers to user IDs whose transactions are automatically
+	 *                   considered suspicious.
+	 * @HONEST_USERS refers to users IDs whose transactions are not being
+	 *               checked at all.
+	 */
+	private static final int[] SUSPICIOUS_USERS = { 542, 1052, 2103 };
 	private static final int[] HONEST_USERS = { 101, 606 };
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY = 6; // more
-																				// than
-																				// 5
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY = 5; // more
-																								// than
-																								// 4
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO = 4; // more
-																				// than
-																				// 3
-																				// when
-																				// sum
-																				// 5000
-	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO = 3; // more
-																				// than
-																				// 2
-																				// when
-																				// sum
-																				// 10000
+	// more than 5 sent by a user in a day
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_IN_ONE_DAY = 6;
+	// more than 4 to one account sent by a user in a day
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_TO_ONE_ACCOUNT_IN_ONE_DAY = 5;
+	// more than 3 when sum equals 5000 euros // 4
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_5000EURO = 4;
+	// more than 2 when sum equals 10000 euros
+	private static final int SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO = 3;
 	private static final BigDecimal SUSPICIOUS_SUM_5000 = new BigDecimal(5000.00);
 	private static final BigDecimal SUSPICIOUS_SUM_10000 = new BigDecimal(10000.00);
 
+	/**
+	 * provides list of suspicious transactions from the list of all
+	 * transactions according to arbitrary rules.
+	 * 
+	 * @param transactionsToAnalyze
+	 * @return
+	 */
 	public Set<Transaction> getSuspiciousTransactions(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<Transaction> listOfSuspectTransactions = new HashSet<>();
 		Set<Transaction> temporarySuspectTransactionsInAnalyzedList = new HashSet<>();
@@ -72,6 +77,15 @@ public class FraudAnalyser {
 		return listOfSuspectTransactions;
 	}
 
+	/**
+	 * returns unique set of transactions made by user identified by user ID on
+	 * specific day, using @FilteringByUser and @FilteringByDate.
+	 * 
+	 * @param transactionsToAnalyze
+	 * @param userID
+	 * @param date
+	 * @return
+	 */
 	private static Set<Transaction> getTransactionsOfUserOnDay(ArrayList<Transaction> transactionsToAnalyze,
 			Integer userID, LocalDate date) {
 		Set<Transaction> listOfUserTransactionsOnTheDay = new HashSet<>();
@@ -82,6 +96,16 @@ public class FraudAnalyser {
 		return listOfUserTransactionsOnTheDay;
 	}
 
+	/**
+	 * returns unique set of suspicious transactions, implementing the fifth
+	 * rule: if user made on specific date more than 5 transactions, all his
+	 * transactions are suspicious
+	 * 
+	 * @param transactionsToAnalyze
+	 * @param uniqueUsersInAnalyzedList
+	 * @param uniqueDatesInAnalyzedList
+	 * @return
+	 */
 	public Set<Transaction> analyseNumberOfTransactionsPerUserPerDay(ArrayList<Transaction> transactionsToAnalyze,
 			Set uniqueUsersInAnalyzedList, Set<LocalDate> uniqueDatesInAnalyzedList) {
 		Set<Transaction> suspectTransactions = new HashSet<>();
@@ -102,9 +126,7 @@ public class FraudAnalyser {
 				}
 			}
 		}
-
 		return suspectTransactions;
-
 	}
 
 	public Set<Transaction> analyseAmountOfMoneyPerUserPerDay(ArrayList<Transaction> transactionsToAnalyze,
@@ -122,11 +144,20 @@ public class FraudAnalyser {
 						(Integer) users.get(user), dates.get(date));
 				BigDecimal sumForUserForDay = addTransferAmounts(filteredTransactions);
 				int numberOfTransactions = filteredTransactions.size();
+				if(isSuspiciousForAmountOfMoney(numberOfTransactions, sumForUserForDay)){
+					suspectTransactions.addAll(filteredTransactions);
+				}
 			}
 		}
 		return suspectTransactions;
 	}
 
+	/**
+	 * adds transferred amounts of money for transactions on the list.
+	 * 
+	 * @param filteredTransactions
+	 * @return
+	 */
 	private static BigDecimal addTransferAmounts(Set<Transaction> filteredTransactions) {
 		BigDecimal sum = new BigDecimal(0);
 		for (Transaction t : filteredTransactions) {
@@ -135,6 +166,17 @@ public class FraudAnalyser {
 		return sum;
 	}
 
+	/**
+	 * returns unique set of suspicious transactions, implementing fourth rule:
+	 * if more than 4 transactions were made by the user in a day to the same
+	 * recipient, all his transactions are suspicious
+	 * 
+	 * @param transactionsToAnalyze
+	 * @param uniqueUsersInAnalyzedList
+	 * @param uniqueDatesInAnalyzedList
+	 * @param uniqueAccountsInAnalyzedList
+	 * @return
+	 */
 	public Set<Transaction> analyseNumberOfTransactionsToOneAccountPerUserPerDay(
 			ArrayList<Transaction> transactionsToAnalyze, Set uniqueUsersInAnalyzedList,
 			Set<LocalDate> uniqueDatesInAnalyzedList, Set uniqueAccountsInAnalyzedList) {
@@ -191,35 +233,48 @@ public class FraudAnalyser {
 			return false;
 	}
 
-	private static boolean isNumberOfTransactionsSuspiciousForSum10000(int numberOfTransactions) {
-		return (numberOfTransactions >= SUSPICIOUS_NUMBER_OF_TRANSACTIONS_10000EURO) ? true : false;
-	}
-
+	/**
+	 * returns set of unique users from the transaction list.
+	 * 
+	 * @param transactionsToAnalyze
+	 * @return
+	 */
 	public static Set getUniqueUsers(ArrayList<Transaction> transactionsToAnalyze) {
 		Set users = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			users.add(transactionsToAnalyze.get(i).getUserID());
 		}
-
 		return users;
 	}
 
+	/**
+	 * returns set of unique recipient accounts from the transaction list.
+	 * 
+	 * @param transactionsToAnalyze
+	 * @return
+	 */
 	public static Set getUniqueRecipientAccounts(ArrayList<Transaction> transactionsToAnalyze) {
 		Set accounts = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			accounts.add(transactionsToAnalyze.get(i).getRecipientAccount());
-		}
 
+		}
 		return accounts;
 	}
 
+	/**
+	 * returns set of unique dates by year, month and day from list of
+	 * transactions
+	 * 
+	 * @param transactionsToAnalyze
+	 * @return
+	 */
 	public static Set<LocalDate> getUniqueDatesWithoutHour(ArrayList<Transaction> transactionsToAnalyze) {
 		Set<LocalDate> dates = new HashSet<>();
 		for (int i = 0; i < transactionsToAnalyze.size(); i++) {
 			Transaction t = transactionsToAnalyze.get(i);
 			dates.add(t.getDateWithoutHour());
 		}
-
 		return dates;
 	}
 
@@ -235,8 +290,8 @@ public class FraudAnalyser {
 
 	// TODO change to private and remove tests
 	public static boolean isUserSuspectForSure(int userID) {
-		for (int i = 0; i < SUSPECT_USERS.length; i++) {
-			if (userID == SUSPECT_USERS[i]) {
+		for (int i = 0; i < SUSPICIOUS_USERS.length; i++) {
+			if (userID == SUSPICIOUS_USERS[i]) {
 				return true;
 			}
 		}

@@ -1,0 +1,192 @@
+package com.capgemini.hanoi;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+/**
+ * makes playing Hanoi towers game possible. Creates the board and collects
+ * commands of a user through a console.
+ * 
+ * @author BOWROBEL
+ *
+ */
+public class Hanoi {
+	protected  StackWritten originTower;
+	protected  StackWritten intermediateTower;
+	protected  StackWritten targetTower;
+	protected ArrayList<Integer> listOfRings = new ArrayList<>(); //should be generic type? how?
+	protected static Set<Integer> indexesOfTowers = new HashSet<Integer>();
+	protected static ArrayList<Integer[]> listOfMoves = new ArrayList<>();
+	protected StackWritten[] allTowers = { originTower, intermediateTower, targetTower };
+
+	/**
+	 * creates the board and runs the game: first it creates indexes
+	 * corresponding to towers, then it gets number of rings on origin tower and
+	 * creates list of different-sized rings, gets tower numbers from user, gets
+	 * command from user how to move rings ends if target tower is full prints
+	 * list of moves
+	 * 
+	 */
+	public static void setBoard() {
+		Hanoi hanoi = new Hanoi();
+		creatingIndexesForTowers();
+		System.out.println("Welcome to Hanoi Towers game, you have three empty towers numbered 1, 2 and 3.");
+		System.out.println("How many rings do you want to put on the tower number 1?");
+		Scanner sc = new Scanner(System.in);
+		int numberOfRings = sc.nextInt();
+		hanoi.listOfRings = hanoi.createRings(numberOfRings);
+		hanoi.createTowers(hanoi.listOfRings);
+		hanoi.fillOriginTower(hanoi.listOfRings);
+		hanoi.getCommandsForMovingRings();
+		System.out.println("Congratulations! You finished the game.");
+		printListOfMoves();
+		sc.close();
+	}
+
+	protected static void creatingIndexesForTowers() {
+		indexesOfTowers.add(1);
+		indexesOfTowers.add(2);
+		indexesOfTowers.add(3);
+	}
+
+	/**
+	 * creates list of rings - first is the biggest one, then in descending
+	 * order
+	 * 
+	 * @param numberOfRings
+	 * @return ArrayList of integer values meaning rings diameter
+	 */
+	protected ArrayList<Integer> createRings(int numberOfRings) {
+		if (numberOfRings <= 0) {
+			throw new IllegalArgumentException("Number of rings must be positive, integer value!");
+		}
+		for (int i = numberOfRings; i >= 1; i--) {
+			listOfRings.add(i);
+		}
+		return listOfRings;
+	}
+
+	/**
+	 * puts rings on the first tower from the biggest to the smallest and
+	 * creates the other two
+	 * 
+	 * @param listOfRings
+	 */
+	protected void createTowers(ArrayList<Integer> listOfRings) {
+		int maximalSizeOfTower = listOfRings.size();
+		intermediateTower = new StackWritten(maximalSizeOfTower);
+		targetTower = new StackWritten(maximalSizeOfTower);
+		originTower = new StackWritten(maximalSizeOfTower);
+	}
+
+	protected void fillOriginTower(ArrayList<Integer> listOfRings) {
+		for (int ringIndex = 0; ringIndex < listOfRings.size(); ringIndex++) {
+			int ring = listOfRings.get(ringIndex).intValue();
+			originTower.push(ring);
+		}
+	}
+
+	/**
+	 * collects commands for moving rings in form of tower numbers
+	 */
+	protected void getCommandsForMovingRings() {
+		Scanner sc = new Scanner(System.in);
+		while (!isTargetTowerFull()) {
+			int originTowerNumber, targetTowerNumber;
+			System.out.println("Choose a tower to take a ring from: ");
+			originTowerNumber = sc.nextInt();
+			System.out.println("Choose a tower to put a ring on: ");
+			targetTowerNumber = sc.nextInt();
+			 Stack[] allTowers = { originTower, intermediateTower, targetTower};
+			moveRingIfTowerNumberIsValid(originTowerNumber, targetTowerNumber, allTowers);
+		}
+		sc.close();
+	}
+
+	private  boolean isTargetTowerFull() {
+		return targetTower.getSize() >= targetTower.getMaximumStackSize() - 1;
+	}
+
+	/**
+	 * moves the ring, if the move is valid, if not it prints a message to the
+	 * user
+	 * 
+	 * @param originTowerNumber
+	 * @param targetTowerNumber
+	 * @param allTowers
+	 */
+	protected static void moveRingIfTowerNumberIsValid(int originTowerNumber, int targetTowerNumber,
+			StackWritten[] allTowers) {
+		if (areEnteredTowerNumbersValid(originTowerNumber, targetTowerNumber)) {
+			if (originTowerNumber != targetTowerNumber) {
+				Integer[] moveFromTo = { originTowerNumber, targetTowerNumber };
+				listOfMoves.add(moveFromTo);
+				moveRing(allTowers[originTowerNumber - 1], allTowers[targetTowerNumber - 1]);
+			} else {
+				System.out.println("Tower numbers you entered are the same!.");
+			}
+		} else {
+			System.out.println("One or both of tower numbers are invalid! Towers are numbered 1, 2 and 3.\n");
+		}
+	}
+
+	/**
+	 * validates tower numbers entered by player, checking if they are in range
+	 * of 1-3,
+	 * 
+	 * @param originTowerNumber
+	 * @param targetTowerNumber
+	 * @return
+	 */
+	private static boolean areEnteredTowerNumbersValid(int originTowerNumber, int targetTowerNumber) {
+		return indexesOfTowers.contains(originTowerNumber) && indexesOfTowers.contains(targetTowerNumber);
+	}
+
+	/**
+	 * moves a ring from origin tower to target tower if origin tower is not
+	 * empty and the moved ring's size is smaller than ring's on top of the
+	 * target tower
+	 * 
+	 * @param originTower
+	 * @param targetTower
+	 */
+	public static void moveRing(StackWritten originTower, StackWritten targetTower) {
+		if (originTower.isEmpty()) {
+			System.out.println("The tower is empty! " + "\n Choose another move.");
+			throw new IllegalStateException("Tower is empty");
+		} else {
+			if (targetTower.isEmpty() || isTopRingFromOriginSmallerThanTopRingFromTarget(originTower, targetTower)) {
+				int topRingFromOriginTower = originTower.pop();
+				targetTower.push(topRingFromOriginTower);
+			} else {
+				System.out.println("You cannot put a bigger ring on a smaller one! \nChoose another move.");
+				throw new IllegalStateException("You cannot put a bigger ring on a smaller one!");
+			}
+		}
+	}
+
+	/**
+	 * checks if top ring from origin tower is smaller than top ring from target
+	 * tower
+	 * 
+	 * @param originTower
+	 * @param targetTower
+	 * @return
+	 */
+
+	private static boolean isTopRingFromOriginSmallerThanTopRingFromTarget(StackWritten originTower, StackWritten targetTower) {
+		return originTower.peek() < targetTower.peek();
+	}
+
+	/**
+	 * prints a list of valid moves made by the player
+	 */
+	private static void printListOfMoves() {
+		System.out.println("Here is the list of your moves:");
+		for (int moveIndex = 0; moveIndex < listOfMoves.size(); moveIndex++) {
+			System.out.println("From " + listOfMoves.get(moveIndex)[0] + " to " + listOfMoves.get(moveIndex)[1]);
+		}
+	}
+}
