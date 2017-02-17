@@ -1,0 +1,6 @@
+.metadata
+bin/
+.settings/
+.metadata/.plugins/
+.metadata/.lock
+.metadata/.log
